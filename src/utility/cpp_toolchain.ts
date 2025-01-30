@@ -1,3 +1,4 @@
+import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
 
 function includes(): string {
@@ -36,14 +37,16 @@ function read(filename: string): string {
     return `cat ./out/${filename}.txt`;
 }
 
-// see possible improvements: https://nodejs.org/api/child_process.html#child_processexeccommand-options-callback
 export function cpp_toolchain(filename: string, content: string): string {
+    assert(!/\s/g.test(filename), "filename must not contain whitespace.");
     let command: string = clearfiles(filename) + " && "
                         + write(filename, content) + " && "
                         + compile(filename) + " && "
                         + execute(filename) + " && "
                         + read(filename);
+
     try {
+        // more info on execSync: https://nodejs.org/api/child_process.html#synchronous-process-creation
         let stdout = execSync(command);
         return stdout.toString();
     } catch (error) {
