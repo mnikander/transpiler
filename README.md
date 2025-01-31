@@ -51,8 +51,8 @@ Each fragment in this repository transforms an AST node from JSON into C++ code.
 This breaks down the task of intermediate code generation into many smaller parts.
 These parts can be developed, tested, and experimented with individually.
 
-## Design
-This section outlines key design decisions, the system design, and the strategy employed for testing.
+## System Design
+This section outlines key design decisions, the system design, and the pipeline employed for development and testing.
 
 ### Choice of the Target Language
 
@@ -74,23 +74,9 @@ The runtime of the _transpiler_ is currently not a concern, since the goal is to
 
 There are many ways to generate C++ code for one particular language keyword or feature.
 For example, `const int x = 5;` and `int const x = 5;` mean the same thing.
-Another example is that an expression such as `(lambda (a b) a)` can be translated into:
-```cpp
-[](auto a, auto b){ return a; }
-```
-or into :
-
-```c++
-struct lambda_NR { // NR must be a unique ID, to avoid collisions with other function objects
-    template<typename T>
-    T operator()(T a, T b){ return a; }
-};
-lambda_NR{};
-```
-which have advantages in brevity or type usability, respectively.
+Another example is that an expression such as `(lambda (a b) a)` can be translated into C++ lambda expressions or into function objects.
 Being able to easily experiment with several different implementations, is an important factor during development.
-
-Overall, there are several options for how to test the code generation:
+There are several options for how to test the code generation alongside its development:
 1. string comparison on the generated C++ code
 2. snapshot testing, where the generated code is compared to an earlier snapshot of the generated code
 3. compile and execute the generated code
