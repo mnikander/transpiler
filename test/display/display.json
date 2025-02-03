@@ -1,0 +1,8 @@
+{
+    "$type": "Display",
+    "value":
+    {
+        "$type": "Integer",
+        "value": 5
+    }
+}
