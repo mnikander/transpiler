@@ -3,7 +3,7 @@
 import { Node } from "./nodes";
 
 export class String implements Node {
-    readonly $type: string = "String";
+    readonly lexeme: string = "String";
     value: string;
 
     constructor(input: string) {

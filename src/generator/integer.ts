@@ -4,7 +4,7 @@ import assert from "assert";
 import { Node } from "./nodes";
 
 export class Integer implements Node {
-    readonly $type: string = "Integer";
+    readonly lexeme: string = "Integer";
     value: number;
 
     constructor(input: number) {

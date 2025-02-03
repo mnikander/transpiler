@@ -1,8 +1,8 @@
 {
-    "$type": "Display",
+    "lexeme": "Display",
     "value":
     {
-        "$type": "Integer",
+        "lexeme": "Integer",
         "value": 5
     }
 }

@@ -3,7 +3,7 @@
 import { Node } from "./nodes";
 
 export class Display implements Node {
-    readonly $type = "Display";
+    readonly lexeme = "Display";
     value: Node;
     generate(): string {
         return `std::cout << ${this.value.generate()} << std::endl;`;

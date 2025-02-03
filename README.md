@@ -23,18 +23,18 @@ might be parsed into the following AST node in JSON form:
 
 ```json
 {
-    "$type": "Application",
+    "lexeme": "Application",
     "operator": {
-        "$type": "Binary",
+        "lexeme": "Binary",
         "value": "define"
     },
     "arguments": [
         {
-            "$type": "Variable",
+            "lexeme": "Variable",
             "value": "x"
         },
         {
-            "$type": "Integer",
+            "lexeme": "Integer",
             "value": 5
         }
     ]
