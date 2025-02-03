@@ -4,7 +4,8 @@ import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
 
 function includes(): string {
-    return `#include <cmath>
+    return `// generated C++ code
+#include <cmath>
 #include <cstdlib>
 #include <iostream>
 #include <functional>
@@ -16,7 +17,8 @@ function main(body: string): string {
     return `int main() {
 ${body}
 return EXIT_SUCCESS;
-}`;
+}
+`;
 }
 
 function clearfiles(filename: string): string {
