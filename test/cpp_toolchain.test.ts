@@ -9,7 +9,7 @@ describe('C++ Toolchain', () => {
     //       maybe it's printing some stuff to stdout before the process exits with the error
     it('error message', () => {
         let filename: string = "error";
-        let content: string = 'provoke_error; // an unknown variable name causes a compilation error';
+        let content: string = 'provoke_error; // use an unknown variable name to cause a compilation error';
         const result: string = cpp_toolchain(filename, content).split('\n')[0];
         expect(result).toBe("Error while executing C++ toolchain:");
     });
