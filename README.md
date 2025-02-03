@@ -54,21 +54,20 @@ These parts can be developed, tested, and experimented with individually.
 ## System Design
 This section outlines key design decisions, the system design, and the pipeline employed for development and testing.
 
-### Choice of the Target Language
-
-Several possible target languages were considered: LLVM IR, WebAssembly, C, C++, JavaScript, and TypeScript.
-The web-based languages would allow executing the program in a browser, which is great for usability.
-The assembly languages could ultimately provide the best runtime performance.
-C++ was chosen as the target language because it's fast and provides useful abstractions.
-This makes it easier to develop and debug the code generator, than if LLVM IR or WebAssembly was chosen as the target language.
-The translation into other target languages may be implemented later.
-It is beneficial if the architecture and testing pipelines support adding another target language later on.
-
 ### Choice of the Implementation Language
 
 The code generator itself is written in TypeScript, so that it can be integrated into a [Langium](https://langium.org/) project.
 The ecosystem provided by _NodeJS_ and _npm_ also provide much easier access to a huge number of libraries and packages, which speeds up development.
-The runtime of the _transpiler_ is currently not a concern, since the goal is to prototype a few language features.
+The runtime performance of the _code generator_ is currently not a concern, since the goal is to prototype a few language features.
+
+### Choice of the Target Language
+
+Several target languages were considered: LLVM IR, WebAssembly, C, C++, JavaScript, and TypeScript.
+The web-based languages allow executing the program in a browser, which is great for usability.
+The assembly languages could provide the best runtime performance.
+C++ was chosen as the target language because it's fast and provides useful abstractions.
+This makes it easier to develop and debug the code generator, than if LLVM IR or WebAssembly were used instead.
+It is beneficial if the architecture and testing pipelines support adding another target language later on though.
 
 ### Test Design
 
