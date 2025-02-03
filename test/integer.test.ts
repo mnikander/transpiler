@@ -1,18 +1,21 @@
 // Copyright (c) 2025 Marco Nikander
 
 import { describe, it, expect } from 'vitest';
-import { Integer } from '../src/nodes';
 import { generate } from '../src/generate';
+import { Display, Integer } from '../src/nodes';
 
-let data: Integer = {
-    "lexeme": "Integer",
-    "value": 5
+let data: Display = {
+    lexeme: "Display",
+    value: {
+        lexeme: "Integer",
+        value: 5
+    }
 }
 
 describe('Integer', () => {
-    let code: string = generate(data);
 
-    it('five', () => {
+    it('simple', () => {
+        let code: string = generate(data.value as Integer);
         expect(code).toBe("5l");
     });
 });
