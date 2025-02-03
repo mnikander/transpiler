@@ -49,7 +49,7 @@ export function cpp_toolchain(filename: string, content: string): string {
 
     try {
         // more info on execSync: https://nodejs.org/api/child_process.html#synchronous-process-creation
-        let stdout = execSync(command);
+        let stdout = execSync(command, { stdio: 'pipe' });
         return stdout.toString();
     } catch (error) {
         return `Error while executing C++ toolchain:\n${error}`;
