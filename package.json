@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc -b tsconfig.json",
-    "cpp": "npm run build && node out/utility/cpp_toolchain.js && cat out/*.txt",
+    "main": "npm run build && node out/main.js",
     "test": "vitest",
     "test:watch": "vitest --watch"
   },
