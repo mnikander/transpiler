@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -b tsconfig.json",
+    "build": "mkdir -p out/artifacts && tsc -b tsconfig.json",
     "main": "npm run build && node out/main.js",
     "test": "vitest",
     "test:watch": "vitest --watch"

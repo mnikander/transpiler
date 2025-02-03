@@ -22,23 +22,23 @@ return EXIT_SUCCESS;
 }
 
 function clearfiles(filename: string): string {
-    return `echo '//empty file' > out/${filename}.cpp && echo 'empty' > out/${filename}.txt`;
+    return `echo '// empty cpp file' > out/artifacts/${filename}.cpp && echo 'the program was not executed' > out/artifacts/${filename}.txt`;
 }
 
 function write(filename: string, content: string): string {
-    return "echo '" + includes() + main(content) + `' > out/${filename}.cpp`;
+    return "echo '" + includes() + main(content) + `' > out/artifacts/${filename}.cpp`;
 }
 
 function compile(filename: string): string {
-    return `g++ -o out/${filename} out/${filename}.cpp`;
+    return `g++ -o out/artifacts/${filename} out/artifacts/${filename}.cpp`;
 }
 
 function execute(filename: string): string {
-    return `./out/${filename} > out/${filename}.txt`;
+    return `./out/artifacts/${filename} > out/artifacts/${filename}.txt`;
 }
 
 function read(filename: string): string {
-    return `cat ./out/${filename}.txt`;
+    return `cat ./out/artifacts/${filename}.txt`;
 }
 
 export function cpp_toolchain(filename: string, content: string): string {
