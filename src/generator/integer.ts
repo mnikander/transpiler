@@ -1,3 +1,5 @@
+// Copyright (c) 2025 Marco Nikander
+
 export interface Integer {
     readonly $type: 'Integer';
     value: number;

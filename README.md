@@ -146,3 +146,6 @@ The primary testing strategy will look like this:
 
 **Note**: Piping the output to a file is optional, since stdout can be read by the unit test directly.
 It _can_ be helpful for debugging purposes, but this step might be removed soon.
+
+---
+**Copyright (c) 2025 Marco Nikander**

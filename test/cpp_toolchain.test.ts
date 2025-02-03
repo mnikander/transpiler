@@ -1,3 +1,5 @@
+// Copyright (c) 2025 Marco Nikander
+
 import { describe, it, expect } from 'vitest';
 import { cpp_toolchain } from '../src/utility/cpp_toolchain'
 
