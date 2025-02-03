@@ -16,7 +16,7 @@ function generate_integer(data: Integer): string {
 }
 
 function generate_string(data: String): string {
-    return data.value;
+    return '"' + data.value + '"';
 }
 
 export function generate(data: Data) : string {
