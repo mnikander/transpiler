@@ -24,6 +24,10 @@ export interface String extends Data {
     value: string;
 }
 
+export interface Application extends Data {
+    value: any[];
+}
+
 export interface Variable extends Data {
     value: string;
 }

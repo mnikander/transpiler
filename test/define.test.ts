@@ -3,9 +3,9 @@
 import { describe, it, expect } from 'vitest';
 import { cpp_toolchain } from '../src/cpp_toolchain'
 import { generate } from '../src/generate';
-import { Data, Display } from '../src/nodes';
+import { Application, Display } from '../src/nodes';
 
-let define_x: Data = {
+let define_x: Application = {
     lexeme: "Application",
     value: [
         {

@@ -1,7 +1,7 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
-import { Data, Display, Float, Integer, String } from "./nodes";
+import { Application, Data, Display, Float, Integer, String } from "./nodes";
 
 export function generate(data: Data) : string {
     if (data.lexeme === "Display") {
@@ -16,16 +16,8 @@ export function generate(data: Data) : string {
     else if (data.lexeme === "String") {
         return generate_string(data as String);
     }
-    else if(data.lexeme == "Application") {
-        if(data.value instanceof Array && data.value.length > 0) {
-            let body: string = "";
-            body += generate_application(data);
-            return body;
-        }
-        else {
-            assert(false, `Invalid function application: ${data.value.toString()}`);
-            return " /* ERROR: INVALID FUNCTION APPLICATION */ ";
-        }
+    else if(data.lexeme === "Application") {
+        return generate_application(data as Application);
     }
     else if(data.lexeme === "Variable") {
         return data.value.toString();
@@ -53,15 +45,22 @@ function generate_string(data: String): string {
 }
 
 function generate_application(data: Data): string {
-    const [head, ...tail] = data.value;
-    switch (head.value) {
-        case "add":
-            return `std::plus<>{}(${comma_separate(tail)})`;
-        case "define":
-            return generate_define(tail);
-        default:
-            assert(false, `Invalid application of function: '${data.value[0].toString()}'.`);
-            return "";
+
+    if(data.value instanceof Array && data.value.length > 0) {
+        const [head, ...tail] = data.value;
+        switch (head.value) {
+            case "add":
+                return `std::plus<>{}(${comma_separate(tail)})`;
+            case "define":
+                return generate_define(tail);
+            default:
+                assert(false, `Invalid application of function: '${data.value[0].toString()}'.`);
+                return "";
+        }
+    }
+    else {
+        assert(false, `Invalid function application: ${data.value.toString()}`);
+        return " /* ERROR: INVALID FUNCTION APPLICATION */ ";
     }
 }
 
