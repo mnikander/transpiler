@@ -3,22 +3,6 @@
 import assert from "assert";
 import { Data, Display, Float, Integer, String } from "./nodes";
 
-function generate_display(data: Display): string {
-    return `std::cout << ${generate(data.value)} << std::endl;`;
-}
-
-function generate_float(data: Float): string {
-    return data.value.toString() + 'f';
-}
-
-function generate_integer(data: Integer): string {
-    return data.value.toString() + 'l';
-}
-
-function generate_string(data: String): string {
-    return '"' + data.value + '"';
-}
-
 export function generate(data: Data) : string {
     if (data.lexeme === "Display") {
         return generate_display(data as Display);
@@ -36,4 +20,20 @@ export function generate(data: Data) : string {
         assert(false,"Invalid lexeme passed to code generation.");
         return `" ERROR: INVALID LEXEME "`;
     }
+}
+
+function generate_display(data: Display): string {
+    return `std::cout << ${generate(data.value)} << std::endl;`;
+}
+
+function generate_float(data: Float): string {
+    return data.value.toString() + 'f';
+}
+
+function generate_integer(data: Integer): string {
+    return data.value.toString() + 'l';
+}
+
+function generate_string(data: String): string {
+    return '"' + data.value + '"';
 }
