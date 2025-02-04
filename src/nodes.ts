@@ -5,6 +5,9 @@ export interface Data {
     value: any;
 }
 
+// Unit testing of the C++ toolchain depends on 'display' for every test.
+// Display will be treated separately from all other functions for the time
+// being, so that its implementation stays as simple and reliable as possible.
 export interface Display extends Data {
     value: Data;
 }

@@ -16,6 +16,17 @@ export function generate(data: Data) : string {
     else if (data.lexeme === "String") {
         return generate_string(data as String);
     }
+    else if(data.lexeme == "Application") {
+        if(data.value instanceof Array && data.value.length > 0) {
+            let body: string = "";
+            body += generate_application(data);
+            return body;
+        }
+        else {
+            assert(false, `Invalid function application: ${data.value.toString()}`);
+            return " /* ERROR: INVALID FUNCTION APPLICATION */ ";
+        }
+    }
     else {
         assert(false,`Invalid lexeme passed to code generation: ${data.lexeme.toString()}`);
         return `" /* ERROR: INVALID LEXEME */ "`;
@@ -36,4 +47,26 @@ function generate_integer(data: Integer): string {
 
 function generate_string(data: String): string {
     return '"' + data.value + '"';
+}
+
+function generate_application(data: Data): string {
+    let result: string = "";
+    switch (data.value[0].value) {
+        case "add":
+            result += `std::plus<>{}`;
+            break;
+        default:
+            assert(false, `Invalid application of function: '${data.value[0].toString()}'.`);
+    }
+
+    result += "(";
+    if(data.value.length > 1) {
+        result += generate(data.value[1]);
+        for (let i = 2; i < data.value.length; i++) {
+            result += ', ' + generate(data.value[i]);
+        }
+    }
+    result += ")";
+
+    return result;
 }
