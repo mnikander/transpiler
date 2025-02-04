@@ -51,22 +51,25 @@ function generate_string(data: String): string {
 
 function generate_application(data: Data): string {
     let result: string = "";
-    switch (data.value[0].value) {
+    const [head, ...tail] = data.value;
+    switch (head.value) {
         case "add":
-            result += `std::plus<>{}`;
+            result += `std::plus<>{}(${comma_separate(tail)})`;
             break;
         default:
             assert(false, `Invalid application of function: '${data.value[0].toString()}'.`);
     }
 
-    result += "(";
-    if(data.value.length > 1) {
-        result += generate(data.value[1]);
-        for (let i = 2; i < data.value.length; i++) {
-            result += ', ' + generate(data.value[i]);
+    return result;
+}
+
+function comma_separate(data: Data[]): string {
+    let result = "";
+    if(data.length > 0) {
+        result += generate(data[0]);
+        for (let i = 1; i < data.length; i++) {
+            result += ', ' + generate(data[i]);
         }
     }
-    result += ")";
-
     return result;
 }
