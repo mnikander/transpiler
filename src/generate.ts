@@ -1,7 +1,7 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
-import { Application, Data, Display, Float, Integer, String } from "./nodes";
+import { Application, Data, Display, Float, Integer, String, Variable } from "./nodes";
 
 export function generate(data: Data) : string {
     if (data.lexeme === "Display") {
@@ -20,7 +20,7 @@ export function generate(data: Data) : string {
         return generate_application(data as Application);
     }
     else if(data.lexeme === "Variable") {
-        return data.value.toString();
+        return generate_variable(data as Variable);
     }
     else {
         assert(false,`Invalid lexeme passed to code generation: ${data.lexeme.toString()}`);
@@ -42,6 +42,10 @@ function generate_integer(data: Integer): string {
 
 function generate_string(data: String): string {
     return '"' + data.value + '"';
+}
+
+function generate_variable(data: Variable): string {
+    return data.value.toString();
 }
 
 function generate_application(data: Data): string {
