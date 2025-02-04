@@ -17,8 +17,8 @@ export function generate(data: Data) : string {
         return generate_string(data as String);
     }
     else {
-        assert(false,"Invalid lexeme passed to code generation.");
-        return `" ERROR: INVALID LEXEME "`;
+        assert(false,`Invalid lexeme passed to code generation: ${data.lexeme.toString()}`);
+        return `" /* ERROR: INVALID LEXEME */ "`;
     }
 }
 
