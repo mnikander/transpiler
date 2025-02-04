@@ -57,6 +57,8 @@ function generate_application(data: Data): string {
                 return `std::plus<>{}(${comma_separate(tail)})`;
             case "define":
                 return generate_define(tail);
+            case "application":
+                return generate_application(head.value);
             default:
                 assert(false, `Invalid application of function: '${data.value[0].toString()}'.`);
                 return "";
