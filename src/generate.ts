@@ -16,11 +16,11 @@ export function generate(data: Data) : string {
     else if (data.lexeme === "String") {
         return generate_string(data as String);
     }
-    else if(data.lexeme === "Application") {
-        return generate_application(data as Application);
-    }
     else if(data.lexeme === "Variable") {
         return generate_variable(data as Variable);
+    }
+    else if(data.lexeme === "Application") {
+        return generate_application(data as Application);
     }
     else {
         assert(false,`Invalid lexeme passed to code generation: ${data.lexeme.toString()}`);
@@ -65,8 +65,8 @@ function generate_application(data: Data): string {
         }
     }
     else {
-        assert(false, `Invalid function application: ${data.value.toString()}`);
-        return " /* ERROR: INVALID FUNCTION APPLICATION */ ";
+        assert(false, `Missing function and arguments: ${data.value.toString()}`);
+        return " /* ERROR: MISSING FUNCTION AND ARGUMENTS */ ";
     }
 }
 
