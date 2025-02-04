@@ -29,7 +29,7 @@ export function generate(data: Data) : string {
 }
 
 function generate_display(data: Display): string {
-    return `std::cout << ${generate(data.value)} << std::endl;`;
+    return `std::cout << ${generate(data.value)} << std::endl;\n`;
 }
 
 function generate_float(data: Float): string {
