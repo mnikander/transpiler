@@ -1,23 +1,14 @@
 # Compiler fragments
 
-The goal is to prototype several language features and gain experience with the basics of language design and compilers.
 This repository contains code fragments for the _intermediate code generation_ stage of a compiler.
-Each code fragment implements an individual command or language feature.
-Typically, this involves transforming one kind of node in an abstract syntax tree (AST) into target code.
-The underlying assumption is that the AST nodes all have a very constistent structure, which makes it easy to represent the AST nodes.
-A language similar to Lisp, relying entirely on symbolic expressions in prefix-notation, would likely have an AST with such a homogeneous structure.
-For example the function application:
+The aim is to experiment with a few language features and learn more about compilers.
+Each code fragment transforms one kind of node in an abstract syntax tree (AST) into target code.
+The underlying assumption is that the AST nodes all have a homogeneous structure, stemming from a language similar to Lisp, for example.
+The following function application:
 
 ```lisp
 (define x 5)
 ```
-<!--
-With type annotations:
-```lisp
-(define x:I64 5)
-(define (first foo:I64 bar:I64) foo)
-```
--->
 
 might be parsed into the following AST node in JSON form:
 
@@ -25,7 +16,7 @@ might be parsed into the following AST node in JSON form:
 {
     "lexeme": "Application",
     "operator": {
-        "lexeme": "Binary",
+        "lexeme": "Abstraction",
         "value": "define"
     },
     "arguments": [
@@ -47,9 +38,16 @@ This AST node could then be transformed into the following C++ code:
 const int x = 5;
 ```
 
-Each fragment in this repository transforms an AST node from JSON into C++ code.
-This breaks down the task of intermediate code generation into many smaller parts.
-These parts can be developed, tested, and experimented with individually.
+## Getting Started
+
+1. Clone this repo
+2. Ensure you have _nodejs_, _npm_, and _g++_ installed
+3. `npm run main` to build and run the example
+4. `npm test` to build and run the unit tests
+
+Both the main function and the unit tests will automatically transpile their abstract syntax trees to C++ and then compile and execute the resulting programs. 
+If you wish to build the main program without immediately executing it, you can use `npm run build` and then manually execute it with `./out/artifacts/main`.
+You can find all generated source files, executables, and result files containing the output on stdout, in the directory `out/artifacts`.
 
 ## System Design
 This section outlines key design decisions, the system design, and the pipeline employed for development and testing.
