@@ -27,6 +27,9 @@ export function generate(data: Data) : string {
             return " /* ERROR: INVALID FUNCTION APPLICATION */ ";
         }
     }
+    else if(data.lexeme === "Variable") {
+        return data.value.toString();
+    }
     else {
         assert(false,`Invalid lexeme passed to code generation: ${data.lexeme.toString()}`);
         return `" /* ERROR: INVALID LEXEME */ "`;
@@ -50,16 +53,30 @@ function generate_string(data: String): string {
 }
 
 function generate_application(data: Data): string {
-    let result: string = "";
     const [head, ...tail] = data.value;
     switch (head.value) {
         case "add":
-            result += `std::plus<>{}(${comma_separate(tail)})`;
-            break;
+            return `std::plus<>{}(${comma_separate(tail)})`;
+        case "define":
+            return generate_define(tail);
         default:
             assert(false, `Invalid application of function: '${data.value[0].toString()}'.`);
+            return "";
     }
+}
 
+function generate_define(data: Data[]): string {
+    let result: string = "";
+    assert(data.length >= 1, "'define' has no arguments.");
+    result += `auto const ${data[0].value}`;
+    if (data.length == 1) {
+        result += ";";
+    }
+    else if (data.length == 2) {
+        result += ` = ${data[1].value};`;
+    } else {
+        assert(false, `'define' has too many arguments: ${data.length}`)
+    }
     return result;
 }
 

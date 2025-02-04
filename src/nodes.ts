@@ -23,3 +23,7 @@ export interface Integer extends Data {
 export interface String extends Data {
     value: string;
 }
+
+export interface Variable extends Data {
+    value: string;
+}
