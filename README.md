@@ -67,6 +67,84 @@ C++ was chosen as the target language because it's fast and provides useful abst
 This makes it easier to develop and debug the code generator, than if LLVM IR or WebAssembly were used instead.
 It is beneficial if the architecture and testing pipelines support adding another target language later on though.
 
+### Notation for Abstract Syntax Trees
+
+Initially, ASTs were encoded in a format similar to that used by [Langium](https://langium.org/).
+This was done so that the code generation can be used inside a Langium project.
+The downside of this approach is that the abstract syntax trees become very complicated.
+For example `(display (add 1 (add 2 4)))` becomes:
+
+```json
+{
+    "lexeme": "Display",
+    "value": {
+        "lexeme": "Application",
+        "value": [
+            {
+                "lexeme": "Abstraction",
+                "value": "add"
+            },
+            {
+                "lexeme": "Integer",
+                "value": 1
+            },
+            {
+                "lexeme": "Application",
+                "value": [
+                    {
+                        "lexeme": "Abstraction",
+                        "value": "add"
+                    },
+                    {
+                        "lexeme": "Integer",
+                        "value": 2
+                    },
+                    {
+                        "lexeme": "Integer",
+                        "value": 4
+                    }
+                ]
+            }
+        ]
+    }
+}
+```
+
+The source language, for the time being, has a syntax similar to that of Lisp.
+The explicit parentheses of the symbolic expressions essentially give us an AST for free, however.
+We could just translate it as follows:
+```json
+{
+    "symbolic_expression": "(display (add 1 (add 2 4)))",
+    "simple_json":  ["display", ["add", 1, ["add", 2, 4]]]
+}
+```
+This much more compact notation is easier to write and work with than the long-form notation above.
+Note that in order to add type-annotations, each entry in the JSON array would have to be replaced by an object.
+
+```json
+{
+    "symbolic_expression": "(display (add 1 (add 2 4)))",
+    "typed_json":
+    [
+        {"display": "i64 -> Output"},
+        [
+            {"add": "[i64 i64] -> i64"},
+            {"1": "i64"},
+            [
+                {"add": "[i64 i64] -> i64"},
+                {"2": "i64"},
+                {"4": "i64"}
+            ]
+        ]
+    ]
+}
+```
+Further annotations such as const-qualifiers would inflate this further, by requiring that each annotation is itself an object.
+The difference between this an the Langium-inspired JSON representation is smaller then.
+Nonetheless, this structure is still closer to the original Lisp code, and is easier to reason about and traverse.
+Hence, the Langium-inspired AST format will be abandoned, in favor of this minimalist approach.
+
 ### Test Design
 
 There are many ways to generate C++ code for one particular language keyword or feature.
