@@ -3,20 +3,13 @@
 import { describe, it, expect } from 'vitest';
 import { cpp_toolchain } from '../src/cpp_toolchain'
 import { generate } from '../src/generate';
-import { Display, String } from '../src/nodes';
 
 // (display "Hello, world.")
-let data: Display = {
-    lexeme: "Display",
-    value: {
-        lexeme: "String",
-        value: "Hello, world."
-    }
-}
+let data = ["display", "\"Hello, world.\""];
 
 describe('String', () => {
-    it('simple', () => {
-        let code: string = generate(data.value as String);
+    it('direct', () => {
+        let code: string = generate(data[1]);
         expect(code).toBe('"Hello, world."');
     });
 

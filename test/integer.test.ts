@@ -3,22 +3,15 @@
 import { describe, it, expect } from 'vitest';
 import { cpp_toolchain } from '../src/cpp_toolchain'
 import { generate } from '../src/generate';
-import { Display, Integer } from '../src/nodes';
 
 // (display 5)
-let data: Display = {
-    lexeme: "Display",
-    value: {
-        lexeme: "Integer",
-        value: 5
-    }
-}
+let data = ["display", 5];
 
 describe('Integer', () => {
 
-    it('simple', () => {
-        let code: string = generate(data.value as Integer);
-        expect(code).toBe("5l");
+    it('direct', () => {
+        let code: string = generate(data[1]);
+        expect(code).toBe("5");
     });
 
     it('(display 5)', () => {
