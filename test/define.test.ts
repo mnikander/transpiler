@@ -5,6 +5,7 @@ import { cpp_toolchain } from '../src/cpp_toolchain'
 import { generate } from '../src/generate';
 import { Application, Display } from '../src/nodes';
 
+// (define x 2)
 let define_x: Application = {
     lexeme: "Application",
     value: [
@@ -23,6 +24,7 @@ let define_x: Application = {
     ]
 }
 
+// (display x)
 let display_x: Display = {
     lexeme: "Display",
     value: {

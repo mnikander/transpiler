@@ -2,8 +2,9 @@
 
 import { cpp_toolchain } from "./cpp_toolchain";
 import { generate } from './generate';
-import { Data, Display } from './nodes';
+import { Application, Data, Display } from './nodes';
 
+// (display "Hello, world.")
 let text: Display = {
     lexeme: "Display",
     value: {
@@ -12,6 +13,7 @@ let text: Display = {
     }
 }
 
+// (display (add 1 2))
 let addition: Data = {
     lexeme: "Display",
     value: {

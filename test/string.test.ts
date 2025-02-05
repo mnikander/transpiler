@@ -5,6 +5,7 @@ import { cpp_toolchain } from '../src/cpp_toolchain'
 import { generate } from '../src/generate';
 import { Display, String } from '../src/nodes';
 
+// (display "Hello, world.")
 let data: Display = {
     lexeme: "Display",
     value: {

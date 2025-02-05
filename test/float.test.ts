@@ -5,6 +5,7 @@ import { cpp_toolchain } from '../src/cpp_toolchain'
 import { generate } from '../src/generate';
 import { Display, Float } from '../src/nodes';
 
+// (display 0.1)
 let data: Display = {
     lexeme: "Display",
     value: {

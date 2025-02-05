@@ -5,6 +5,7 @@ import { cpp_toolchain } from "../src/cpp_toolchain";
 import { generate } from "../src/generate";
 import { Data } from '../src/nodes';
 
+// (display (add 1 2))
 let addition: Data = {
     lexeme: "Display",
     value: {
@@ -26,6 +27,7 @@ let addition: Data = {
     }
 };
 
+// (display (add 1 (add 2 4)))
 let nested_right: Data = {
     lexeme: "Display",
     value: {
@@ -60,6 +62,7 @@ let nested_right: Data = {
     }
 };
 
+// (display (add (add 1 2) 4))
 let nested_left: Data = {
     lexeme: "Display",
     value: {
