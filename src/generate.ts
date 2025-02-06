@@ -14,15 +14,11 @@ export function generate(ast: any): string {
         else if (is_define(ast)) {
             return generate_define(ast);
         }
-        else if (is_higher_order_function(ast)) {
-            return generate_higher_order_function(ast);
-        }
         else if (is_lambda(ast)) {
             return generate_lambda(ast);
         }
         else {
-            let [head, ...tail] = ast;
-            assert(false, `unknown function <${head.toString()}> of type <${typeof head}> or incorrect number of arguments: <${tail.toString()}>, i.e. ${ast.length - 1}`);
+            return generate_function_application(ast);
         }
     }
     else if (typeof ast !== 'undefined') {
@@ -108,19 +104,11 @@ function generate_lambda_arguments(args: string | string[]): string {
     }
 }
 
-function is_higher_order_function(ast: any): boolean {
-    if (ast instanceof Array && ast[0] instanceof Array) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-function generate_higher_order_function(ast: any[][]): string {
+function generate_function_application(ast: any[]): string {
     let [head, ...tail] = ast;
     let result = "";
-    result += generate(head) + "(";
+    result += generate(head);
+    result += "(";
     for (let i = 0; i < tail.length; i++) {
         result += `${generate(tail[i])}`;
         if ((i + 1) < tail.length) {
