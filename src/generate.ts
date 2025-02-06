@@ -11,6 +11,9 @@ export function generate(ast: any): string {
         else if (is_add(ast)) {
             return generate_add(ast);
         }
+        else if (is_subtract(ast)) {
+            return generate_subtract(ast);
+        }
         else if (is_define(ast)) {
             return generate_define(ast);
         }
@@ -56,13 +59,24 @@ function generate_display(ast: any): string {
 
 function is_add(ast: any): boolean {
     let [head, ...tail] = ast;
-    return head == "add";
+    return head == "add" || head == "+";
 }
 
 function generate_add(ast: any): string {
     let [head, ...tail] = ast;
     assert(tail.length == 2, `'add' requires 2 arguments, ${tail.length} provided: <${tail.toString()}>`);
     return `std::plus<>{}(${generate(tail[0])}, ${generate(tail[1])})`;
+}
+
+function is_subtract(ast: any): boolean {
+    let [head, ...tail] = ast;
+    return head == "subtract" || head == "-";
+}
+
+function generate_subtract(ast: any): string {
+    let [head, ...tail] = ast;
+    assert(tail.length == 2, `'subtract' requires 2 arguments, ${tail.length} provided: <${tail.toString()}>`);
+    return `std::minus<>{}(${generate(tail[0])}, ${generate(tail[1])})`;
 }
 
 function is_define(ast: any): boolean {
