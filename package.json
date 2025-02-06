@@ -6,6 +6,7 @@
   "scripts": {
     "build": "mkdir -p out/artifacts && tsc -b tsconfig.json",
     "main": "npm run build && node out/main.js",
+    "clean": "rm out/artifacts/*",
     "test": "vitest",
     "test:watch": "vitest --watch"
   },
