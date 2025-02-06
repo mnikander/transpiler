@@ -77,6 +77,6 @@ function generate_define(ast: any): string {
         return `auto const ${generate(tail[0])} = ${generate(tail[1])};`;
     } else {
         assert(false, `'define' requires 1 or 2 arguments, ${tail.length} provided <${tail.toString}>`);
-        return " /* ERROR: INCORRECT NUMBER OF ARGUMENTS */ "
+        return " /* ERROR: INCORRECT NUMBER OF ARGUMENTS */ ";
     }
 }
