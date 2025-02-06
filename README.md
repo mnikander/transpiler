@@ -127,8 +127,14 @@ This representation would still be quite simple, though:
 
 ### Test Design
 
-Testing the code generator effectively, presents a number of challenges.
-There are several options for how to test the code generation:
+Testing the code generator effectively, presents a number of challenges:
+1. How can the correctness of the code generation be ensured?
+2. How can unit tests for code generation be written easily?
+3. How can the maintenance effort for unit tests be kept low, even if the code generation is frequently refactored?
+4. How could the code generation for two different target languages be tested effectively?
+5. How can alternative implementations for the same language feature be tested?
+
+In general, there are several options for how to test the code generation including:
 1. string comparison on the generated C++ code
 2. snapshot testing, where the generated code is compared to an earlier snapshot of the generated code
 3. compile and execute the generated code
