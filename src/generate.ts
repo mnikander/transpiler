@@ -14,11 +14,17 @@ export function generate(ast: any): string {
         else if (is_subtract(ast)) {
             return generate_subtract(ast);
         }
+        else if (is_equal(ast)) {
+            return generate_equal(ast);
+        }
         else if (is_define(ast)) {
             return generate_define(ast);
         }
         else if (is_lambda(ast)) {
             return generate_lambda(ast);
+        }
+        else if (is_if(ast)) {
+            return generate_if(ast);
         }
         else {
             return generate_function_application(ast);
@@ -35,7 +41,15 @@ export function generate(ast: any): string {
 
 function generate_atom(ast: any): string {
     if (typeof ast === 'string') {
-        return ast;
+        if (ast == "True") {
+            return "true";
+        }
+        else if (ast === "False") {
+            return "false";
+        }
+        else {
+            return ast;
+        }
     }
     else if (ast !== Object(ast)) { // primitive data-type (not an object)
         return ast.toString();
@@ -79,6 +93,17 @@ function generate_subtract(ast: any): string {
     return `std::minus<>{}(${generate(tail[0])}, ${generate(tail[1])})`;
 }
 
+function is_equal(ast: any): boolean {
+    let [head, ...tail] = ast;
+    return head == "equal" || head == "==";
+}
+
+function generate_equal(ast: any): string {
+    let [head, ...tail] = ast;
+    assert(tail.length == 2, `'equal' requires 2 arguments, ${tail.length} provided: <${tail.toString()}>`);
+    return `std::equal_to<>{}(${generate(tail[0])}, ${generate(tail[1])})`;
+}
+
 function is_define(ast: any): boolean {
     let [head, ...tail] = ast;
     return head == "define";
@@ -116,6 +141,17 @@ function generate_lambda_arguments(args: string | string[]): string {
         assert(false, `invalid function argument <${args}> of type <${typeof args}>`);
         return "/* ERROR: INVALID FUNCTION ARGUMENT */";
     }
+}
+
+function is_if(ast: any): boolean {
+    let [head, ...tail] = ast;
+    return head == "if"; // || head == "?";
+}
+
+function generate_if(ast: any): string {
+    let [head, ...tail] = ast;
+    assert(tail.length == 3, `'if' requires 3 arguments, ${tail.length} provided: <${tail.toString()}>`);
+    return `((${generate(tail[0])}) ? (${generate(tail[1])}) : (${generate(tail[2])}))`;
 }
 
 function generate_function_application(ast: any[]): string {
