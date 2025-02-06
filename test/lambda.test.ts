@@ -37,4 +37,29 @@ describe('lambda', () => {
         const result: string = cpp_toolchain(filename, content);
         expect(result).toBe("1\n");
     });
+
+    // // TODO: make recursion possible; I will probably have to switch from lambdas to functions or function objects for this
+    // it('(define countdown (lambda x (if (equal x 0)(0)(countdown (-x 1)))))', () => {
+    //     let abstraction = ["define", "countdown", ["lambda", "x", ["if", ["equal", "x", 0], 0, ["countdown", ["-", "x", 1]]]]];
+    //     let application = ["display", ["countdown", 5]];
+    //     let filename: string = "test_lambda_recursion";
+    //     let content: string = generate(abstraction) + generate(application);
+    //     const result: string = cpp_toolchain(filename, content);
+    //     expect(result).toBe("1\n");
+    // });
+
+    // // TODO: make co-recursion possible. In C++ this requires a forward declaration. I would probably have to
+    // //       switch from lambdas to function objects, and forward declare the object, in order to implement this
+    // // (define even (lambda x (if (equal x 0) (True) (odd (- x 1))))
+    // // (define odd (lambda x (even (- x 1)))
+    // // (display (even 5))
+    // it('even and odd', () => {
+    //     let even = ["define", "even", ["lambda", "x", ["if", ["equal", "x", 0], "True",["odd", ["-", "x", 1]]]]];
+    //     let odd = ["define", "second", ["lambda", "x", ["even", ["-", "x", 1]]]];
+    //     let application = ["display", ["even", 5]];
+    //     let filename: string = "test_lambda_2nd_order";
+    //     let content: string = generate(even) + generate(odd) + generate(application);
+    //     const result: string = cpp_toolchain(filename, content);
+    //     expect(result).toBe("false\n");
+    // });
 });
