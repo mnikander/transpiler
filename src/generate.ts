@@ -49,7 +49,7 @@ function generate_atom(ast: any): string {
 
 function is_display(ast: any): boolean {
     let [head, ...tail] = ast;
-    return head == "display" && ast.length == 2;
+    return head == "display";
 }
 
 function generate_display(ast: any): string {
@@ -60,7 +60,7 @@ function generate_display(ast: any): string {
 
 function is_add(ast: any): boolean {
     let [head, ...tail] = ast;
-    return head == "add" && ast.length == 3;
+    return head == "add";
 }
 
 function generate_add(ast: any): string {
@@ -71,7 +71,7 @@ function generate_add(ast: any): string {
 
 function is_define(ast: any): boolean {
     let [head, ...tail] = ast;
-    return head == "define" && (ast.length == 2 || ast.length == 3);
+    return head == "define";
 }
 
 function generate_define(ast: any): string {
@@ -133,7 +133,7 @@ function generate_higher_order_function(ast: any[][]): string {
 
 function is_lambda(ast: any): boolean {
     let [head, ...tail] = ast;
-    return head == "lambda" && ast.length == 3;
+    return head == "lambda";
 }
 
 function generate_lambda(ast: string[] | string[][]): string {
