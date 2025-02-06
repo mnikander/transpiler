@@ -22,7 +22,7 @@ return EXIT_SUCCESS;
 }
 
 function clearfiles(filename: string): string {
-    return `echo '// empty cpp file' > out/artifacts/${filename}.cpp && echo 'the program was not executed' > out/artifacts/${filename}.txt`;
+    return `echo '// empty cpp file' > out/artifacts/${filename}.cpp && echo 'empty' > out/artifacts/${filename}.txt`;
 }
 
 function write(filename: string, content: string): string {
