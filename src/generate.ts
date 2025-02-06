@@ -7,18 +7,17 @@ export function generate(ast: any): string {
     let result: string = "";
 
     if (ast instanceof Array) {
-        let [head, ...tail] = ast;
-
-        if (head == "display" && ast.length == 2) {
-            result += generate_display(head, tail);
+        if (is_display(ast)) {
+            result += generate_display(ast);
         }
-        else if (head == "add" && ast.length == 3) {
-            result += generate_add(head, tail);
+        else if (is_add(ast)) {
+            result += generate_add(ast);
         }
-        else if (head == "define" && ast.length == 3) {
-            result += generate_define(head, tail);
+        else if (is_define(ast)) {
+            result += generate_define(ast);
         }
         else {
+            let [head, ...tail] = ast;
             assert(false, `unknown function <${head.toString()}> of type <${typeof head}> or incorrect number of arguments: <${tail.toString()}>, i.e. ${ast.length - 1}`);
         }
     }
@@ -46,17 +45,35 @@ function generate_atom(ast: any): string {
     return result;
 }
 
-function generate_display(head: any, tail: any): string {
+function is_display(ast: any): boolean {
+    let [head, ...tail] = ast;
+    return head == "display" && ast.length == 2;
+}
+
+function generate_display(ast: any): string {
+    let [head, ...tail] = ast;
     assert(tail.length == 1, `'display' requires 1 argument, ${tail.length} provided: <${tail.toString()}>`);
     return `std::cout << ${generate(tail[0])} << std::endl;\n`;
 }
 
-function generate_add(head: any, tail: any): string {
+function is_add(ast: any): boolean {
+    let [head, ...tail] = ast;
+    return head == "add" && ast.length == 3;
+}
+
+function generate_add(ast: any): string {
+    let [head, ...tail] = ast;
     assert(tail.length == 2, `'add' requires 2 arguments, ${tail.length} provided: <${tail.toString()}>`);
     return `std::plus<>{}(${generate(tail[0])}, ${generate(tail[1])})`;
 }
 
-function generate_define(head: any, tail: any): string {
+function is_define(ast: any): boolean {
+    let [head, ...tail] = ast;
+    return head == "define" && ast.length == 3;
+}
+
+function generate_define(ast: any): string {
+    let [head, ...tail] = ast;
     let result: string = "";
     if (tail.length == 1) {
         result += `auto const ${generate(tail[0])};`;
