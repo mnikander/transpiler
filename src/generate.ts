@@ -122,27 +122,6 @@ function generate_define(ast: any): string {
     }
 }
 
-function generate_lambda_arguments(args: string | string[]): string {
-    if (args instanceof Array) {
-        let result: string = "";
-        for (let i = 0; i < args.length; i++) {
-            result += `auto const& ${args[i]}`;
-            if ((i + 1) < args.length) {
-                result += ', ';
-            }
-        }
-        return result;
-    }
-    else if (typeof args === 'string') {
-        return `auto const& ${args}`;
-    }
-    else
-    {
-        assert(false, `invalid function argument <${args}> of type <${typeof args}>`);
-        return "/* ERROR: INVALID FUNCTION ARGUMENT */";
-    }
-}
-
 function is_if(ast: any): boolean {
     let [head, ...tail] = ast;
     return head == "if"; // || head == "?";
@@ -187,5 +166,26 @@ function generate_lambda(ast: string[] | string[][]): string {
     else {
         assert(false, `'lambda' requires 2 arguments, ${tail.length} provided <${tail.toString}>`);
         return " /* ERROR: INCORRECT NUMBER OF ARGUMENTS */ ";
+    }
+}
+
+function generate_lambda_arguments(args: string | string[]): string {
+    if (args instanceof Array) {
+        let result: string = "";
+        for (let i = 0; i < args.length; i++) {
+            result += `auto const& ${args[i]}`;
+            if ((i + 1) < args.length) {
+                result += ', ';
+            }
+        }
+        return result;
+    }
+    else if (typeof args === 'string') {
+        return `auto const& ${args}`;
+    }
+    else
+    {
+        assert(false, `invalid function argument <${args}> of type <${typeof args}>`);
+        return "/* ERROR: INVALID FUNCTION ARGUMENT */";
     }
 }
