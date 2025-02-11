@@ -20,6 +20,15 @@
         "<node_internals>/**",
         "**/node_modules/**"
       ]
+    },
+    {
+      "name": "C++ Launch",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/out/fold",
+      "args": ["arg1", "arg2"],
+      "environment": [{ "name": "config", "value": "Debug" }],
+      "cwd": "${workspaceFolder}"
     }
   ]
 }
