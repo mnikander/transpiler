@@ -150,7 +150,7 @@ function generate_function_application(ast: any[]): string {
 
 function is_lambda(ast: any): boolean {
     let [head, ...tail] = ast;
-    return head == "lambda";
+    return head == "lambda" || head == "->";
 }
 
 function generate_lambda(ast: string[] | string[][]): string {

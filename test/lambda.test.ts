@@ -19,6 +19,14 @@ describe('lambda', () => {
         expect(result).toBe("1\n");
     });
 
+    it('(display ((-> (a b) a) 1 2))', () => {
+        let data = ["display", [["->", ["a", "b"], "a"], 1, 2]];
+        let filename: string = "test_lambda_arrow_immediate";
+        let content: string = generate(data);
+        const result: string = cpp_toolchain(filename, content);
+        expect(result).toBe("1\n");
+    });
+
     it('(define first (lambda (a b) a)); (display (first 1 2))', () => {
         let abstraction = ["define", "first", ["lambda", ["a", "b"], "a"]];
         let application = ["display", ["first", 1, 2]];
