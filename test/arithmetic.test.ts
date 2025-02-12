@@ -16,7 +16,7 @@ describe('Arithmetic', () => {
 
     it('(display (+ 1 2))', () => {
         let ast = ["display", ["+", 1, 2]];
-        let filename: string = "test_add";
+        let filename: string = "test_plus";
         let content: string = generate(ast);
         const result: string = cpp_toolchain(filename, content);
         expect(result).toBe("3\n");
@@ -40,7 +40,7 @@ describe('Arithmetic', () => {
 
     it('(display (- 1 2))', () => {
         let ast = ["display", ["-", 1, 2]];
-        let filename: string = "test_add";
+        let filename: string = "test_minus";
         let content: string = generate(ast);
         const result: string = cpp_toolchain(filename, content);
         expect(result).toBe("-1\n");
