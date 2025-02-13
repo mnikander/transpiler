@@ -1,4 +1,5 @@
 node_modules/
 out/
+cpp_library/out/
 *.disabled
 tsconfig.tsbuildinfo

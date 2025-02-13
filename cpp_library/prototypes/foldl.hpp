@@ -1,10 +1,9 @@
 #pragma once
 
-#include <cassert>
 #include <iterator> // distance
 
 #include "list.hpp"
-#include "until.hpp"
+#include "../src/until.hpp"
 
 template <typename F, typename A, typename L>
 A foldl(F f, A acc, L const& list) {
@@ -13,12 +12,9 @@ A foldl(F f, A acc, L const& list) {
         A _acc;
         L _list;
     };
-    int counter = 0;
 
     // predicate (termination condition)
-    auto condition = [&counter](State const& s) { 
-            ++counter;
-            assert(counter<20);
+    auto condition = [](State const& s) { 
             return std::distance(s._list.first, s._list.last) == 0;
     };
 
