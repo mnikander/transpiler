@@ -2,6 +2,7 @@
 #include "../src/until.hpp"
 #include "../prototypes/foldl.hpp"
 #include "../prototypes/list.hpp"
+#include "../prototypes/map.hpp"
 
 TEST(until, counter_sum)
 {
@@ -31,3 +32,17 @@ TEST(until, foldl)
     EXPECT_EQ(result, 10);
 }
 
+TEST(until, map)
+{
+    std::array<int, 5> data{-1, 0, 1, 2, 3};
+    std::array<int, 5> result{0, 0, 0, 0, 0};
+
+    using It = decltype(data.begin());
+    map(std::negate<>{}, List<It>{data.begin(), data.end()}, List<It>{result.begin(), result.end()});
+
+    EXPECT_EQ(result[0], 1);
+    EXPECT_EQ(result[1], 0);
+    EXPECT_EQ(result[2], -1);
+    EXPECT_EQ(result[3], -2);
+    EXPECT_EQ(result[4], -3);
+}
