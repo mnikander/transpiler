@@ -8,6 +8,9 @@ export function generate(ast: any): string {
         if (is_display(ast)) {
             return generate_display(ast);
         }
+        if (is_error(ast)) {
+            return generate_error(ast);
+        }
         else if (is_add(ast)) {
             return generate_add(ast);
         }
@@ -69,6 +72,17 @@ function generate_display(ast: any): string {
     let [head, ...tail] = ast;
     assert(tail.length == 1, `'display' requires 1 argument, ${tail.length} provided: <${tail.toString()}>`);
     return `std::cout << ${generate(tail[0])} << std::endl;\n`;
+}
+
+function is_error(ast: any): boolean {
+    let [head, ...tail] = ast;
+    return head == "error";
+}
+
+function generate_error(ast: any): string {
+    let [head, ...tail] = ast;
+    assert(tail.length == 1, `'error' requires 1 argument, ${tail.length} provided: <${tail.toString()}>`);
+    return `std::cerr << "Error: " << ${generate(tail[0])} << std::endl;\nstd::abort();\n`;
 }
 
 function is_add(ast: any): boolean {
