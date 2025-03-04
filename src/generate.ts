@@ -1,6 +1,16 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
+import { generate_atom } from "./lexeme/atom";
+import { generate_function_application } from "./lexeme/application";
+import { is_add, generate_add } from "./lexeme/add";
+import { is_define, generate_define } from "./lexeme/define";
+import { is_display, generate_display } from "./lexeme/display";
+import { is_error, generate_error } from "./lexeme/error";
+import { is_subtract, generate_subtract } from "./lexeme/subtract";
+import { is_equal, generate_equal } from "./lexeme/equal";
+import { is_lambda, generate_lambda } from "./lexeme/lambda";
+import { is_if, generate_if } from "./lexeme/if";
 
 // TODO: set reasonable type information for the 'ast' parameter
 export function generate(ast: any): string {
@@ -39,167 +49,5 @@ export function generate(ast: any): string {
     else {
         assert(false, "undefined node");
         return "/* ERROR: UNDEFINED NODE */";
-    }
-}
-
-function generate_atom(ast: any): string {
-    if (typeof ast === 'string') {
-        if (ast == "True") {
-            return "true";
-        }
-        else if (ast === "False") {
-            return "false";
-        }
-        else {
-            return ast;
-        }
-    }
-    else if (ast !== Object(ast)) { // primitive data-type (not an object)
-        return ast.toString();
-    }
-    else {
-        assert(false, `invalid symbol <${ast.toString()}> of type <${typeof ast}>`);
-        return "/* ERROR: INVALID SYMBOL */";
-    }
-}
-
-function is_display(ast: any): boolean {
-    let [head, ...tail] = ast;
-    return head == "display";
-}
-
-function generate_display(ast: any): string {
-    let [head, ...tail] = ast;
-    assert(tail.length == 1, `'display' requires 1 argument, ${tail.length} provided: <${tail.toString()}>`);
-    return `std::cout << ${generate(tail[0])} << std::endl;\n`;
-}
-
-function is_error(ast: any): boolean {
-    let [head, ...tail] = ast;
-    return head == "error";
-}
-
-function generate_error(ast: any): string {
-    let [head, ...tail] = ast;
-    assert(tail.length == 1, `'error' requires 1 argument, ${tail.length} provided: <${tail.toString()}>`);
-    return `std::cerr << "Error: " << ${generate(tail[0])} << std::endl;\nstd::abort();\n`;
-}
-
-function is_add(ast: any): boolean {
-    let [head, ...tail] = ast;
-    return head == "add" || head == "+";
-}
-
-function generate_add(ast: any): string {
-    let [head, ...tail] = ast;
-    assert(tail.length == 2, `'add' requires 2 arguments, ${tail.length} provided: <${tail.toString()}>`);
-    return `std::plus<>{}(${generate(tail[0])}, ${generate(tail[1])})`;
-}
-
-function is_subtract(ast: any): boolean {
-    let [head, ...tail] = ast;
-    return head == "subtract" || head == "-";
-}
-
-function generate_subtract(ast: any): string {
-    let [head, ...tail] = ast;
-    assert(tail.length == 2, `'subtract' requires 2 arguments, ${tail.length} provided: <${tail.toString()}>`);
-    return `std::minus<>{}(${generate(tail[0])}, ${generate(tail[1])})`;
-}
-
-function is_equal(ast: any): boolean {
-    let [head, ...tail] = ast;
-    return head == "equal" || head == "==";
-}
-
-function generate_equal(ast: any): string {
-    let [head, ...tail] = ast;
-    assert(tail.length == 2, `'equal' requires 2 arguments, ${tail.length} provided: <${tail.toString()}>`);
-    return `std::equal_to<>{}(${generate(tail[0])}, ${generate(tail[1])})`;
-}
-
-function is_define(ast: any): boolean {
-    let [head, ...tail] = ast;
-    return head == "define";
-}
-
-function generate_define(ast: any): string {
-    let [head, ...tail] = ast;
-    if (tail.length == 1) {
-        return `auto const ${generate(tail[0])};`;
-    }
-    else if (tail.length == 2) {
-        return `auto const ${generate(tail[0])} = ${generate(tail[1])};\n`;
-    } else {
-        assert(false, `'define' requires 1 or 2 arguments, ${tail.length} provided <${tail.toString}>`);
-        return " /* ERROR: INCORRECT NUMBER OF ARGUMENTS */ ";
-    }
-}
-
-function is_if(ast: any): boolean {
-    let [head, ...tail] = ast;
-    return head == "if"; // || head == "?";
-}
-
-function generate_if(ast: any): string {
-    let [head, ...tail] = ast;
-    assert(tail.length == 3, `'if' requires 3 arguments, ${tail.length} provided: <${tail.toString()}>`);
-    return `((${generate(tail[0])}) ? (${generate(tail[1])}) : (${generate(tail[2])}))`;
-}
-
-function generate_function_application(ast: any[]): string {
-    let [head, ...tail] = ast;
-    let result = "";
-    result += generate(head);
-    result += "(";
-    for (let i = 0; i < tail.length; i++) {
-        result += `${generate(tail[i])}`;
-        if ((i + 1) < tail.length) {
-            result += ', ';
-        }
-    }
-    result +=  ")";
-    return result;
-}
-
-function is_lambda(ast: any): boolean {
-    let [head, ...tail] = ast;
-    return head == "lambda" || head == "->";
-}
-
-function generate_lambda(ast: string[] | string[][]): string {
-    let [head, ...tail] = ast;
-    if (tail.length == 2) {
-        let result: string = "[](";
-        result += generate_lambda_arguments(tail[0]);
-        result += "){ return ";
-        result += generate(tail[1]);
-        result += "; }";
-        return result;
-    }
-    else {
-        assert(false, `'lambda' requires 2 arguments, ${tail.length} provided <${tail.toString}>`);
-        return " /* ERROR: INCORRECT NUMBER OF ARGUMENTS */ ";
-    }
-}
-
-function generate_lambda_arguments(args: string | string[]): string {
-    if (args instanceof Array) {
-        let result: string = "";
-        for (let i = 0; i < args.length; i++) {
-            result += `auto const& ${args[i]}`;
-            if ((i + 1) < args.length) {
-                result += ', ';
-            }
-        }
-        return result;
-    }
-    else if (typeof args === 'string') {
-        return `auto const& ${args}`;
-    }
-    else
-    {
-        assert(false, `invalid function argument <${args}> of type <${typeof args}>`);
-        return "/* ERROR: INVALID FUNCTION ARGUMENT */";
     }
 }
