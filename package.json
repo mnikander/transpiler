@@ -7,7 +7,7 @@
     "build": "mkdir -p out/artifacts && tsc -b tsconfig.json",
     "main": "npm run build && node out/main.js",
     "clean": "rm -rf out && mkdir out/ && mkdir out/artifacts && cd out && cmake ../cpp_library && cd ..",
-    "cpp": "cmake --build out/ && ./out/unit_tests && ./out/lambda_example",
+    "cpp": "cmake --build out/ && ./out/unit_tests",
     "test": "npm run cpp && vitest",
     "test:watch": "vitest --watch"
   },
