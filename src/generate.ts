@@ -20,7 +20,7 @@ export function generate(ast: any): string {
         if (is_display(ast)) {
             return generate_display(ast);
         }
-        if (is_error(ast)) {
+        else if (is_error(ast)) {
             return generate_error(ast);
         }
         else if (is_add(ast)) {
