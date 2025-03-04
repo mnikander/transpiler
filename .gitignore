@@ -1,5 +1,6 @@
+*.disabled
+.vscode/settings.json
+cpp_library/out/
 node_modules/
 out/
-cpp_library/out/
-*.disabled
 tsconfig.tsbuildinfo
