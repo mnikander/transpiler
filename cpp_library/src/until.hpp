@@ -1,3 +1,5 @@
+// Copyright (c) 2025 Marco Nikander
+
 #pragma once
 
 // apply the update function to the state repeatedly until the condition is met
