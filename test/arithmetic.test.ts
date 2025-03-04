@@ -45,4 +45,20 @@ describe('Arithmetic', () => {
         const result: string = cpp_toolchain(filename, content);
         expect(result).toBe("-1\n");
     });
+
+    it('(display (* 2 3))', () => {
+        let ast = ["display", ["*", 2, 3]];
+        let filename: string = "test_multiply";
+        let content: string = generate(ast);
+        const result: string = cpp_toolchain(filename, content);
+        expect(result).toBe("6\n");
+    });
+
+    it('(display (/ 8 2))', () => {
+        let ast = ["display", ["/", 8, 2]];
+        let filename: string = "test_multiply";
+        let content: string = generate(ast);
+        const result: string = cpp_toolchain(filename, content);
+        expect(result).toBe("4\n");
+    });
 });

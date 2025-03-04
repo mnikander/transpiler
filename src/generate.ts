@@ -6,7 +6,9 @@ import { generate_function_application } from "./lexeme/application";
 import { is_add, generate_add } from "./lexeme/add";
 import { is_define, generate_define } from "./lexeme/define";
 import { is_display, generate_display } from "./lexeme/display";
+import { is_divide, generate_divide } from "./lexeme/divide";
 import { is_error, generate_error } from "./lexeme/error";
+import { is_multiply, generate_multiply } from "./lexeme/multiply";
 import { is_subtract, generate_subtract } from "./lexeme/subtract";
 import { is_equal, generate_equal } from "./lexeme/equal";
 import { is_lambda, generate_lambda } from "./lexeme/lambda";
@@ -26,6 +28,12 @@ export function generate(ast: any): string {
         }
         else if (is_subtract(ast)) {
             return generate_subtract(ast);
+        }
+        else if (is_multiply(ast)) {
+            return generate_multiply(ast);
+        }
+        else if (is_divide(ast)) {
+            return generate_divide(ast);
         }
         else if (is_equal(ast)) {
             return generate_equal(ast);
