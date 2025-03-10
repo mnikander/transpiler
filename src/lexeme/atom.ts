@@ -1,26 +1,26 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
-import { Document } from "../document";
+import { Document, write } from "../document";
 
 export function generate_atom(doc: Document, ast: any): Document {
     if (typeof ast === 'string') {
         if (ast == "True") {
-            doc.text += "true";
+            doc = write(doc, "true");
         }
         else if (ast === "False") {
-            doc.text += "false";
+            doc = write(doc, "false");
         }
         else {
-            doc.text += ast;
+            doc = write(doc, ast);
         }
     }
     else if (ast !== Object(ast)) { // primitive data-type (not an object)
-        doc.text += ast.toString();
+        doc = write(doc, ast.toString());
     }
     else {
         assert(false, `invalid symbol <${ast.toString()}> of type <${typeof ast}>`);
-        doc.text += "/* ERROR: INVALID SYMBOL */";
+        doc = write(doc, "/* ERROR: INVALID SYMBOL */");
     }
     return doc;
 }

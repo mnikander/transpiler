@@ -1,7 +1,7 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
-import { Document } from "./document";
+import { Document, write } from "./document";
 import { generate_atom } from "./lexeme/atom";
 import { generate_function_application } from "./lexeme/application";
 import { is_add, generate_add } from "./lexeme/add";
@@ -57,7 +57,7 @@ export function generate(doc: Document, ast: any): Document {
     }
     else {
         assert(false, "undefined node");
-        doc.text += "/* ERROR: UNDEFINED NODE */";
+        doc = write(doc, "/* ERROR: UNDEFINED NODE */");
         return doc;
     }
 }
