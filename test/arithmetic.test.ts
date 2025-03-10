@@ -11,7 +11,7 @@ describe('Arithmetic', () => {
         let ast = ["display", ["add", 1, 2]];
         let doc: Document = {
             filename: "test_add",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
@@ -23,7 +23,7 @@ describe('Arithmetic', () => {
         let ast = ["display", ["+", 1, 2]];
         let doc: Document = {
             filename: "test_plus",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
@@ -35,7 +35,7 @@ describe('Arithmetic', () => {
         let ast = ["display", ["add", 1, ["add", 2, 4]]]
         let doc: Document = {
             filename: "test_add_nested_right",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
@@ -47,7 +47,7 @@ describe('Arithmetic', () => {
         let ast = ["display", ["add", ["add", 1, 2], 4]];
         let doc: Document = {
             filename: "test_add_nested_left",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
@@ -59,7 +59,7 @@ describe('Arithmetic', () => {
         let ast = ["display", ["-", 1, 2]];
         let doc: Document = {
             filename: "test_minus",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
@@ -71,7 +71,7 @@ describe('Arithmetic', () => {
         let ast = ["display", ["*", 2, 3]];
         let doc: Document = {
             filename: "test_multiply",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
@@ -83,7 +83,7 @@ describe('Arithmetic', () => {
         let ast = ["display", ["/", 8, 2]];
         let doc: Document = {
             filename: "test_multiply",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);

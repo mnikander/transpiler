@@ -45,7 +45,7 @@ function read(filename: string): string {
 export function cpp_toolchain(doc: Document): string {
     assert(!/\s/g.test(doc.filename), "filename must not contain whitespace.");
     let command: string = clearfiles(doc.filename) + " && "
-                        + write(doc.filename, doc.text) + " && "
+                        + write(doc.filename, doc.main) + " && "
                         + compile(doc.filename) + " && "
                         + execute(doc.filename) + " && "
                         + read(doc.filename);

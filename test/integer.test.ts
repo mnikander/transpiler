@@ -13,17 +13,17 @@ describe('Integer', () => {
     it('direct', () => {
         let doc: Document = {
             filename: "none",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast[1]);
-        expect(doc.text).toBe("5");
+        expect(doc.main).toBe("5");
     });
 
     it('(display 5)', () => {
         let doc: Document = {
             filename: "test_integer",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);

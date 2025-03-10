@@ -11,7 +11,7 @@ let text = ["display", "\"Hello, world.\""];
 let addition = ["display", ["add", 1, 2]];
 let doc: Document = {
     filename: "main",
-    text: "",
+    main: "",
     lambda_counter: 0
 };
 doc = generate(doc, text);

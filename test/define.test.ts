@@ -16,7 +16,7 @@ describe('Define', () => {
     it('(define x 2)', () => {
         let doc: Document = {
             filename: "test_define",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, define_x);
@@ -27,7 +27,7 @@ describe('Define', () => {
     it('(define x 2); (display x)', () => {
         let doc: Document = {
             filename: "test_define_display",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, define_x);

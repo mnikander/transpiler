@@ -2,11 +2,11 @@
 
 export interface Document {
     filename: string;
-    text: string;
+    main: string;
     lambda_counter: number;
 };
 
 export function write(doc: Document, text: string): Document {
-    doc.text += text;
+    doc.main += text;
     return doc;
 }

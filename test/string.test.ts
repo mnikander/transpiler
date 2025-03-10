@@ -12,17 +12,17 @@ describe('String', () => {
     it('direct', () => {
         let doc: Document = {
             filename: "none",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast[1]);
-        expect(doc.text).toBe('"Hello, world."');
+        expect(doc.main).toBe('"Hello, world."');
     });
 
     it('(display "Hello, world.")', () => {
         let doc: Document = {
             filename: "test_string",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);

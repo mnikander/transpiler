@@ -11,7 +11,7 @@ describe('Logical', () => {
         let ast = ["display", ["if", "True", 1, 2]];
         let doc: Document = {
             filename: "test_if",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
@@ -23,7 +23,7 @@ describe('Logical', () => {
         let ast = ["display", ["if", ["equal", 10, 10], 1, 2]];
         let doc: Document = {
             filename: "test_if_correct",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
@@ -35,7 +35,7 @@ describe('Logical', () => {
         let ast = ["display", ["if", ["equal", 11, 22], 1, 2]];
         let doc: Document = {
             filename: "test_if_wrong",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);

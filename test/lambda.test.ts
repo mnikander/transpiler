@@ -10,18 +10,18 @@ describe('lambda', () => {
     it('direct', () => {
         let doc: Document = {
             filename: "none",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        expect(doc.text).toBe("[](auto const& a, auto const& b){ return a; }");
+        expect(doc.main).toBe("[](auto const& a, auto const& b){ return a; }");
     });
     
     it('(display ((lambda (a b) a) 1 2))', () => {
         let ast = ["display", [["lambda", ["a", "b"], "a"], 1, 2]];
         let doc: Document = {
             filename: "test_lambda_immediate",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
@@ -33,7 +33,7 @@ describe('lambda', () => {
         let ast = ["display", [["->", ["a", "b"], "a"], 1, 2]];
         let doc: Document = {
             filename: "test_lambda_arrow_immediate",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
@@ -46,7 +46,7 @@ describe('lambda', () => {
         let application = ["display", ["first", 1, 2]];
         let doc: Document = {
             filename: "test_lambda_named",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, abstraction);
@@ -61,7 +61,7 @@ describe('lambda', () => {
         let application = ["display", [["first", "first", "second"], 1, 2]];
         let doc: Document = {
             filename: "test_lambda_2nd_order",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, first);
@@ -77,7 +77,7 @@ describe('lambda', () => {
     //     let application = ["display", ["countdown", 5]];
     //     let doc: Document = {
     //     filename: "test_lambda_recursion",
-    //     text: "",
+    //     main: "",
     //     lambda_counter: 0
     //     };
     //     doc = generate(abstraction) + generate(application);
@@ -96,7 +96,7 @@ describe('lambda', () => {
     //     let application = ["display", ["even", 5]];
     //     let doc: Document = {
     //     filename: "test_lambda_2nd_order",
-    //     text: "",
+    //     main: "",
     //     lambda_counter: 0
     //     };
     //     doc = generate(even) + generate(odd) + generate(application);

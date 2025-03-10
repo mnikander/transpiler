@@ -13,17 +13,17 @@ describe('Float', () => {
     it('direct', () => {
         let doc: Document = {
             filename: "none",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast[1]);
-        expect(doc.text).toBe("0.1");
+        expect(doc.main).toBe("0.1");
     });
 
     it('(display 0.1)', () => {
         let doc: Document = {
             filename: "test_float",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);

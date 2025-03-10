@@ -12,17 +12,17 @@ describe('Display', () => {
     it('direct', () => {
         let doc: Document = {
             filename: "none",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        expect(doc.text).toBe("std::cout << 5 << std::endl;\n");
+        expect(doc.main).toBe("std::cout << 5 << std::endl;\n");
     });
 
     it('(display 5)', () => {
         let doc: Document = {
             filename: "test_display",
-            text: "",
+            main: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
