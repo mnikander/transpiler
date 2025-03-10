@@ -12,7 +12,7 @@ export function generate_lambda(ast: string[] | string[][]): string {
     let [head, ...tail] = ast;
     if (tail.length == 2) {
         let result: string = "[](";
-        result += generate_lambda_arguments(tail[0]);
+        result += lambda_arguments(tail[0]);
         result += "){ return ";
         result += generate(tail[1]);
         result += "; }";
@@ -24,7 +24,7 @@ export function generate_lambda(ast: string[] | string[][]): string {
     }
 }
 
-function generate_lambda_arguments(args: string | string[]): string {
+function lambda_arguments(args: string | string[]): string {
     if (args instanceof Array) {
         let result: string = "";
         for (let i = 0; i < args.length; i++) {
