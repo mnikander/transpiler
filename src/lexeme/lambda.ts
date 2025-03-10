@@ -1,6 +1,7 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
+import { Document } from "../document";
 import { generate } from "../generate";
 
 export function is_lambda(ast: any): boolean {
@@ -8,20 +9,20 @@ export function is_lambda(ast: any): boolean {
     return head == "lambda" || head == "->";
 }
 
-export function generate_lambda(ast: string[] | string[][]): string {
+export function generate_lambda(doc: Document, ast: string[] | string[][]): Document {
     let [head, ...tail] = ast;
     if (tail.length == 2) {
-        let result: string = "[](";
-        result += lambda_arguments(tail[0]);
-        result += "){ return ";
-        result += generate(tail[1]);
-        result += "; }";
-        return result;
+        doc.text += "[](";
+        doc.text += lambda_arguments(tail[0]);
+        doc.text += "){ return ";
+        doc = generate(doc, tail[1]);
+        doc.text += "; }";
     }
     else {
         assert(false, `'lambda' requires 2 arguments, ${tail.length} provided <${tail.toString}>`);
-        return " /* ERROR: INCORRECT NUMBER OF ARGUMENTS */ ";
+        doc.text += " /* ERROR: INCORRECT NUMBER OF ARGUMENTS */ ";
     }
+    return doc;
 }
 
 function lambda_arguments(args: string | string[]): string {

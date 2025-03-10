@@ -1,6 +1,7 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
+import { Document } from "../document";
 import { generate } from "../generate";
 
 export function is_display(ast: any): boolean {
@@ -8,8 +9,11 @@ export function is_display(ast: any): boolean {
     return head == "display";
 }
 
-export function generate_display(ast: any): string {
+export function generate_display(doc: Document, ast: any): Document {
     let [head, ...tail] = ast;
     assert(tail.length == 1, `'display' requires 1 argument, ${tail.length} provided: <${tail.toString()}>`);
-    return `std::cout << ${generate(tail[0])} << std::endl;\n`;
+    doc.text += "std::cout << ";
+    doc = generate(doc, tail[0]);
+    doc.text += " << std::endl;\n";
+    return doc;
 }

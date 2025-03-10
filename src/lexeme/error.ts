@@ -1,6 +1,7 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
+import { Document } from "../document";
 import { generate } from "../generate";
 
 export function is_error(ast: any): boolean {
@@ -8,8 +9,11 @@ export function is_error(ast: any): boolean {
     return head == "error";
 }
 
-export function generate_error(ast: any): string {
+export function generate_error(doc: Document, ast: any): Document {
     let [head, ...tail] = ast;
     assert(tail.length == 1, `'error' requires 1 argument, ${tail.length} provided: <${tail.toString()}>`);
-    return `std::cerr << "Error: " << ${generate(tail[0])} << std::endl;\nstd::abort();\n`;
+    doc.text += `std::cerr << "Error: " << `;
+    doc = generate(doc, tail[0]);
+    doc.text += ` << std::endl;\nstd::abort();\n`;
+    return doc;
 }

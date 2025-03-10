@@ -1,19 +1,19 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
+import { Document } from "../document";
 import { generate } from "../generate";
 
-export function generate_function_application(ast: any[]): string {
+export function generate_function_application(doc: Document, ast: any[]): Document {
     let [head, ...tail] = ast;
-    let result = "";
-    result += generate(head);
-    result += "(";
+    doc = generate(doc, head);
+    doc.text += "(";
     for (let i = 0; i < tail.length; i++) {
-        result += `${generate(tail[i])}`;
+        doc = generate(doc, tail[i]);
         if ((i + 1) < tail.length) {
-            result += ', ';
+            doc.text += ', ';
         }
     }
-    result +=  ")";
-    return result;
+    doc.text += ")";
+    return doc;
 }
