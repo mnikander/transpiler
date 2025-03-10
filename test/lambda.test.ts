@@ -9,6 +9,7 @@ describe('lambda', () => {
     let ast = ["lambda", ["a", "b"], "a"]; // (lambda (a b) a)
     it('direct', () => {
         let doc: Document = {
+            filename: "none",
             text: "",
             lambda_counter: 0
         };
@@ -18,39 +19,39 @@ describe('lambda', () => {
     
     it('(display ((lambda (a b) a) 1 2))', () => {
         let ast = ["display", [["lambda", ["a", "b"], "a"], 1, 2]];
-        let filename: string = "test_lambda_immediate";
         let doc: Document = {
+            filename: "test_lambda_immediate",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("1\n");
     });
 
     it('(display ((-> (a b) a) 1 2))', () => {
         let ast = ["display", [["->", ["a", "b"], "a"], 1, 2]];
-        let filename: string = "test_lambda_arrow_immediate";
         let doc: Document = {
+            filename: "test_lambda_arrow_immediate",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("1\n");
     });
 
     it('(define first (lambda (a b) a)); (display (first 1 2))', () => {
         let abstraction = ["define", "first", ["lambda", ["a", "b"], "a"]];
         let application = ["display", ["first", 1, 2]];
-        let filename: string = "test_lambda_named";
         let doc: Document = {
+            filename: "test_lambda_named",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, abstraction);
         doc = generate(doc, application);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("1\n");
     });
 
@@ -58,15 +59,15 @@ describe('lambda', () => {
         let first = ["define", "first", ["lambda", ["a", "b"], "a"]];
         let second = ["define", "second", ["lambda", ["a", "b"], "b"]];
         let application = ["display", [["first", "first", "second"], 1, 2]];
-        let filename: string = "test_lambda_2nd_order";
         let doc: Document = {
+            filename: "test_lambda_2nd_order",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, first);
         doc = generate(doc, second);
         doc = generate(doc, application);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("1\n");
     });
 
@@ -74,13 +75,13 @@ describe('lambda', () => {
     // it('(define countdown (lambda x (if (equal x 0)(0)(countdown (-x 1)))))', () => {
     //     let abstraction = ["define", "countdown", ["lambda", "x", ["if", ["equal", "x", 0], 0, ["countdown", ["-", "x", 1]]]]];
     //     let application = ["display", ["countdown", 5]];
-    //     let filename: string = "test_lambda_recursion";
     //     let doc: Document = {
+    //     filename: "test_lambda_recursion",
     //     text: "",
     //     lambda_counter: 0
     //     };
     //     doc = generate(abstraction) + generate(application);
-    //     const result: string = cpp_toolchain(filename, doc.text);
+    //     const result: string = cpp_toolchain(doc);
     //     expect(result).toBe("1\n");
     // });
 
@@ -93,13 +94,13 @@ describe('lambda', () => {
     //     let even = ["define", "even", ["lambda", "x", ["if", ["equal", "x", 0], "True",["odd", ["-", "x", 1]]]]];
     //     let odd = ["define", "second", ["lambda", "x", ["even", ["-", "x", 1]]]];
     //     let application = ["display", ["even", 5]];
-    //     let filename: string = "test_lambda_2nd_order";
     //     let doc: Document = {
+    //     filename: "test_lambda_2nd_order",
     //     text: "",
     //     lambda_counter: 0
     //     };
     //     doc = generate(even) + generate(odd) + generate(application);
-    //     const result: string = cpp_toolchain(filename, doc.text);
+    //     const result: string = cpp_toolchain(doc);
     //     expect(result).toBe("false\n");
     // });
 });

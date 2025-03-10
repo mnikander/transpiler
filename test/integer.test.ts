@@ -12,6 +12,7 @@ describe('Integer', () => {
 
     it('direct', () => {
         let doc: Document = {
+            filename: "none",
             text: "",
             lambda_counter: 0
         };
@@ -20,13 +21,13 @@ describe('Integer', () => {
     });
 
     it('(display 5)', () => {
-        let filename: string = "test_integer";
         let doc: Document = {
+            filename: "test_integer",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("5\n");
     });
 });

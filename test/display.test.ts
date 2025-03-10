@@ -11,6 +11,7 @@ let ast = ["display", 5];
 describe('Display', () => {
     it('direct', () => {
         let doc: Document = {
+            filename: "none",
             text: "",
             lambda_counter: 0
         };
@@ -19,13 +20,13 @@ describe('Display', () => {
     });
 
     it('(display 5)', () => {
-        let filename: string = "test_display";
         let doc: Document = {
+            filename: "test_display",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("5\n");
     });
 });

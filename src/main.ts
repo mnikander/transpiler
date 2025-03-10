@@ -9,12 +9,12 @@ let text = ["display", "\"Hello, world.\""];
 
 // (display (add 1 2))
 let addition = ["display", ["add", 1, 2]];
-let filename: string = "main";
 let doc: Document = {
+    filename: "main",
     text: "",
     lambda_counter: 0
 };
 doc = generate(doc, text);
 doc = generate(doc, addition);
-const result: string = cpp_toolchain(filename, doc.text);
+const result: string = cpp_toolchain(doc);
 console.log(result);

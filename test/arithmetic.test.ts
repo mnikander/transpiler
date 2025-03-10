@@ -9,85 +9,85 @@ describe('Arithmetic', () => {
 
     it('(display (add 1 2))', () => {
         let ast = ["display", ["add", 1, 2]];
-        let filename: string = "test_add";
         let doc: Document = {
+            filename: "test_add",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("3\n");
     });
 
     it('(display (+ 1 2))', () => {
         let ast = ["display", ["+", 1, 2]];
-        let filename: string = "test_plus";
         let doc: Document = {
+            filename: "test_plus",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("3\n");
     });
 
     it('(display (add 1 (add 2 4)))', () => {
         let ast = ["display", ["add", 1, ["add", 2, 4]]]
-        let filename: string = "test_add_nested_right";
         let doc: Document = {
+            filename: "test_add_nested_right",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("7\n");
     });
 
     it('(display (add (add 1 2) 4))', () => {
         let ast = ["display", ["add", ["add", 1, 2], 4]];
-        let filename: string = "test_add_nested_left";
         let doc: Document = {
+            filename: "test_add_nested_left",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("7\n");
     });
 
     it('(display (- 1 2))', () => {
         let ast = ["display", ["-", 1, 2]];
-        let filename: string = "test_minus";
         let doc: Document = {
+            filename: "test_minus",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("-1\n");
     });
 
     it('(display (* 2 3))', () => {
         let ast = ["display", ["*", 2, 3]];
-        let filename: string = "test_multiply";
         let doc: Document = {
+            filename: "test_multiply",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("6\n");
     });
 
     it('(display (/ 8 2))', () => {
         let ast = ["display", ["/", 8, 2]];
-        let filename: string = "test_multiply";
         let doc: Document = {
+            filename: "test_multiply",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("4\n");
     });
 });

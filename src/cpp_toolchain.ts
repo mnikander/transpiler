@@ -2,6 +2,7 @@
 
 import assert from 'node:assert/strict';
 import { execSync } from 'node:child_process';
+import { Document } from './document';
 
 function includes(): string {
     return `// generated C++ code
@@ -41,13 +42,13 @@ function read(filename: string): string {
     return `cat ./out/artifacts/${filename}.txt`;
 }
 
-export function cpp_toolchain(filename: string, content: string): string {
-    assert(!/\s/g.test(filename), "filename must not contain whitespace.");
-    let command: string = clearfiles(filename) + " && "
-                        + write(filename, content) + " && "
-                        + compile(filename) + " && "
-                        + execute(filename) + " && "
-                        + read(filename);
+export function cpp_toolchain(doc: Document): string {
+    assert(!/\s/g.test(doc.filename), "filename must not contain whitespace.");
+    let command: string = clearfiles(doc.filename) + " && "
+                        + write(doc.filename, doc.text) + " && "
+                        + compile(doc.filename) + " && "
+                        + execute(doc.filename) + " && "
+                        + read(doc.filename);
 
     try {
         // more info on execSync: https://nodejs.org/api/child_process.html#synchronous-process-creation

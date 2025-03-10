@@ -9,37 +9,37 @@ describe('Logical', () => {
 
     it('(display (if True 1 2))', () => {
         let ast = ["display", ["if", "True", 1, 2]];
-        let filename: string = "test_if";
         let doc: Document = {
+            filename: "test_if",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("1\n");
     });
 
     it('(display (if (equal 11 11) 1 2)', () => {
         let ast = ["display", ["if", ["equal", 10, 10], 1, 2]];
-        let filename: string = "test_if_correct";
         let doc: Document = {
+            filename: "test_if_correct",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("1\n");
     });
 
     it('(display (if (equal 11 22) 1 2)', () => {
         let ast = ["display", ["if", ["equal", 11, 22], 1, 2]];
-        let filename: string = "test_if_wrong";
         let doc: Document = {
+            filename: "test_if_wrong",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("2\n");
     });
 });

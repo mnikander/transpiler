@@ -12,6 +12,7 @@ describe('Float', () => {
 
     it('direct', () => {
         let doc: Document = {
+            filename: "none",
             text: "",
             lambda_counter: 0
         };
@@ -20,13 +21,13 @@ describe('Float', () => {
     });
 
     it('(display 0.1)', () => {
-        let filename: string = "test_float";
         let doc: Document = {
+            filename: "test_float",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("0.1\n");
     });
 });

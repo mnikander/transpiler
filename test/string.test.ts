@@ -11,6 +11,7 @@ let ast = ["display", "\"Hello, world.\""];
 describe('String', () => {
     it('direct', () => {
         let doc: Document = {
+            filename: "none",
             text: "",
             lambda_counter: 0
         };
@@ -19,13 +20,13 @@ describe('String', () => {
     });
 
     it('(display "Hello, world.")', () => {
-        let filename: string = "test_string";
         let doc: Document = {
+            filename: "test_string",
             text: "",
             lambda_counter: 0
         };
         doc = generate(doc, ast);
-        const result: string = cpp_toolchain(filename, doc.text);
+        const result: string = cpp_toolchain(doc);
         expect(result).toBe("Hello, world.\n");
     });
 });
