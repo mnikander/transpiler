@@ -6,10 +6,10 @@ import { Document, write } from "../document";
 export function generate_atom(doc: Document, ast: any): Document {
     if (typeof ast === 'string') {
         if (ast == "True") {
-            doc = write(doc, "true");
+            doc = write(doc, 'true');
         }
         else if (ast === "False") {
-            doc = write(doc, "false");
+            doc = write(doc, 'false');
         }
         else {
             doc = write(doc, ast);
@@ -20,7 +20,7 @@ export function generate_atom(doc: Document, ast: any): Document {
     }
     else {
         assert(false, `invalid symbol <${ast.toString()}> of type <${typeof ast}>`);
-        doc = write(doc, "/* ERROR: INVALID SYMBOL */");
+        doc = write(doc, '/* ERROR: INVALID SYMBOL */');
     }
     return doc;
 }

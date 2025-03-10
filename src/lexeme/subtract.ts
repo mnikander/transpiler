@@ -12,11 +12,11 @@ export function is_subtract(ast: any): boolean {
 export function generate_subtract(doc: Document, ast: any): Document {
     let [head, ...tail] = ast;
     assert(tail.length == 2, `'subtract' requires 2 arguments, ${tail.length} provided: <${tail.toString()}>`);
-    doc = write(doc, `std::minus<>{}(`);
+    doc = write(doc, 'std::minus<>{}(');
     doc = generate(doc, tail[0]);
-    doc = write(doc, `, `);
+    doc = write(doc, ', ');
     doc = generate(doc, tail[1]);
-    doc = write(doc, `)`);
+    doc = write(doc, ')');
     return doc;
 }
 

@@ -57,7 +57,7 @@ export function generate(doc: Document, ast: any): Document {
     }
     else {
         assert(false, "undefined node");
-        doc = write(doc, "/* ERROR: UNDEFINED NODE */");
+        doc = write(doc, '/* ERROR: UNDEFINED NODE */');
         return doc;
     }
 }

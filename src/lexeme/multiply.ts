@@ -12,10 +12,10 @@ export function is_multiply(ast: any): boolean {
 export function generate_multiply(doc: Document, ast: any): Document {
     let [head, ...tail] = ast;
     assert(tail.length == 2, `'multiply' requires 2 arguments, ${tail.length} provided: <${tail.toString()}>`);
-    doc = write(doc, `std::multiplies<>{}(`);
+    doc = write(doc, 'std::multiplies<>{}(');
     doc = generate(doc, tail[0]);
-    doc = write(doc, `, `);
+    doc = write(doc, ', ');
     doc = generate(doc, tail[1]);
-    doc = write(doc, `)`);
+    doc = write(doc, ')');
     return doc;
 }
