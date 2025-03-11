@@ -21,13 +21,11 @@
                             "data":"b"
                         }
                     ],
-                    [
-                        {
-                            "node":"atom",
-                            "type":"symbol",
-                            "data":"a"
-                        }
-                    ]
+                    {
+                        "node":"atom",
+                        "type":"symbol",
+                        "data":"a"
+                    }
                 ]
             }
         ],
