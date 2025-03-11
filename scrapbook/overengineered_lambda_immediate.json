@@ -10,17 +10,17 @@
                 "data":
                 [
                     {
-                        "node":"argument_list",
+                        "node":"arguments",
                         "type":"",
                         "data":
                         [
                             {
-                                "node":"argument",
+                                "node":"declare",
                                 "type":"i64",
                                 "data":"a"
                             },
                             {
-                                "node":"argument",
+                                "node":"declare",
                                 "type":"i64",
                                 "data":"b"
                             }
