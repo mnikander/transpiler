@@ -9,33 +9,25 @@
                 "type":"symbol",
                 "data":
                 [
-                    {
-                        "node":"arguments",
-                        "type":"",
-                        "data":
-                        [
-                            {
-                                "node":"declare",
-                                "type":"i64",
-                                "data":"a"
-                            },
-                            {
-                                "node":"declare",
-                                "type":"i64",
-                                "data":"b"
-                            }
-                        ]
-                    },
-                    {
-                        "node":"value",
-                        "type":"",
-                        "data":
+                    [
+                        {
+                            "node":"declare",
+                            "type":"i64",
+                            "data":"a"
+                        },
+                        {
+                            "node":"declare",
+                            "type":"i64",
+                            "data":"b"
+                        }
+                    ],
+                    [
                         {
                             "node":"atom",
                             "type":"symbol",
                             "data":"a"
                         }
-                    }
+                    ]
                 ]
             }
         ],
