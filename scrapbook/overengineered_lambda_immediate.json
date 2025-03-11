@@ -1,6 +1,6 @@
 {
     "node":"display",
-    "type":"void",
+    "type":"i64 -> void",
     "data":
     [
         [

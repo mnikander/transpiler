@@ -1,7 +1,7 @@
 [
     {
         "atom":"display",
-        "type":"void"
+        "type":"i64 -> void"
     },
     [
         [

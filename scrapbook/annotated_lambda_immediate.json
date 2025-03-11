@@ -1,5 +1,5 @@
 [
-    {"atom":"display", "type":"void"},
+    {"atom":"display", "type":"i64 -> void"},
     [
         [
             {"atom":"lambda", "type":"i64 -> i64 -> i64"},
