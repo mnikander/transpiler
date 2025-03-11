@@ -27,16 +27,14 @@
                         ]
                     },
                     {
-                        "node":"expression",
+                        "node":"value",
                         "type":"",
                         "data":
-                        [
-                            {
-                                "node":"atom",
-                                "type":"symbol",
-                                "data":"a"
-                            }
-                        ]
+                        {
+                            "node":"atom",
+                            "type":"symbol",
+                            "data":"a"
+                        }
                     }
                 ]
             }
