@@ -1,0 +1,28 @@
+{
+    "node":"display",
+    "type":"symbol",
+    "value":"",
+    "children":
+    [
+        {
+            "node":"+",
+            "type":"symbol",
+            "value":"",
+            "children":
+            [
+                {
+                    "node":"literal",
+                    "type":"i64",
+                    "value":1,
+                    "children":[]
+                },
+                {
+                    "node":"literal",
+                    "type":"i64",
+                    "value":2,
+                    "children":[]
+                }
+            ]
+        }
+    ]
+}
