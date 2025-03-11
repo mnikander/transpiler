@@ -1,1 +1,1 @@
-["display", [["lambda", ["a", "b"], "a"], 1, 2]]
+["display", [["lambda", ["a", "b"], ["+", "a", "b"]], 1, 2]]

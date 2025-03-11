@@ -1,12 +1,12 @@
 {
     "node":"display",
-    "type":"symbol",
+    "type":"void",
     "data":
     [
         [
             {
                 "node":"lambda",
-                "type":"symbol",
+                "type":"i64 -> i64 -> i64",
                 "data":
                 [
                     [
@@ -22,9 +22,21 @@
                         }
                     ],
                     {
-                        "node":"atom",
-                        "type":"symbol",
-                        "data":"a"
+                        "node":"+",
+                        "type":"i64",
+                        "data":
+                        [
+                            {
+                                "node":"atom",
+                                "type":"i64_ref",
+                                "data":"a"
+                            },
+                            {
+                                "node":"atom",
+                                "type":"i64_ref",
+                                "data":"b"
+                            }
+                        ]
                     }
                 ]
             }
@@ -40,5 +52,5 @@
             "data":2
         }
     ],
-    "comment":"(display ((lambda (a b) a) 1 2))"
+    "comment":"(display ((lambda (a b) (+ a b)) 1 2))"
 }
