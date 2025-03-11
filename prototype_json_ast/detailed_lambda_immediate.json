@@ -1,0 +1,60 @@
+{
+    "node":"display",
+    "type":[["i64"], ["void"]],
+    "args":
+    [
+        {
+            "node":"application",
+            "type":"i64",
+            "func":
+            {
+                "node":"lambda",
+                "type":[["i64", "i64"], ["i64"]],
+                "param":
+                [
+                    {
+                        "node":"parameter",
+                        "type":"i64",
+                        "name":"a"
+                    },
+                    {
+                        "node":"parameter",
+                        "type":"i64",
+                        "name":"b"
+                    }
+                ],
+                "body":
+                {
+                    "node":"+",
+                    "type":[["i64", "i64"], ["i64"]],
+                    "args":
+                    [
+                        {
+                            "node":"reference",
+                            "type":"i64",
+                            "value":"a"
+                        },
+                        {
+                            "node":"reference",
+                            "type":"i64",
+                            "value":"b"
+                        }
+                    ]
+                }
+            },
+            "args":
+            [
+                {
+                    "node":"literal",
+                    "type":"i64",
+                    "value":1
+                },
+                {
+                    "node":"literal",
+                    "type":"i64",
+                    "value":2
+                }
+            ]
+        }
+    ]
+}
