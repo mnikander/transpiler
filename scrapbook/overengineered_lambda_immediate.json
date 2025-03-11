@@ -9,18 +9,23 @@
                 "type":"symbol",
                 "data":
                 [
-                    [
-                        {
-                            "node":"argument",
-                            "type":"i64",
-                            "data":"a"
-                        },
-                        {
-                            "node":"argument",
-                            "type":"i64",
-                            "data":"b"
-                        }
-                    ],
+                    {
+                        "node":"argument_list",
+                        "type":"",
+                        "data":
+                        [
+                            {
+                                "node":"argument",
+                                "type":"i64",
+                                "data":"a"
+                            },
+                            {
+                                "node":"argument",
+                                "type":"i64",
+                                "data":"b"
+                            }
+                        ]
+                    },
                     {
                         "node":"expression",
                         "type":"",
