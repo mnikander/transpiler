@@ -1,0 +1,25 @@
+{
+    "node":"display",
+    "type":"symbol",
+    "data":
+    [
+        {
+            "node":"+",
+            "type":"symbol",
+            "data":
+            [
+                {
+                    "node":"literal",
+                    "type":"i64",
+                    "data":1
+                },
+                {
+                    "node":"literal",
+                    "type":"i64",
+                    "data":2
+                }
+            ]
+        }
+    ],
+    "comment":"(display (+ 1 2))"
+}

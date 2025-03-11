@@ -1,0 +1,46 @@
+[
+    {
+        "atom":"display",
+        "type":"(-> i64 void)"
+    },
+    [
+        [
+            {
+                "atom":"lambda",
+                "type":"(-> (i64 i64) i64)"
+            },
+            [
+                {
+                    "atom":"a",
+                    "type":"i64"
+                },
+                {
+                    "atom":"b",
+                    "type":"i64"
+                }
+            ],
+            [
+                {
+                    "atom":"+",
+                    "type":"i64"
+                },
+                {
+                    "atom":"a",
+                    "type":"i64_ref"
+                },
+                {
+                    "atom":"b",
+                    "type":"i64_ref"
+                }
+            ]
+        ],
+        {
+            "atom":1,
+            "type":"i64"
+        },
+        {
+            "atom":2,
+            "type":"i64"
+        }
+    ]
+]

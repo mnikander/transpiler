@@ -1,0 +1,10 @@
+[
+    {"atom":"display","type":"symbol"},
+    [
+        {"atom":"+","type":"symbol"},
+        [
+            {"atom":1,"type":"i64"},
+            {"atom":2,"type":"i64"}
+        ]
+    ]
+]

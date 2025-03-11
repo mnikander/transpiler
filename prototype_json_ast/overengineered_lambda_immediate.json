@@ -1,0 +1,60 @@
+{
+    "node":"display",
+    "type":"(-> i64 void)",
+    "data":
+    [
+        {
+            "node":"application",
+            "type":"((-> (i64 i64) i64) i64 i64)",
+            "data":
+            [
+                {
+                    "node":"lambda",
+                    "type":"(-> (i64 i64) i64)",
+                    "data":
+                    [
+                        [
+                            {
+                                "node":"declare",
+                                "type":"i64",
+                                "data":"a"
+                            },
+                            {
+                                "node":"declare",
+                                "type":"i64",
+                                "data":"b"
+                            }
+                        ],
+                        {
+                            "node":"+",
+                            "type":"i64",
+                            "data":
+                            [
+                                {
+                                    "node":"atom",
+                                    "type":"i64_ref",
+                                    "data":"a"
+                                },
+                                {
+                                    "node":"atom",
+                                    "type":"i64_ref",
+                                    "data":"b"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "node":"literal",
+                    "type":"i64",
+                    "data":1
+                },
+                {
+                    "node":"literal",
+                    "type":"i64",
+                    "data":2
+                }
+            ]
+        }
+    ]
+}
