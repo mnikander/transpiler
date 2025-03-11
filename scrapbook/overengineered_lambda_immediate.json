@@ -51,6 +51,5 @@
             "type":"i64",
             "data":2
         }
-    ],
-    "comment":"(display ((lambda (a b) (+ a b)) 1 2))"
+    ]
 }
