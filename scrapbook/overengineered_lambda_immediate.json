@@ -1,41 +1,35 @@
 {
     "node":"display",
     "type":"symbol",
-    "value":"",
-    "children":
+    "data":
     [
         [
             {
                 "node":"lambda",
                 "type":"symbol",
-                "value":"",
-                "children":
+                "data":
                 [
                     [
                         {
                             "node":"argument",
                             "type":"i64",
-                            "value":"a",
-                            "children":[]
+                            "data":"a"
                         },
                         {
                             "node":"argument",
                             "type":"i64",
-                            "value":"b",
-                            "children":[]
+                            "data":"b"
                         }
                     ],
                     {
                         "node":"expression",
                         "type":"",
-                        "value":"",
-                        "children":
+                        "data":
                         [
                             {
                                 "node":"atom",
                                 "type":"symbol",
-                                "value":"a",
-                                "children":[]
+                                "data":"a"
                             }
                         ]
                     }
@@ -45,14 +39,12 @@
         {
             "node":"literal",
             "type":"i64",
-            "value":1,
-            "children":[]
+            "data":1
         },
         {
             "node":"literal",
             "type":"i64",
-            "value":2,
-            "children":[]
+            "data":2
         }
     ]
 }
