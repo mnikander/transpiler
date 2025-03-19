@@ -1,0 +1,18 @@
+(do                         # 'do' sequentially evaluates its arguments, side-effects are allowed inside the 'do' block
+    (display (+ 1 2))
+    (display (! true))
+    (display (if true 42 0))
+
+    (declare x i32)
+    (define x 5)
+    (define y (: i32 2))    # type annotation i32 on the value '2' means y is i32
+    (display (+ x y))
+    (display (: char 'a'))
+    (display [1 2.0 'a'])
+    (display "hello world")
+
+    (define first (lambda [a b] a))
+    (define second (: (-> [i32 i32] i32)    # a type-valued function is used to annotate a function
+                      (-> [a b] b)))
+    (declare a (linear i32))
+)
