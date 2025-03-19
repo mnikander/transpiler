@@ -1,0 +1,4 @@
+(+ 1 2)
+(! true)
+(if true 42 0)
+(do (define x 5) (define y 2) (display (+ x y)))
