@@ -12,30 +12,30 @@ Application:
     ('(' func=Define symbol=ID data+=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application | Annotation) ')');
 
 Unary:
-    name=('display' | 'sqrt' | '!');
+    data=('display' | 'sqrt' | '!');
 
 Binary:
-    name=('+' | '-' | '*' | '/' | '%' | '^' |
+    data=('+' | '-' | '*' | '/' | '%' | '^' |
           '>' | '<' | '>=' | '<=' | '==' | '!=' |
           '&' | '|' );
 
 Ternary:
-    name=('if');
+    data=('if');
 
 Nary:
-    name=('conditional' | 'do' | '|>' | '>>=');
+    data=('conditional' | 'do' | '|>' | '>>=');
 
 Declare:
-    name=('declare');
+    data=('declare');
 
 Define:
-    name=('define');
+    data=('define');
 
 Annotation:
-    '(' name=':' data+=Type data+=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application) ')';
+    '(' data+=':' data+=Type data+=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application) ')';
 
 Type:
-    name=('i8' | 'i16' | 'i32' | 'i64' | 'f32' | 'f64' | 'bool' | 'byte' | 'char' );
+    data=('i8' | 'i16' | 'i32' | 'i64' | 'f32' | 'f64' | 'bool' | 'byte' | 'char' );
 
 List:
     '[' data+= (ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application | Annotation)* ']';
