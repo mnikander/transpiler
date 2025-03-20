@@ -9,4 +9,8 @@
     (display (+ x y))
     (display (: char 'a'))
     (display [1 2.0 'a'])
+    (display "hello world")
+
+    (define first (lambda [a b] a))
+    (define second (-> [a b] b))
 )

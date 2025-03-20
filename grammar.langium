@@ -4,12 +4,16 @@ entry Model:
     data=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application | Annotation);
 
 Application:
+    ('(' func=Lambda data+=(ID | List) data+=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application | Annotation)')') |
     ('(' func=Unary data+=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application | Annotation) ')') |
     ('(' func=Binary data+=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application | Annotation) data+=(ID | BOOL | INT | FLOAT | Application) ')') |
     ('(' func=Ternary data+=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application | Annotation) data+=(ID | BOOL | INT | FLOAT | Application) data+=(ID | BOOL | INT | FLOAT | Application) ')') |
     ('(' func=Nary data+=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application | Annotation)* ')') |
     ('(' func=Declare symbol=ID data+=(Type) ')') |
     ('(' func=Define symbol=ID data+=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application | Annotation) ')');
+
+Lambda:
+    data=('lambda' | '->');
 
 Unary:
     data=('display' | 'sqrt' | '!');
