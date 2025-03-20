@@ -9,7 +9,7 @@ Application:
     ('(' operator=Ternary arguments+=(BOOL | INT | FLOAT | Application) arguments+=(BOOL | INT | FLOAT | Application) arguments+=(BOOL | INT | FLOAT | Application)')');
 
 Unary:
-    value='sqrt' | '!';
+    name=('display' | 'sqrt' | '!');
 
 Binary:
     value=('+' | '-' | '*' | '/' | '%' | '^' | 
@@ -17,7 +17,7 @@ Binary:
            '&' | '|' );
 
 Ternary:
-    value='if';
+    name=('if');
 
 hidden terminal WS: /\s+/;
 terminal ID: /[_a-zA-Z][\w_]*/;
