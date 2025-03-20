@@ -15,7 +15,7 @@ A foldl(F f, A acc, List<T> const& list) {
           s = until([ ](State const& s){ return empty(std::get<1>(s)); },
                     [f](State s){return std::make_tuple(
                                             f(std::get<0>(s), head(std::get<1>(s))),
-                                            List(std::get<1>(s).first+1, std::get<1>(s).last));},
+                                            tail(std::get<1>(s)));},
                     std::move(s));
     return std::get<0>(s);
 }
