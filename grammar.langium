@@ -4,20 +4,34 @@ entry Model:
     (expressions+=(BOOL | INT | FLOAT | Application))*;
 
 Application:
-    ('(' operator=Unary arguments+=(BOOL | INT | FLOAT | Application) ')') |
-    ('(' operator=Binary arguments+=(BOOL | INT | FLOAT | Application) arguments+=(BOOL | INT | FLOAT | Application)')') |
-    ('(' operator=Ternary arguments+=(BOOL | INT | FLOAT | Application) arguments+=(BOOL | INT | FLOAT | Application) arguments+=(BOOL | INT | FLOAT | Application)')');
+    ('(' func=Unary data+=(ID | BOOL | INT | FLOAT | Application | Annotation) ')') |
+    ('(' func=Binary data+=(ID | BOOL | INT | FLOAT | Application | Annotation) data+=(ID | BOOL | INT | FLOAT | Application) ')') |
+    ('(' func=Ternary data+=(ID | BOOL | INT | FLOAT | Application | Annotation) data+=(ID | BOOL | INT | FLOAT | Application) data+=(ID | BOOL | INT | FLOAT | Application) ')') |
+    ('(' func=Nary data+=(ID | BOOL | INT | FLOAT | Application | Annotation)* ')') |
+    ('(' func=Define symbol=ID data=(ID | BOOL | INT | FLOAT | Application | Annotation) ')');
 
 Unary:
     name=('display' | 'sqrt' | '!');
 
 Binary:
-    value=('+' | '-' | '*' | '/' | '%' | '^' | 
-           '>' | '<' | '>=' | '<=' | '==' | '!=' |
-           '&' | '|' );
+    name=('+' | '-' | '*' | '/' | '%' | '^' |
+          '>' | '<' | '>=' | '<=' | '==' | '!=' |
+          '&' | '|' );
 
 Ternary:
     name=('if');
+
+Nary:
+    name=('conditional' | 'do' | '|>' | '>>=');
+
+Define:
+    name=('define');
+
+Annotation:
+    '(' name=':' data+=Type data+=(ID | BOOL | INT | FLOAT | Application) ')';
+
+Type:
+    name=('i8' | 'i16' | 'i32' | 'i64' | 'f32' | 'f64' | 'bool' | 'byte' | 'char' );
 
 hidden terminal WS: /\s+/;
 terminal ID: /[_a-zA-Z][\w_]*/;
