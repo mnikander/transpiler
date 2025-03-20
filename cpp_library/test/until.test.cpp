@@ -9,12 +9,12 @@ TEST(until, counter_sum)
 {
     using State = std::tuple<int, int, int>;
     State result = until(
+        std::make_tuple(0, 10, 0),
         [](State s){ return std::get<0>(s) == std::get<1>(s); },
         [](State s){ return std::make_tuple(
                         std::get<0>(s)+1,
                         std::get<1>(s),
-                        std::get<2>(s) + std::get<0>(s)); },
-        std::make_tuple(0, 10, 0));
+                        std::get<2>(s) + std::get<0>(s)); });
     
     EXPECT_EQ(std::get<2>(result), 45);
 }

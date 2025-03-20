@@ -3,8 +3,8 @@
 #pragma once
 
 // apply the update function to the state repeatedly until the condition is met
-template <typename C, typename U, typename S>
-S until(C condition, U update, S state){
+template <typename S, typename C, typename U>
+S until(S state, C condition, U update){
     while (condition(state) == false) {
         state = update(std::move(state));
     }

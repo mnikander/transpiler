@@ -31,5 +31,5 @@ void map(F f, L source_list, L target_list) {
         return State{s._source_list, s._target_list, s._counter + 1};
     };
 
-    (void) until(condition, update, State{source_list, target_list, 0});
+    (void) until(State{source_list, target_list, 0}, condition, update);
 }
