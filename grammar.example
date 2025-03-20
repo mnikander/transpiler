@@ -1,4 +1,8 @@
-(+ 1 2)
-(! true)
-(if true 42 0)
-(do (define x 5) (define y 2) (display (+ x y)))
+(do                         # 'do' sequentially evaluates its arguments, side-effects are allowed inside the 'do' block
+    (display (+ 1 2))
+    (display (! true))
+    (display (if true 42 0))
+
+    (define x (: i32 5))
+    (define y (: i32 2))    # type annotation i32 on the value '2' means y is i32
+    (display (+ x y)))

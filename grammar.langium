@@ -1,7 +1,7 @@
 grammar LispLike
 
 entry Model:
-    (expressions+=(BOOL | INT | FLOAT | Application))*;
+    data=(ID | BOOL | INT | FLOAT | Application | Annotation);
 
 Application:
     ('(' func=Unary data+=(ID | BOOL | INT | FLOAT | Application | Annotation) ')') |
