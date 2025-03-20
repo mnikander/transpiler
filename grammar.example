@@ -6,4 +6,7 @@
     (declare x i32)
     (define x 5)
     (define y (: i32 2))    # type annotation i32 on the value '2' means y is i32
-    (display (+ x y)))
+    (display (+ x y))
+    (display (: char 'a'))
+    (display [1 2.0 'a'])
+)
