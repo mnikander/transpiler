@@ -18,11 +18,21 @@ struct List {
 };
 
 template <typename T>
+decltype(*T{}) const& head(List<T> const& list) {
+    return *(list.first);
+}
+
+template <typename T>
 List<T> tail(List<T> list) {
-    return List<T>{++(list.first), list.last};
+    return List<T>{list.first+1, list.last};
 }
 
 template <typename T>
 int length(List<T> const& list) {
     return std::distance(list.first, list.last);
+}
+
+template <typename T>
+bool empty(List<T> const& list) {
+    return list.first == list.last;
 }

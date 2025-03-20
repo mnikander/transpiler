@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <tuple>
 #include "../src/until.hpp"
 #include "../prototypes/foldl.hpp"
 #include "../prototypes/list.hpp"
@@ -6,22 +7,16 @@
 
 TEST(until, counter_sum)
 {
-    struct State {
-        int i;
-        int limit;
-        int sum;
-    };
-    auto atLimit = [](State s) {
-        return s.i == s.limit;
-    };
-    auto increment = [](State s) { 
-        s.sum += s.i;
-        s.i++;
-        return s;
-    };
-    State result = until(atLimit, increment, State{0, 10, 0});
+    using State = std::tuple<int, int, int>;
+    State result = until(
+        [](State s){ return std::get<0>(s) == std::get<1>(s); },
+        [](State s){ return std::make_tuple(
+                        std::get<0>(s)+1,
+                        std::get<1>(s),
+                        std::get<2>(s) + std::get<0>(s)); },
+        std::make_tuple(0, 10, 0));
     
-    EXPECT_EQ(result.sum, 45);
+    EXPECT_EQ(std::get<2>(result), 45);
 }
 
 TEST(until, foldl)

@@ -3,29 +3,19 @@
 #pragma once
 
 #include <iterator> // distance
+#include <tuple>
 
 #include "list.hpp"
 #include "../src/until.hpp"
 
-template <typename F, typename A, typename L>
-A foldl(F f, A acc, L const& list) {
-    using I = typename L::iterator_type;
-    struct State {
-        A _acc;
-        L _list;
-    };
-
-    // predicate (termination condition)
-    auto condition = [](State const& s) { 
-            return std::distance(s._list.first, s._list.last) == 0;
-    };
-
-    // homomorphism (state update)
-    auto update = [f](State const& s) -> State {
-        return State{f(s._acc, *(s._list.first)), 
-                     List<I>{(s._list.first)+1, s._list.last}};
-    };
-
-    State result = until(condition, update, State{acc, list}); 
-    return result._acc;
+template <typename F, typename A, typename T>
+A foldl(F f, A acc, List<T> const& list) {
+    using State = std::tuple<A, List<T>>;
+    State s = std::make_tuple(acc, list);
+          s = until([ ](State const& s){ return empty(std::get<1>(s)); },
+                    [f](State s){return std::make_tuple(
+                                            f(std::get<0>(s), head(std::get<1>(s))),
+                                            List(std::get<1>(s).first+1, std::get<1>(s).last));},
+                    std::move(s));
+    return std::get<0>(s);
 }

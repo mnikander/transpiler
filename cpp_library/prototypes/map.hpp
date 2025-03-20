@@ -7,6 +7,7 @@
 #include "list.hpp"
 #include "../src/until.hpp"
 
+// map is problematic because it requires creating an output sequence
 // this whole implementation feels extremely hacky
 // TODO: rewrite it
 template <typename F, typename L>
