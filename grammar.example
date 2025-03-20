@@ -12,5 +12,7 @@
     (display "hello world")
 
     (define first (lambda [a b] a))
-    (define second (-> [a b] b))
+    (define second (: (-> [i32 i32] i32)    # a type-valued function is used to annotate a function
+                      (-> [a b] b)))
+    (declare a (linear i32))
 )

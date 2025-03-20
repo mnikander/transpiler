@@ -1,22 +1,25 @@
 grammar LispLike
 
 entry Model:
-    data=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application | Annotation);
+    data=(ID | Type | BOOL | INT | FLOAT | CHAR | STRING | List | Abstraction | Application | Annotation);
+
+Abstraction:
+    ('(' func=Lambda data+=(ID | List) data+=(ID | Type | BOOL | INT | FLOAT | CHAR | STRING | List | Abstraction | Application | Annotation)')');
 
 Application:
-    ('(' func=Lambda data+=(ID | List) data+=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application | Annotation)')') |
-    ('(' func=Unary data+=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application | Annotation) ')') |
-    ('(' func=Binary data+=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application | Annotation) data+=(ID | BOOL | INT | FLOAT | Application) ')') |
-    ('(' func=Ternary data+=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application | Annotation) data+=(ID | BOOL | INT | FLOAT | Application) data+=(ID | BOOL | INT | FLOAT | Application) ')') |
-    ('(' func=Nary data+=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application | Annotation)* ')') |
-    ('(' func=Declare symbol=ID data+=(Type) ')') |
-    ('(' func=Define symbol=ID data+=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application | Annotation) ')');
+    ('(' func=Unary data+=(ID | Type | BOOL | INT | FLOAT | CHAR | STRING | List | Abstraction | Application | Annotation) ')') |
+    ('(' func=Binary data+=(ID | Type | BOOL | INT | FLOAT | CHAR | STRING | List | Abstraction | Application | Annotation) data+=(ID | BOOL | INT | FLOAT | Application) ')') |
+    ('(' func=Ternary data+=(ID | Type | BOOL | INT | FLOAT | CHAR | STRING | List | Abstraction | Application | Annotation) data+=(ID | BOOL | INT | FLOAT | Application) data+=(ID | BOOL | INT | FLOAT | Application) ')') |
+    ('(' func=Nary data+=(ID | Type | BOOL | INT | FLOAT | CHAR | STRING | List | Abstraction | Application | Annotation)* ')') |
+    ('(' func=Define symbol=ID data+=(ID | Type | BOOL | INT | FLOAT | CHAR | STRING | List | Abstraction | Application | Annotation) ')') |
+    ('(' func=Annotation data+=(Type | Abstraction) data+=(ID | Type | BOOL | INT | FLOAT | CHAR | STRING | List | Abstraction | Application) ')') |
+    ('(' func=Declare symbol=ID data+=(Type) ')');
 
 Lambda:
     data=('lambda' | '->');
 
 Unary:
-    data=('display' | 'sqrt' | '!');
+    data=('display' | 'sqrt' | '!' | 'copy' | 'move' | 'lend');
 
 Binary:
     data=('+' | '-' | '*' | '/' | '%' | '^' |
@@ -36,13 +39,20 @@ Define:
     data=('define');
 
 Annotation:
-    '(' data+=':' data+=Type data+=(ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application) ')';
+    data=':';
 
 Type:
-    data=('i8' | 'i16' | 'i32' | 'i64' | 'f32' | 'f64' | 'bool' | 'byte' | 'char' );
+    ((BasicType | Abstraction | Application | List)) |
+    ('(' Linear (BasicType | Abstraction | Application | List)) ')';
+
+BasicType:
+    data+=('i8' | 'i16' | 'i32' | 'i64' | 'f32' | 'f64' | 'bool' | 'byte' | 'char' );
+
+Linear:
+    data+='linear';
 
 List:
-    '[' data+= (ID | BOOL | INT | FLOAT | CHAR | STRING | List | Application | Annotation)* ']';
+    '[' data+=(ID | Type | BOOL | INT | FLOAT | CHAR | STRING | List | Abstraction | Application | Annotation)* ']';
 
 hidden terminal WS: /\s+/;
 terminal ID: /[_a-zA-Z][\w_]*/;
