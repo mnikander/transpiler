@@ -8,6 +8,7 @@ Application:
     ('(' func=Binary data+=(ID | BOOL | INT | FLOAT | Application | Annotation) data+=(ID | BOOL | INT | FLOAT | Application) ')') |
     ('(' func=Ternary data+=(ID | BOOL | INT | FLOAT | Application | Annotation) data+=(ID | BOOL | INT | FLOAT | Application) data+=(ID | BOOL | INT | FLOAT | Application) ')') |
     ('(' func=Nary data+=(ID | BOOL | INT | FLOAT | Application | Annotation)* ')') |
+    ('(' func=Declare symbol=ID data=(Type) ')') |
     ('(' func=Define symbol=ID data=(ID | BOOL | INT | FLOAT | Application | Annotation) ')');
 
 Unary:
@@ -23,6 +24,9 @@ Ternary:
 
 Nary:
     name=('conditional' | 'do' | '|>' | '>>=');
+
+Declare:
+    name=('declare');
 
 Define:
     name=('define');

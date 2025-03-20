@@ -3,6 +3,7 @@
     (display (! true))
     (display (if true 42 0))
 
-    (define x (: i32 5))
+    (declare x i32)
+    (define x 5)
     (define y (: i32 2))    # type annotation i32 on the value '2' means y is i32
     (display (+ x y)))
