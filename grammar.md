@@ -53,14 +53,14 @@ $$
 [list ]             &\to \texttt{[}  [expression]^*  \texttt{]} \\ % the list is missing in the grammar above
 [lambda]            &\to \texttt{(->}  [arguments] [expression]  \texttt{)} \\
 [application]       &\to \texttt{(} [nonliteral] [expression]^* \texttt{)} \\
-[function]          &\to [lambda] \mid [basicfunction] \mid [if] \\
+[function]          &\to [lambda] \mid [basicfunction] \mid [if] \mid [conditional] \\
 [basicfunction]     &\to
     \texttt{+} \mid \texttt{-} \mid \texttt{*} \mid
     \texttt{/} \mid \texttt{\%} \mid \texttt{\textasciicircum} \mid
     \texttt{\&} \mid \texttt{|} \mid \texttt{!} \mid
     \texttt{<} \mid \texttt{>} \mid \texttt{<=} \mid
     \texttt{>=} \mid \texttt{==} \mid \texttt{!=} \\
-[if]                &\to \texttt{(if} [expression] [expression] [expression]\texttt{)}\\
+[if]                &\to \texttt{(if} [expression] [expression] [expression]\texttt{)} \\
+[conditional]       &\to \texttt{(conditional} \{ \texttt{[} [expression] [expression] \texttt{]}\}^+ \texttt{)} \\
 \end{align}
 $$
-
