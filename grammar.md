@@ -1,4 +1,4 @@
-Basic productions for various characters:
+## Basic characters and digits
 
 $$
 \begin{align}
@@ -13,7 +13,7 @@ $$
 \end{align}
 $$
 
-Productions for literals and identifiers:
+## Literals and Identifiers
 
 $$
 \begin{align}
@@ -34,7 +34,7 @@ $$
 \end{align}
 $$
 
-Productions which define the heart of the language:
+## Expressions and Functions
 
 $$
 \begin{align}
@@ -73,11 +73,11 @@ $$
 \end{align}
 $$
 
-Lists:
+## Lists
 
 $$
 \begin{align}
-[list]              &\to \texttt{[}  [expression]^*  \texttt{]} \\
+[list]              &\to \texttt{[} [expression]^* \texttt{]} \\
 [construct]         &\to \texttt{(construct} [expression][expression]  \texttt{)} \\
 [head]              &\to \texttt{(head} [list] \texttt{)} \\
 [tail]              &\to \texttt{(tail} [list] \texttt{)} \\
