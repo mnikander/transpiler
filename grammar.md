@@ -38,25 +38,29 @@ Productions which define the heart of the language:
 
 $$
 \begin{align}
-[expression]        &\to 
+[nonliteral]        &\to
+\begin{cases}
+                            [identifier] \\ 
+                            [function] \\
+                            [application] \\ % note: access to a list of functions is covered by this case
+\end{cases} \\
+[expression]        &\to
 \begin{cases}
                             [literal] \\
-                            [identifier] \\ 
-                            [lambda] \\
-                            [basicfunction] \\
-                            [application] \\
+                            [list] \\ % is this correct?
+                            [nonliteral] \\
 \end{cases} \\
-[lambda]            &\to \texttt{(->}  [arguments]  [expression]  \texttt{)} \\
-[application]       &\to \texttt{(} [function] [expression]^* \texttt{)} \\
-[function]          &\to [lambda] \mid [basicfunction] \mid [identifier] \\
+[list ]             &\to \texttt{[}  [expression]^*  \texttt{]} \\ % the list is missing in the grammar above
+[lambda]            &\to \texttt{(->}  [arguments] [expression]  \texttt{)} \\
+[application]       &\to \texttt{(} [nonliteral] [expression]^* \texttt{)} \\
+[function]          &\to [lambda] \mid [basicfunction] \mid [if] \\
 [basicfunction]     &\to
     \texttt{+} \mid \texttt{-} \mid \texttt{*} \mid
     \texttt{/} \mid \texttt{\%} \mid \texttt{\textasciicircum} \mid
     \texttt{\&} \mid \texttt{|} \mid \texttt{!} \mid
     \texttt{<} \mid \texttt{>} \mid \texttt{<=} \mid
     \texttt{>=} \mid \texttt{==} \mid \texttt{!=} \\
-% could you use a static function which returns a symbol, here and in the body of the lambda?
-[list ]             &\to \texttt{[}  [expression]^*  \texttt{]} \\
+[if]                &\to \texttt{(if} [expression] [expression] [expression]\texttt{)}\\
 \end{align}
 $$
 
