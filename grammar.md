@@ -86,3 +86,35 @@
 [\text{tail}]              &\to \text{(tail} [\text{list}] \text{)}\\
 \end{align}
 ```
+
+## Sequentially evaluated expressions
+>TODO: add these productions to the grammar above
+```math
+\begin{align}
+[\text{do}]                &\to \text{(do} [\text{expression}]^+ \text{)}\\
+[\text{inversecompose}]    &\to \text{(|>} [\text{expression}]^+ \text{)}\\
+[\text{monadicbind}]       &\to \text{(>>=} [\text{expression}]^+ \text{)}\\
+\end{align}
+```
+
+## Identifiers
+>TODO: add these productions to the grammar above
+```math
+\begin{align}
+% do I want `(declare identifier type)` or `(declare type identifier)` ?
+[\text{declare}]           &\to \text{(declare} [\text{identifier}] [\text{type}] \text{)}\\
+[\text{define}]            &\to \text{(define} [\text{identifier}] [\text{expression}] \text{)}\\
+[\text{overload}]          &\to \text{(overload} [\text{identifier}][\text{type}][\text{expression}] \text{)}\\
+\end{align}
+```
+>TODO: do I want overloading, or type-classes? It would be good if the inbuilt functions could be 'overloaded' for custom types as well.
+
+## Types
+
+```math
+\begin{align}
+[\text{basictype}]        &\to \text{bool} \mid \text{byte} \mid \text{char} \mid \text{i8} \mid \text{i16} \mid \text{i32} \mid \text{i64} \mid \text{f32} \mid \text{f64}\\
+[\text{type}]             &\to [\text{basictype}] \mid ...\\ %TODO
+\end{align}
+```
+> TODO: create productions for arrays, dictionaries, and non-primitive types such as ADTs
