@@ -52,7 +52,16 @@ $$
 \end{cases} \\
 [lambda]            &\to \texttt{(->}  [arguments] [expression]  \texttt{)} \\
 [application]       &\to \texttt{(} [nonliteral] [expression]^* \texttt{)} \\
-[function]          &\to [lambda] \mid [basicfunction] \mid [if] \mid [conditional] \mid [construct] \mid [head] \mid [tail]\\
+[function]          &\to
+\begin{cases}
+                        [lambda] \\
+                        [basicfunction] \\
+                        [if] \\
+                        [conditional] \\
+                        [construct] \\
+                        [head] \\
+                        [tail]
+\end{cases} \\
 [basicfunction]     &\to
     \texttt{+} \mid \texttt{-} \mid \texttt{*} \mid
     \texttt{/} \mid \texttt{\%} \mid \texttt{\textasciicircum} \mid
