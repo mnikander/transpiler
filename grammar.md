@@ -8,6 +8,8 @@
 [\text{.}]                 &\to \text{.}\\
 [\text{'}]                 &\to \text{'}\\
 [\text{"}]                 &\to \text{"}\\
+[\text{lbracket}]          &\to \text{[}\\
+[\text{rbracket}]          &\to \text{]}\\
 [\text{+-}]                &\to \text{+} \mid \text{-}\\
 [\text{ascii}]             &\to ... todo\\
 \end{align}
@@ -29,7 +31,7 @@
                             [\text{string\_literal}]
 \end{cases}\\
 [\text{identifier}]        &\to [\text{letter\_}][\text{alphanumeric\_}]^*\\
-[\text{identifierlist}]    &\to \text{[} [\text{identifier}]^* \text{]}\\
+[\text{identifierlist}]    &\to [\text{lbracket}] [\text{identifier}]^* [\text{rbracket}]\\
 [\text{arguments}]         &\to [\text{identifier}] \mid [\text{identifierlist}]\\
 \end{align}
 ```
@@ -71,7 +73,7 @@
     \text{<} \mid \text{>} \mid \text{<=} \mid
     \text{>=} \mid \text{==} \mid \text{!=}\\
 [\text{if}]                &\to \text{(if} [\text{expression}] [\text{expression}] [\text{expression}]\text{)}\\
-[\text{conditional}]       &\to \text{(conditional} \{ \text{[} [\text{expression}] [\text{expression}] \text{]}\}^+ \text{)}\\
+[\text{conditional}]       &\to \text{(conditional} \{ [\text{lbracket}] [\text{expression}] [\text{expression} [\text{rbracket}] ]\}^+ \text{)}\\
 [\text{until}]             &\to \text{(until} [\text{expression}] [\text{expression}] [\text{expression}]\text{)}\\
 \end{align}
 ```
@@ -80,7 +82,7 @@
 
 ```math
 \begin{align}
-[\text{list}]              &\to \text{[} \{\text{expression}\}^* \text{]}\\
+[\text{list}]              &\to [\text{lbracket}] \{\text{expression}\}^* [\text{rbracket}]\\
 [\text{construct}]         &\to \text{(construct} [\text{expression}][\text{expression}] \text{)}\\
 [\text{head}]              &\to \text{(head} [\text{list}] \text{)}\\
 [\text{tail}]              &\to \text{(tail} [\text{list}] \text{)}\\
