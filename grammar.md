@@ -38,22 +38,24 @@ Productions which define the heart of the language:
 
 $$
 \begin{align}
-[abstraction]       &\to \texttt{(->}  [arguments]  [expression]  \texttt{)} \\
-% could you use a static function which returns a symbol, here and in the body of the lambda?
-[application]       &\to \texttt{(} \{[basicfunction] \mid [expression]\}^+ \texttt{)} \\
 [expression]        &\to 
 \begin{cases}
                             [literal] \\
                             [identifier] \\ 
-                            [abstraction] \\
+                            [lambda] \\
+                            [basicfunction] \\
                             [application] \\
 \end{cases} \\
+[lambda]            &\to \texttt{(->}  [arguments]  [expression]  \texttt{)} \\
+[application]       &\to \texttt{(} [function] [expression]^* \texttt{)} \\
+[function]          &\to [lambda] \mid [basicfunction] \mid [identifier] \\
 [basicfunction]     &\to
     \texttt{+} \mid \texttt{-} \mid \texttt{*} \mid
     \texttt{/} \mid \texttt{\%} \mid \texttt{\textasciicircum} \mid
     \texttt{\&} \mid \texttt{|} \mid \texttt{!} \mid
     \texttt{<} \mid \texttt{>} \mid \texttt{<=} \mid
     \texttt{>=} \mid \texttt{==} \mid \texttt{!=} \\
+% could you use a static function which returns a symbol, here and in the body of the lambda?
 [list ]             &\to \texttt{[}  [expression]^*  \texttt{]} \\
 \end{align}
 $$
