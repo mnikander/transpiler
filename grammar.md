@@ -8,8 +8,6 @@
 \text{[.]}                 &\to \text{.}\\
 \text{[']}                 &\to \text{'}\\
 \text{["]}                 &\to \text{"}\\
-\text{[lbracket]}          &\to \text{[}\\
-\text{[rbracket]}          &\to \text{]}\\
 \text{[+-]}                &\to \text{+} \mid \text{-}\\
 \text{[ascii]}             &\to ... todo\\
 \end{align}
@@ -31,7 +29,7 @@
                             \text{[string\_literal]}
 \end{cases}\\
 \text{[identifier]}        &\to \text{[letter\_]}\text{[alphanumeric\_]}^*\\
-\text{[identifierlist]}    &\to \text{[lbracket]} \text{[identifier]}^* \text{[rbracket]}\\
+\text{[identifierlist]}    &\to \textit{ [ } \text{[identifier]}^* \textit{ ] }\\
 \text{[arguments]}         &\to \text{[identifier]} \mid \text{[identifierlist]}\\
 \end{align}
 ```
@@ -53,8 +51,8 @@
                             \text{[list]}\\
                             \text{[nonliteral]}
 \end{cases}\\
-\text{[lambda]}            &\to \text{(-> } \text{[arguments]} \text{[expression]} \text{)}\\
-\text{[application]}       &\to \text{(} \text{[nonliteral]} \text{[expression]}^* \text{)}\\
+\text{[lambda]}            &\to ( \text{-> } \text{[arguments]} \text{[expression]} )\\
+\text{[application]}       &\to ( \text{[nonliteral]} \text{[expression]}^* )\\
 \text{[function]}          &\to
 \begin{cases}
                         \text{[lambda]}\\
@@ -72,9 +70,9 @@
     \text{\&} \mid \text{|} \mid \text{!} \mid
     \text{<} \mid \text{>} \mid \text{<=} \mid
     \text{>=} \mid \text{==} \mid \text{!=}\\
-\text{[if]}                &\to \text{(if} \text{[expression]} \text{[expression]} \text{[expression]}\text{)}\\
-\text{[conditional]}       &\to \text{(conditional} \{ \text{[lbracket]} \text{[expression]} \text{[expression]} \text{[rbracket]}\}^+ \text{)}\\
-\text{[until]}             &\to \text{(until} \text{[expression]} \text{[expression]} \text{[expression]}\text{)}\\
+\text{[if]}                &\to ( \textit{if } \text{[expression]} \text{[expression]} \text{[expression]})\\
+\text{[conditional]}       &\to ( \textit{conditional } \{ \textit{ [ } \text{[expression]} \text{[expression]} \textit{ ] }\}^+ )\\
+\text{[until]}             &\to ( \textit{until } \text{[expression]} \text{[expression]} \text{[expression]})\\
 \end{align}
 ```
 
@@ -82,10 +80,10 @@
 
 ```math
 \begin{align}
-\text{[list]}              &\to \text{[lbracket]} \{\text{expression}\}^* \text{[rbracket]}\\
-\text{[construct]}         &\to \text{(construct} \text{[expression]}\text{[expression]} \text{)}\\
-\text{[head]}              &\to \text{(head} \text{[list]} \text{)}\\
-\text{[tail]}              &\to \text{(tail} \text{[list]} \text{)}\\
+\text{[list]}              &\to \textit{ [ } \{\text{expression}\}^* \textit{ ] }\\
+\text{[construct]}         &\to ( \textit{construct } \text{[expression]}\text{[expression]} )\\
+\text{[head]}              &\to ( \textit{head } \text{[list]} )\\
+\text{[tail]}              &\to ( \textit{tail } \text{[list]} )\\
 \end{align}
 ```
 
@@ -93,9 +91,9 @@
 >TODO: add these productions to the grammar above
 ```math
 \begin{align}
-\text{[do]}                &\to \text{(do} \text{[expression]}^+ \text{)}\\
-\text{[inversecompose]}    &\to \text{(|>} \text{[expression]}^+ \text{)}\\
-\text{[monadicbind]}       &\to \text{(>>=} \text{[expression]}^+ \text{)}\\
+\text{[do]}                &\to ( \textit{do } \text{[expression]}^+ )\\
+\text{[inversecompose]}    &\to ( \text{|> } \text{[expression]}^+ )\\
+\text{[monadicbind]}       &\to ( \text{>>= } \text{[expression]}^+ )\\
 \end{align}
 ```
 
@@ -104,9 +102,9 @@
 ```math
 \begin{align}
 % do I want `(declare identifier type)` or `(declare type identifier)` ?
-\text{[declare]}           &\to \text{(declare} \text{[identifier]} \text{[type]} \text{)}\\
-\text{[define]}            &\to \text{(define} \text{[identifier]} \text{[expression]} \text{)}\\
-\text{[overload]}          &\to \text{(overload} \text{[identifier]}\text{[type]}\text{[expression]} \text{)}\\
+\text{[declare]}           &\to ( \textit{declare } \text{[identifier]} \text{[type]} )\\
+\text{[define]}            &\to ( \textit{define } \text{[identifier]} \text{[expression]} )\\
+\text{[overload]}          &\to ( \textit{overload } \text{[identifier]}\text{[type]}\text{[expression]} )\\
 \end{align}
 ```
 >TODO: do I want overloading, or type-classes? It would be good if the inbuilt functions could be 'overloaded' for custom types as well.
