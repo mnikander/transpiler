@@ -58,6 +58,7 @@ $$
                         [basicfunction] \\
                         [if] \\
                         [conditional] \\
+                        [until] \\
                         [construct] \\
                         [head] \\
                         [tail]
@@ -70,6 +71,7 @@ $$
     \texttt{>=} \mid \texttt{==} \mid \texttt{!=} \\
 [if]                &\to \texttt{(if} [expression] [expression] [expression]\texttt{)} \\
 [conditional]       &\to \texttt{(conditional} \{ \texttt{[} [expression] [expression] \texttt{]}\}^+ \texttt{)} \\
+[until]             &\to \texttt{(until} [expression] [expression] [expression]\texttt{)} \\
 \end{align}
 $$
 
