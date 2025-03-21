@@ -1,88 +1,88 @@
 ## Basic characters and digits
 
-$$
+```math
 \begin{align}
-[digit]             &\to \texttt{0}\mid ... \mid \texttt{9} \\
-[letter\_]          &\to \texttt{\_} \mid \texttt{a} \mid ... \mid \texttt{z} \mid \texttt{A} \mid ...\mid \texttt{Z}\\
-[alphanumeric\_]    &\to [digit] \mid [letter\_]\\
-[.]                 &\to \texttt{.} \\
-[']                 &\to \texttt{'} \\
-["]                 &\to \texttt{"} \\
-[+-]                &\to \texttt{+} \mid \texttt{-} \\
-[ascii]             &\to ... todo\\
+[\text{digit}]             &\to \text{0}\mid ... \mid \text{9}\\
+[\text{letter\_}]          &\to \text{\_} \mid \text{a} \mid ... \mid \text{z} \mid \text{A} \mid ...\mid \text{Z}\\
+[\text{alphanumeric\_}]    &\to [\text{digit}] \mid [\text{letter\_}]\\
+[\text{.}]                 &\to \text{.}\\
+[\text{'}]                 &\to \text{'}\\
+[\text{"}]                 &\to \text{"}\\
+[\text{+-}]                &\to \text{+} \mid \text{-}\\
+[\text{ascii}]             &\to ... todo\\
 \end{align}
-$$
+```
 
 ## Literals and Identifiers
 
-$$
+```math
 \begin{align}
-[integer\_literal]  &\to [+-]^? [digit]^+ \\
-[float\_literal]    &\to [+-]^? [digit]^*[.][digit]^+\\
-[character\_literal]&\to ['] [ascii] ['] \\
-[string\_literal]   &\to ["] [ascii]^* ["] \\
-[literal]           &\to
+[\text{integer\_literal}]  &\to [\text{+-}]^? [\text{digit}]^+\\
+[\text{float\_literal}]    &\to [\text{+-}]^? [\text{digit}]^*[\text{.}][\text{digit}]^+\\
+[\text{character\_literal}]&\to [\text{'}] [\text{ascii}] [\text{'}]\\
+[\text{string\_literal}]   &\to [\text{"}] [\text{ascii}]^* [\text{"}]\\
+[\text{literal}]           &\to
 \begin{cases}
-                            [integer\_literal] \\
-                            [float\_literal] \\
-                            [character\_literal] \\
-                            [string\_literal]
-\end{cases} \\
-[identifier]        &\to [letter\_][alphanumeric\_]^* \\
-[identifierlist]    &\to \texttt{[} [identifier]^* \texttt{]}\\
-[arguments]         &\to [identifier] \mid [identifierlist] \\
+                            [\text{integer\_literal}]\\
+                            [\text{float\_literal}]\\
+                            [\text{character\_literal}]\\
+                            [\text{string\_literal}]
+\end{cases}\\
+[\text{identifier}]        &\to [\text{letter\_}][\text{alphanumeric\_}]^*\\
+[\text{identifierlist}]    &\to \text{[} [\text{identifier}]^* \text{]}\\
+[\text{arguments}]         &\to [\text{identifier}] \mid [\text{identifierlist}]\\
 \end{align}
-$$
+```
 
 ## Expressions and Functions
 
-$$
+```math
 \begin{align}
-[nonliteral]        &\to
+[\text{nonliteral}]        &\to
 \begin{cases}
-                            [identifier] \\ 
-                            [function] \\
-                            [application] \\ % note: access to a list of functions is covered by this case
-\end{cases} \\
-[expression]        &\to
+                            [\text{identifier}]\\
+                            [\text{function}]\\
+                            [\text{application}]
+% note: access to a list of functions is covered by the 'application' case
+\end{cases}\\
+[\text{expression}]        &\to
 \begin{cases}
-                            [literal] \\
-                            [list] \\ % is this correct?
-                            [nonliteral] \\
-\end{cases} \\
-[lambda]            &\to \texttt{(->}  [arguments] [expression]  \texttt{)} \\
-[application]       &\to \texttt{(} [nonliteral] [expression]^* \texttt{)} \\
-[function]          &\to
+                            [\text{literal}]\\
+                            [\text{list}]\\
+                            [\text{nonliteral}]
+\end{cases}\\
+[\text{lambda}]            &\to \text{(-> } [\text{arguments}] [\text{expression}] \text{)}\\
+[\text{application}]       &\to \text{(} [\text{nonliteral}] [\text{expression}]^* \text{)}\\
+[\text{function}]          &\to
 \begin{cases}
-                        [lambda] \\
-                        [basicfunction] \\
-                        [if] \\
-                        [conditional] \\
-                        [until] \\
-                        [construct] \\
-                        [head] \\
-                        [tail]
-\end{cases} \\
-[basicfunction]     &\to
-    \texttt{+} \mid \texttt{-} \mid \texttt{*} \mid
-    \texttt{/} \mid \texttt{\%} \mid \texttt{\textasciicircum} \mid
-    \texttt{\&} \mid \texttt{|} \mid \texttt{!} \mid
-    \texttt{<} \mid \texttt{>} \mid \texttt{<=} \mid
-    \texttt{>=} \mid \texttt{==} \mid \texttt{!=} \\
-[if]                &\to \texttt{(if} [expression] [expression] [expression]\texttt{)} \\
-[conditional]       &\to \texttt{(conditional} \{ \texttt{[} [expression] [expression] \texttt{]}\}^+ \texttt{)} \\
-[until]             &\to \texttt{(until} [expression] [expression] [expression]\texttt{)} \\
+                        [\text{lambda}]\\
+                        [\text{basicfunction}]\\
+                        [\text{if}]\\
+                        [\text{conditional}]\\
+                        [\text{until}]\\
+                        [\text{construct}]\\
+                        [\text{head}]\\
+                        [\text{tail}]
+\end{cases}\\
+[\text{basicfunction}]     &\to
+    \text{+} \mid \text{-} \mid \text{*} \mid
+    \text{/} \mid \text{\%} \mid \wedge \mid
+    \text{\&} \mid \text{|} \mid \text{!} \mid
+    \text{<} \mid \text{>} \mid \text{<=} \mid
+    \text{>=} \mid \text{==} \mid \text{!=}\\
+[\text{if}]                &\to \text{(if} [\text{expression}] [\text{expression}] [\text{expression}]\text{)}\\
+[\text{conditional}]       &\to \text{(conditional} \{ \text{[} [\text{expression}] [\text{expression}] \text{]}\}^+ \text{)}\\
+[\text{until}]             &\to \text{(until} [\text{expression}] [\text{expression}] [\text{expression}]\text{)}\\
 \end{align}
-$$
+```
 
 ## Lists
 
-$$
+```math
 \begin{align}
-[list]              &\to \texttt{[} [expression]^* \texttt{]} \\
-[construct]         &\to \texttt{(construct} [expression][expression]  \texttt{)} \\
-[head]              &\to \texttt{(head} [list] \texttt{)} \\
-[tail]              &\to \texttt{(tail} [list] \texttt{)} \\
-
+[\text{list}]              &\to \text{[} \{\text{expression}\}^* \text{]}\\
+[\text{construct}]         &\to \text{(construct} [\text{expression}][\text{expression}] \text{)}\\
+[\text{head}]              &\to \text{(head} [\text{list}] \text{)}\\
+[\text{tail}]              &\to \text{(tail} [\text{list}] \text{)}\\
 \end{align}
-$$
+```
