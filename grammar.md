@@ -80,7 +80,7 @@
 
 ```math
 \begin{align}
-\text{[list]}              &\to \textit{ [ } \{\text{expression}\}^* \textit{ ] }\\
+\text{[list]}              &\to \textit{ [ } \text{[expression]}^* \textit{ ] }\\
 \text{[construct]}         &\to ( \textit{construct } \text{[expression]}\text{[expression]} )\\
 \text{[head]}              &\to ( \textit{head } \text{[list]} )\\
 \text{[tail]}              &\to ( \textit{tail } \text{[list]} )\\
