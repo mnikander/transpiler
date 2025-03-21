@@ -8,10 +8,8 @@ $$
 [.]                 &\to \texttt{.} \\
 [']                 &\to \texttt{'} \\
 ["]                 &\to \texttt{"} \\
-[\space ( \space]   &\to \texttt{(} \\
-[\space ) \space]   &\to \texttt{)} \\
 [+-]                &\to \texttt{+} \mid \texttt{-} \\
-[ascii]             &\to ...\space todo\\
+[ascii]             &\to ... todo\\
 \end{align}
 $$
 
@@ -31,7 +29,7 @@ $$
                             [string\_literal]
 \end{cases} \\
 [identifier]        &\to [letter\_][alphanumeric\_]^* \\
-[identifierlist]    &\to \texttt{[}\space [identifier]^* \space\texttt{]}\\
+[identifierlist]    &\to \texttt{[} [identifier]^* \texttt{]}\\
 [arguments]         &\to [identifier] \mid [identifierlist] \\
 \end{align}
 $$
@@ -40,9 +38,9 @@ Productions which define the heart of the language:
 
 $$
 \begin{align}
-[abstraction]       &\to \texttt{(->} \space [arguments] \space [expression] \space \texttt{)} \\
+[abstraction]       &\to \texttt{(->}  [arguments]  [expression]  \texttt{)} \\
 % could you use a static function which returns a symbol, here and in the body of the lambda?
-[application]       &\to \texttt{(}\space \{[basicfunction] \mid [expression]\}^+ \space\texttt{)} \\
+[application]       &\to \texttt{(} \{[basicfunction] \mid [expression]\}^+ \texttt{)} \\
 [expression]        &\to 
 \begin{cases}
                             [literal] \\
@@ -56,7 +54,7 @@ $$
     \texttt{\&} \mid \texttt{|} \mid \texttt{!} \mid
     \texttt{<} \mid \texttt{>} \mid \texttt{<=} \mid
     \texttt{>=} \mid \texttt{==} \mid \texttt{!=} \\
-[list ]             &\to \texttt{[} \space [expression]^* \space \texttt{]} \\
+[list ]             &\to \texttt{[}  [expression]^*  \texttt{]} \\
 \end{align}
 $$
 
