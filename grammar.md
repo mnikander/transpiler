@@ -50,10 +50,9 @@ $$
                             [list] \\ % is this correct?
                             [nonliteral] \\
 \end{cases} \\
-[list ]             &\to \texttt{[}  [expression]^*  \texttt{]} \\ % the list is missing in the grammar above
 [lambda]            &\to \texttt{(->}  [arguments] [expression]  \texttt{)} \\
 [application]       &\to \texttt{(} [nonliteral] [expression]^* \texttt{)} \\
-[function]          &\to [lambda] \mid [basicfunction] \mid [if] \mid [conditional] \\
+[function]          &\to [lambda] \mid [basicfunction] \mid [if] \mid [conditional] \mid [construct] \mid [head] \mid [tail]\\
 [basicfunction]     &\to
     \texttt{+} \mid \texttt{-} \mid \texttt{*} \mid
     \texttt{/} \mid \texttt{\%} \mid \texttt{\textasciicircum} \mid
@@ -62,5 +61,17 @@ $$
     \texttt{>=} \mid \texttt{==} \mid \texttt{!=} \\
 [if]                &\to \texttt{(if} [expression] [expression] [expression]\texttt{)} \\
 [conditional]       &\to \texttt{(conditional} \{ \texttt{[} [expression] [expression] \texttt{]}\}^+ \texttt{)} \\
+\end{align}
+$$
+
+Lists:
+
+$$
+\begin{align}
+[list]              &\to \texttt{[}  [expression]^*  \texttt{]} \\
+[construct]         &\to \texttt{(construct} [expression][expression]  \texttt{)} \\
+[head]              &\to \texttt{(head} [list] \texttt{)} \\
+[tail]              &\to \texttt{(tail} [list] \texttt{)} \\
+
 \end{align}
 $$
