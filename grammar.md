@@ -1,39 +1,3 @@
-## Basic characters and digits
-
-```math
-\begin{align}
-\text{[digit]}             &\to \text{0}\mid ... \mid \text{9}\\
-\text{[letter\_]}          &\to \text{\_} \mid \text{a} \mid ... \mid \text{z} \mid \text{A} \mid ...\mid \text{Z}\\
-\text{[alphanumeric\_]}    &\to \text{[digit]} \mid \text{[letter\_]}\\
-\text{[.]}                 &\to \text{.}\\
-\text{[']}                 &\to \text{'}\\
-\text{["]}                 &\to \text{"}\\
-\text{[+-]}                &\to \text{+} \mid \text{-}\\
-\text{[ascii]}             &\to ... todo\\
-\end{align}
-```
-
-## Literals and Identifiers
-
-```math
-\begin{align}
-\text{[integer\_literal]}  &\to \text{[+-]}^? \text{[digit]}^+\\
-\text{[float\_literal]}    &\to \text{[+-]}^? \text{[digit]}^*\text{[.]}\text{[digit]}^+\\
-\text{[character\_literal]}&\to \text{[']} \text{[ascii]} \text{[']}\\
-\text{[string\_literal]}   &\to \text{["]} \text{[ascii]}^* \text{["]}\\
-\text{[literal]}           &\to
-\begin{cases}
-                            \text{[integer\_literal]}\\
-                            \text{[float\_literal]}\\
-                            \text{[character\_literal]}\\
-                            \text{[string\_literal]}
-\end{cases}\\
-\text{[identifier]}        &\to \text{[letter\_]}\text{[alphanumeric\_]}^*\\
-\text{[identifierlist]}    &\to \textit{ [ } \text{[identifier]}^* \textit{ ] }\\
-\text{[arguments]}         &\to \text{[identifier]} \mid \text{[identifierlist]}\\
-\end{align}
-```
-
 ## Expressions and Functions
 
 ```math
@@ -76,18 +40,7 @@
 \end{align}
 ```
 
-## Lists
-
-```math
-\begin{align}
-\text{[list]}              &\to \textit{ [ } \text{[expression]}^* \textit{ ] }\\
-\text{[construct]}         &\to ( \textit{construct } \text{[expression]}\text{[expression]} )\\
-\text{[head]}              &\to ( \textit{head } \text{[list]} )\\
-\text{[tail]}              &\to ( \textit{tail } \text{[list]} )\\
-\end{align}
-```
-
-## Sequentially evaluated expressions
+## Sequentially-evaluated expressions
 >TODO: add these productions to the grammar above
 ```math
 \begin{align}
@@ -97,7 +50,7 @@
 \end{align}
 ```
 
-## Identifiers
+## Variables
 >TODO: add these productions to the grammar above
 ```math
 \begin{align}
@@ -110,11 +63,57 @@
 >TODO: do I want overloading, or type-classes? It would be good if the inbuilt functions could be 'overloaded' for custom types as well.
 
 ## Types
-
+> TODO: create productions for arrays, dictionaries, and non-primitive types such as ADTs
 ```math
 \begin{align}
 \text{[basictype]}        &\to \text{bool} \mid \text{byte} \mid \text{char} \mid \text{i8} \mid \text{i16} \mid \text{i32} \mid \text{i64} \mid \text{f32} \mid \text{f64}\\
 \text{[type]}             &\to \text{[basictype]} \mid ...\\ %TODO
 \end{align}
 ```
-> TODO: create productions for arrays, dictionaries, and non-primitive types such as ADTs
+
+## Lists
+
+```math
+\begin{align}
+\text{[list]}              &\to \textit{ [ } \text{[expression]}^* \textit{ ] }\\
+\text{[construct]}         &\to ( \textit{construct } \text{[expression]}\text{[expression]} )\\
+\text{[head]}              &\to ( \textit{head } \text{[list]} )\\
+\text{[tail]}              &\to ( \textit{tail } \text{[list]} )\\
+\end{align}
+```
+
+## Literals and Identifiers
+
+```math
+\begin{align}
+\text{[integer\_literal]}  &\to \text{[+-]}^? \text{[digit]}^+\\
+\text{[float\_literal]}    &\to \text{[+-]}^? \text{[digit]}^*\text{[.]}\text{[digit]}^+\\
+\text{[character\_literal]}&\to \text{[']} \text{[ascii]} \text{[']}\\
+\text{[string\_literal]}   &\to \text{["]} \text{[ascii]}^* \text{["]}\\
+\text{[literal]}           &\to
+\begin{cases}
+                            \text{[integer\_literal]}\\
+                            \text{[float\_literal]}\\
+                            \text{[character\_literal]}\\
+                            \text{[string\_literal]}
+\end{cases}\\
+\text{[identifier]}        &\to \text{[letter\_]}\text{[alphanumeric\_]}^*\\
+\text{[identifierlist]}    &\to \textit{ [ } \text{[identifier]}^* \textit{ ] }\\
+\text{[arguments]}         &\to \text{[identifier]} \mid \text{[identifierlist]}\\
+\end{align}
+```
+
+## Basic characters and digits
+
+```math
+\begin{align}
+\text{[digit]}             &\to \text{0}\mid ... \mid \text{9}\\
+\text{[letter\_]}          &\to \text{\_} \mid \text{a} \mid ... \mid \text{z} \mid \text{A} \mid ...\mid \text{Z}\\
+\text{[alphanumeric\_]}    &\to \text{[digit]} \mid \text{[letter\_]}\\
+\text{[.]}                 &\to \text{.}\\
+\text{[']}                 &\to \text{'}\\
+\text{["]}                 &\to \text{"}\\
+\text{[+-]}                &\to \text{+} \mid \text{-}\\
+\text{[ascii]}             &\to ... todo\\
+\end{align}
+```
