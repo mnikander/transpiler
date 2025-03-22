@@ -1,4 +1,5 @@
 ## Expressions and Functions
+<!-- TODO: insert missing elements from the sections below -->
 
 ```math
 \begin{align}
@@ -13,6 +14,7 @@
 \text{[expression]}         &\to
 \begin{cases}
                             \text{[literal]}\\
+                            \text{[type]}\\ % TODO: will this cause problems?
                             \text{[list]}\\
                             \text{[nonliteral]}
 \end{cases}\\
@@ -42,7 +44,7 @@
 ```
 
 ## Sequentially-evaluated expressions
->TODO: add these productions to the grammar above
+> TODO: add these productions to the grammar above -->
 ```math
 \begin{align}
 \text{[do]}                 &\to
@@ -62,38 +64,54 @@
 \end{align}
 ```
 
-## Variables and Modules
->TODO: add these productions to the grammar above
+## Names
+> TODO: add these productions to the grammar above
 
->TODO: is the order of the arguments consistent, concerning identifiers, types, and expressions?
 ```math
 \begin{align}
+\text{[identifier]}         &\to \text{[letter\_]}\text{[alphanumeric\_]}^*\\
+\text{[identifierlist]}     &\to \textit{ [ } \text{[identifier]}^* \textit{ ] }\\
+\text{[arguments]}          &\to \text{[identifier]} \mid \text{[identifierlist]}\\
 % do I want `(declare identifier type)` or `(declare type identifier)` ?
 \text{[declare]}           &\to ( \textit{declare } \text{[identifier]} \text{[type]} )\\
 \text{[define]}            &\to ( \textit{define } \text{[identifier]} \text{[expression]} )\\
 \text{[overload]}          &\to ( \textit{overload } \text{[identifier]}\text{[type]}\text{[expression]} )\\
 \text{[annotate]}          &\to ( \text{: } \text{[type]} \text{[expression]} )\\
-\text{[module]}            &\to \\
-\text{[import]}            &\to \\
-\text{[export]}            &\to \\
+\text{[module]}            &\to \\ % TODO
+\text{[import]}            &\to \\ % TODO
+\text{[export]}            &\to \\ % TODO
 \end{align}
 ```
+> TODO: is the order of the arguments consistent, concerning identifiers, types, and expressions?
 
->TODO: do I want overloading, or type-classes?
-It would be good if the inbuilt functions could be 'overloaded' for custom types as well.
+> TODO: do I want overloading or type-classes?
+I need to be able to extend built-in operations such as '+' to new datatypes.
 
-> TODO: check how `module`/`import`/`export` work in Scheme.
+> TODO: check how module, import, and export work in Scheme.
+<!--
 With `module` I want to create something similar to namespaces in C++ or modules in Python.
 `import` could possibly be similar to a let-binding in Scheme.
 `export` denotes which functions, types, and interfaces are publically visible, i.e. importable, from a module.
 This implies that a module may actually be a list of identifiers, some of which are marked with the export keyword.
+-->
+
+> TODO: Keyword for linear variables and arguments
 
 ## Types
->TODO: Are types expressions, i.e. first-class citizens, which can be passed into and returned from functions, assigned to identifiers, stored in datastructures etc?
-Or should I keep values and types as two separate worlds?
-Add types to the grammar above, accordingly.
 
->TODO: Interfaces, type classes, generics
+>TODO: Are types expressions, i.e. first-class citizens, which can be passed into and returned from functions, assigned to identifiers, stored in datastructures etc?
+<!--
+There are at least three possibilities:\
+(1) types are first class citizens and belong into the expression category\
+(2) types should be a category of their own\
+(3) a special category is created for compile-time expressions, which types are part of (would most functions have to be part of this category too? Or is it better to check constexpr with a validation, rather than making it part of the grammar?)\
+-->
+
+> TODO: Do I need to distinguish between Lists and Typelists so that I avoid a circular reasoning when defining the List, and its type signature?
+Does the existance of a type-list or type-array, with a syntax such as `<Boolean I32 F32>`, make the grammar more specific and more robust?
+
+> TODO: Interfaces, type classes, generics
+
 
 ```math
 \begin{align}
@@ -106,7 +124,7 @@ Add types to the grammar above, accordingly.
     \text{[set\_type]}\\
     \text{[dictionary\_type]}\\
     \text{[primitive\_type]}\\
-    ... %TODO
+    \space % TODO
     \end{cases}\\
 \text{[variant\_type]}      &\to
     \begin{cases}
@@ -127,12 +145,24 @@ Add types to the grammar above, accordingly.
 \end{align}
 ```
 
-> TODO: Algebraic Data Types (ADTs) are variants of tuples of pointers which allow recursive tree-like structures.
+<!--
+TODO: Algebraic Data Types (ADTs) are variants of tuples of pointers which allow recursive tree-like structures.
 How do you define the type? How do you initialize them with data?
 -- I could make use of the Lisp-style list.
 It stores pointers to two child elements and if the data is set to a variant of tuples then it can encode ADTs.
+-->
 
-## Type Operations
+> TODO: Can I create type-safe enums by defining a variant of empty types, as follows?
+```scheme
+(do
+    (define Red   (: Type Nil))
+    (define Green (: Type Nil))
+    (define Blue  (: Type Nil))
+    (define Color (: Type (Variant <Red Green Blue>)))
+)
+```
+
+### Type Operations
 ```math
 \begin{align}
 \text{[typeof]}             &\to ( \textit{typeof } \text{[type\_indentifier]} )\\
@@ -140,10 +170,17 @@ It stores pointers to two child elements and if the data is set to a variant of 
 \text{[type\_indentifier]}  &\to ( \text{[type]} \mid \text{[identifier]} )\\
 \end{align}
 ```
-> TODO: is `sizeof` actually needed when programming, seeing as I won't be dealing with raw pointers?
+<!--
+TODO: is `sizeof` actually needed when programming, seeing as I won't be dealing with raw pointers?
 If some sort of external function call or inter-operability with C is desired, this might be quite helpful.
+-->
 
-## List Operations
+### Variant Operations
+> TODO
+### Tuple Operations
+> TODO
+
+### List Operations
 
 ```math
 \begin{align}
@@ -154,7 +191,24 @@ If some sort of external function call or inter-operability with C is desired, t
 \end{align}
 ```
 
-## Literals and Identifiers
+### Static Array Operations
+> TODO
+## Set Operations
+<!-- TODO -->
+## Dictionary Operations
+<!-- TODO -->
+
+## Memory Operations
+<!-- TODO -->
+```math
+\begin{align}
+\text{[copy]}               &\to ( \textit{copy } \text{[identifier]} )\\
+\text{[move]}               &\to ( \textit{move } \text{[identifier]} )\\
+\text{[borrow]}             &\to ( \textit{borrow } \text{[identifier]} )\\
+\end{align}
+```
+
+## Literals
 
 ```math
 \begin{align}
@@ -169,9 +223,6 @@ If some sort of external function call or inter-operability with C is desired, t
                             \text{[character\_literal]}\\
                             \text{[string\_literal]}
 \end{cases}\\
-\text{[identifier]}         &\to \text{[letter\_]}\text{[alphanumeric\_]}^*\\
-\text{[identifierlist]}     &\to \textit{ [ } \text{[identifier]}^* \textit{ ] }\\
-\text{[arguments]}          &\to \text{[identifier]} \mid \text{[identifierlist]}\\
 \end{align}
 ```
 
@@ -186,6 +237,6 @@ If some sort of external function call or inter-operability with C is desired, t
 \text{[']}                  &\to \text{'}\\
 \text{["]}                  &\to \text{"}\\
 \text{[+-]}                 &\to \text{+} \mid \text{-}\\
-\text{[ascii]}              &\to ... todo\\
+\text{[ascii]}              &\to % TODO
 \end{align}
 ```
