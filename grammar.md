@@ -42,6 +42,19 @@
 \text{[until]}              &\to ( \textit{until } \text{[expression]} \text{[expression]} \text{[expression]})\\
 \end{align}
 ```
+A basic example:
+```lisp
+(display
+    (if (> 1 0)
+        "All good"
+        "Something is wrong"))
+```
+Function application, using an immediately-invoked lambda which returns its first argument:
+```lisp
+((-> [a b] a) 2 4)
+```
+> TODO: since a function can be assigned to an identifier, do I need to include identifiers in the production rule for [function]?
+If so, I need to include identifiers as a possibility in way more places.
 
 ## Sequentially-evaluated expressions
 > TODO: add these productions to the grammar above -->
@@ -54,12 +67,12 @@
     \end{cases}\\
 \text{[inverse\_compose]}   &\to
     \begin{cases}
-    ( \text{|> } \text{[expression]}^+ )\\
-    ( \text{|> } \text{[list]})
+    ( \textit{pipeline } \text{[expression]} \text{[function]}^* )\\
+    ( \textit{pipeline } \text{[list]})
     \end{cases}\\
 \text{[monadic\_bind]}      &\to
-    \begin{cases}( \text{>>= } \text{[expression]}^+ )\\
-    ( \text{>>= } \text{[list]})
+    \begin{cases}( \textit{bind } \text{[expression]}^+ )\\
+    ( \textit{bind } \text{[list]})
     \end{cases}\\
 \end{align}
 ```
@@ -120,28 +133,27 @@ Does the existance of a type-list or type-array, with a syntax such as `<Boolean
     \text{[variant\_type]}\\
     \text{[tuple\_type]}\\
     \text{[list\_type]}\\
-    \text{[array\_type]}\\
-    \text{[set\_type]}\\
-    \text{[dictionary\_type]}\\
+    \text{[static\_array\_type]}\\
+    \text{[function\_type]}\\
     \text{[primitive\_type]}\\
     \space % TODO
     \end{cases}\\
 \text{[variant\_type]}      &\to
     \begin{cases}
     ( \textit{Variant } \text{[type]}^+ )\\
-    ( \textit{Variant } \text{[list]} )
+    ( \textit{Variant } \text{[array]} )
     \end{cases}\\
 \text{[tuple\_type]}        &\to
     \begin{cases}
     ( \textit{Tuple } \text{[type]}^+ )\\
-    ( \textit{Tuple } \text{[type]} \text{[integer\_literal]} )\\
-    ( \textit{Tuple } \text{[list]} )
+    ( \textit{Tuple } \text{[array]} )
     \end{cases}\\
 \text{[list\_type]}         &\to ( \textit{List } \text{[type]} )\\
-\text{[array\_type]}        &\to ( \textit{Array } \text{[type]} )\\
-\text{[set\_type]}          &\to ( \textit{Set } \text{[type]} )\\
-\text{[dictionary\_type]}   &\to ( \textit{Dictionary } \text{[type]} \text{[type]} )\\
-\text{[primitive\_type]}    &\to \text{Nil} \mid \text{Boolean} \mid \text{Byte} \mid \text{Character} \mid \text{I8} \mid \text{I16} \mid \text{I32} \mid \text{I64} \mid \text{F32} \mid \text{F64}\\
+\text{[static\_array\_type]}  &\to ( \textit{Array } \text{[type]} \text{[integer\_literal]} )\\
+\text{[function\_type]}     &\to ( \textit{Function } \text{[type\_arguments]} \text{[type\_arguments]} )\\
+\text{[type\_arguments]}    &\to \text{[type]} \mid \text{[typevector]}\\
+\text{[typevector]}         &\to \text{<} \text{[type]}^* \text{>}\\ %TODO: can this be replaced by a list of types or array of types? A tuple of types is not an option because a tuple requires multiple type parameters, i.e. a tuple would require a tuple of types for its own type signature. This won't work, so some datastructure with only a single template parameter, set to 'Type' must be used for all type signatures. This could be a List, static Array, or a special Typevector type.
+\text{[primitive\_type]}    &\to \text{Nil} \mid \text{Type} \mid \text{Boolean} \mid \text{Byte} \mid \text{C8} \mid \text{I8} \mid \text{I16} \mid \text{I32} \mid \text{I64} \mid \text{F32} \mid \text{F64}\\
 \end{align}
 ```
 
@@ -153,13 +165,12 @@ It stores pointers to two child elements and if the data is set to a variant of 
 -->
 
 > TODO: Can I create type-safe enums by defining a variant of empty types, as follows?
-```scheme
+```lisp
 (do
     (define Red   (: Type Nil))
     (define Green (: Type Nil))
     (define Blue  (: Type Nil))
-    (define Color (: Type (Variant <Red Green Blue>)))
-)
+    (define Color (: Type (Variant <Red Green Blue>))))
 ```
 
 ### Type Operations
@@ -192,11 +203,25 @@ If some sort of external function call or inter-operability with C is desired, t
 ```
 
 ### Static Array Operations
-> TODO
-## Set Operations
-<!-- TODO -->
-## Dictionary Operations
-<!-- TODO -->
+> TODO: does it make sense to implement a reference-counted slice-view on arrays, so that head and tail operations are possible? Or should index-based access be the only access pattern?
+```math
+\begin{align}
+\text{[array]}              &\to < \text{[expression]}^* >\\
+\text{[get\_array]}         &\to ( \textit{get} \text{[array]} \text{[expression]} )\\
+\end{align}
+```
+```lisp
+(do
+    (define data <0 10 20 30>)
+    (define elem (get data 2))
+    (display (== elem 20)))     # true
+```
+### Other Datatypes
+Note that many more datatypes can be implemented in terms of the already listed datatypes.
+Several notable datatypes which are NOT included in this grammar, for the time being, are:
+- Dynamic Array
+- Set
+- Dictionary
 
 ## Memory Operations
 <!-- TODO -->
@@ -205,6 +230,15 @@ If some sort of external function call or inter-operability with C is desired, t
 \text{[copy]}               &\to ( \textit{copy } \text{[identifier]} )\\
 \text{[move]}               &\to ( \textit{move } \text{[identifier]} )\\
 \text{[borrow]}             &\to ( \textit{borrow } \text{[identifier]} )\\
+\text{[box]}                &\to ( \textit{box } \text{[expression]} )\\
+\end{align}
+```
+
+## Input and Output
+
+```math
+\begin{align}
+\text{[display]}            &\to ( \textit{display } \text{[expression]} )
 \end{align}
 ```
 
