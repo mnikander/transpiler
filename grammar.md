@@ -84,13 +84,29 @@
 > TODO: check how these work in Scheme. One possibility is for `import` to be similar to a let-binding in Scheme. With `module` I want to create something similar to namespaces in C++. `export` denotes which functions, types, and interfaces are publically visible, i.e. importable, from a module. This implies that a module may actually be a list of identifiers, some of which are marked with the export keyword.
 
 ## Types
-> TODO: create productions for arrays, dictionaries, and non-primitive types such as ADTs
 ```math
 \begin{align}
-\text{[basictype]}        &\to \text{bool} \mid \text{byte} \mid \text{char} \mid \text{i8} \mid \text{i16} \mid \text{i32} \mid \text{i64} \mid \text{f32} \mid \text{f64}\\
-\text{[type]}             &\to \text{[basictype]} \mid ...\\ %TODO
+\text{[type]}               &\to \text{[variant\_type]} \mid \text{[tuple\_type]} \mid \text{[list\_type]} \mid \text{[array\_type]} \mid \text{[primitive\_type]} \mid ...\\ %TODO
+\text{[variant\_type]}      &\to
+    \begin{cases}
+    ( \textit{Variant } \text{[type]}^+ )\\
+    ( \textit{Variant } \text{[list]} )
+    \end{cases}\\
+\text{[tuple\_type]}        &\to
+    \begin{cases}
+    ( \textit{Tuple } \text{[type]}^+ )\\
+    ( \textit{Tuple } \text{[type]} \text{[integer\_literal]} )\\
+    ( \textit{Tuple } \text{[list]} )
+    \end{cases}\\
+\text{[list\_type]}         &\to ( \textit{List } \text{[type]} )\\
+\text{[array\_type]}        &\to ( \textit{Array } \text{[type]} )\\
+\text{[set\_type]}          &\to ( \textit{Set } \text{[type]} )\\
+\text{[dictionary\_type]}   &\to ( \textit{Dictionary } \text{[type]} \text{[type]} )\\
+\text{[primitive\_type]}    &\to \text{Nil} \mid \text{Boolean} \mid \text{Byte} \mid \text{Character} \mid \text{I8} \mid \text{I16} \mid \text{I32} \mid \text{I64} \mid \text{F32} \mid \text{F64}\\
 \end{align}
 ```
+
+> TODO: Algebraic Data Types (ADTs) are variants of tuples of pointers which allow recursive tree-like structures. How do you define the type? How do you initialize them with data? -- I could make use of the Lisp-style list. It stores pointers to two child elements and if the data is set to a variant of tuples then it can encode ADTs.
 
 ## Lists
 
