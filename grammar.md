@@ -64,17 +64,21 @@
 
 ## Variables and Modules
 >TODO: add these productions to the grammar above
+
+>TODO: is the order of the arguments consistent, concerning identifiers, types, and expressions?
 ```math
 \begin{align}
 % do I want `(declare identifier type)` or `(declare type identifier)` ?
 \text{[declare]}           &\to ( \textit{declare } \text{[identifier]} \text{[type]} )\\
 \text{[define]}            &\to ( \textit{define } \text{[identifier]} \text{[expression]} )\\
 \text{[overload]}          &\to ( \textit{overload } \text{[identifier]}\text{[type]}\text{[expression]} )\\
+\text{[annotate]}          &\to ( \text{: } \text{[type]} \text{[expression]} )\\
 \text{[module]}            &\to \\
 \text{[import]}            &\to \\
 \text{[export]}            &\to \\
 \end{align}
 ```
+
 >TODO: do I want overloading, or type-classes? It would be good if the inbuilt functions could be 'overloaded' for custom types as well.
 
 > TODO: check how these work in Scheme. One possibility is for `import` to be similar to a let-binding in Scheme. With `module` I want to create something similar to namespaces in C++. `export` denotes which functions, types, and interfaces are publically visible, i.e. importable, from a module. This implies that a module may actually be a list of identifiers, some of which are marked with the export keyword.
