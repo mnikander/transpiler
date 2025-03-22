@@ -2,23 +2,23 @@
 
 ```math
 \begin{align}
-\text{[entry]}             &\to \text{[expression]}\\
-\text{[nonliteral]}        &\to
+\text{[entry]}              &\to \text{[expression]}\\
+\text{[nonliteral]}         &\to
 \begin{cases}
                             \text{[identifier]}\\
                             \text{[function]}\\
                             \text{[application]}
 % note: access to a list of functions is covered by the 'application' case
 \end{cases}\\
-\text{[expression]}        &\to
+\text{[expression]}         &\to
 \begin{cases}
                             \text{[literal]}\\
                             \text{[list]}\\
                             \text{[nonliteral]}
 \end{cases}\\
-\text{[lambda]}            &\to ( \text{-> } \text{[arguments]} \text{[expression]} )\\
-\text{[application]}       &\to ( \text{[nonliteral]} \text{[expression]}^* )\\
-\text{[function]}          &\to
+\text{[lambda]}             &\to ( \text{-> } \text{[arguments]} \text{[expression]} )\\
+\text{[application]}        &\to ( \text{[nonliteral]} \text{[expression]}^* )\\
+\text{[function]}           &\to
 \begin{cases}
                         \text{[lambda]}\\
                         \text{[basicfunction]}\\
@@ -29,15 +29,15 @@
                         \text{[head]}\\
                         \text{[tail]}
 \end{cases}\\
-\text{[basicfunction]}     &\to
+\text{[basicfunction]}      &\to
     \text{+} \mid \text{-} \mid \text{*} \mid
     \text{/} \mid \text{\%} \mid \wedge \mid
     \text{\&} \mid \text{|} \mid \text{!} \mid
     \text{<} \mid \text{>} \mid \text{<=} \mid
     \text{>=} \mid \text{==} \mid \text{!=}\\
-\text{[if]}                &\to ( \textit{if } \text{[expression]} \text{[expression]} \text{[expression]})\\
-\text{[conditional]}       &\to ( \textit{conditional } \{ \textit{ [ } \text{[expression]} \text{[expression]} \textit{ ] }\}^+ )\\
-\text{[until]}             &\to ( \textit{until } \text{[expression]} \text{[expression]} \text{[expression]})\\
+\text{[if]}                 &\to ( \textit{if } \text{[expression]} \text{[expression]} \text{[expression]})\\
+\text{[conditional]}        &\to ( \textit{conditional } \{ \textit{ [ } \text{[expression]} \text{[expression]} \textit{ ] }\}^+ )\\
+\text{[until]}              &\to ( \textit{until } \text{[expression]} \text{[expression]} \text{[expression]})\\
 \end{align}
 ```
 
@@ -45,17 +45,17 @@
 >TODO: add these productions to the grammar above
 ```math
 \begin{align}
-\text{[do]}                &\to
+\text{[do]}                 &\to
     \begin{cases}
     ( \textit{do } \text{[expression]}^+ )\\
     ( \textit{do } \text{[list]})
     \end{cases}\\
-\text{[inversecompose]}    &\to
+\text{[inverse\_compose]}   &\to
     \begin{cases}
     ( \text{|> } \text{[expression]}^+ )\\
     ( \text{|> } \text{[list]})
     \end{cases}\\
-\text{[monadicbind]}       &\to
+\text{[monadic\_bind]}      &\to
     \begin{cases}( \text{>>= } \text{[expression]}^+ )\\
     ( \text{>>= } \text{[list]})
     \end{cases}\\
@@ -79,9 +79,14 @@
 \end{align}
 ```
 
->TODO: do I want overloading, or type-classes? It would be good if the inbuilt functions could be 'overloaded' for custom types as well.
+>TODO: do I want overloading, or type-classes?
+It would be good if the inbuilt functions could be 'overloaded' for custom types as well.
 
-> TODO: check how these work in Scheme. One possibility is for `import` to be similar to a let-binding in Scheme. With `module` I want to create something similar to namespaces in C++. `export` denotes which functions, types, and interfaces are publically visible, i.e. importable, from a module. This implies that a module may actually be a list of identifiers, some of which are marked with the export keyword.
+> TODO: check how `module`/`import`/`export` work in Scheme.
+With `module` I want to create something similar to namespaces in C++ or modules in Python.
+`import` could possibly be similar to a let-binding in Scheme.
+`export` denotes which functions, types, and interfaces are publically visible, i.e. importable, from a module.
+This implies that a module may actually be a list of identifiers, some of which are marked with the export keyword.
 
 ## Types
 ```math
@@ -112,10 +117,10 @@
 
 ```math
 \begin{align}
-\text{[list]}              &\to \textit{ [ } \text{[expression]}^* \textit{ ] }\\
-\text{[construct]}         &\to ( \textit{construct } \text{[expression]}\text{[expression]} )\\
-\text{[head]}              &\to ( \textit{head } \text{[list]} )\\
-\text{[tail]}              &\to ( \textit{tail } \text{[list]} )\\
+\text{[list]}               &\to \textit{ [ } \text{[expression]}^* \textit{ ] }\\
+\text{[construct]}          &\to ( \textit{construct } \text{[expression]}\text{[expression]} )\\
+\text{[head]}               &\to ( \textit{head } \text{[list]} )\\
+\text{[tail]}               &\to ( \textit{tail } \text{[list]} )\\
 \end{align}
 ```
 
@@ -123,20 +128,20 @@
 
 ```math
 \begin{align}
-\text{[integer\_literal]}  &\to \text{[+-]}^? \text{[digit]}^+\\
-\text{[float\_literal]}    &\to \text{[+-]}^? \text{[digit]}^*\text{[.]}\text{[digit]}^+\\
-\text{[character\_literal]}&\to \text{[']} \text{[ascii]} \text{[']}\\
-\text{[string\_literal]}   &\to \text{["]} \text{[ascii]}^* \text{["]}\\
-\text{[literal]}           &\to
+\text{[integer\_literal]}   &\to \text{[+-]}^? \text{[digit]}^+\\
+\text{[float\_literal]}     &\to \text{[+-]}^? \text{[digit]}^*\text{[.]}\text{[digit]}^+\\
+\text{[character\_literal]} &\to \text{[']} \text{[ascii]} \text{[']}\\
+\text{[string\_literal]}    &\to \text{["]} \text{[ascii]}^* \text{["]}\\
+\text{[literal]}            &\to
 \begin{cases}
                             \text{[integer\_literal]}\\
                             \text{[float\_literal]}\\
                             \text{[character\_literal]}\\
                             \text{[string\_literal]}
 \end{cases}\\
-\text{[identifier]}        &\to \text{[letter\_]}\text{[alphanumeric\_]}^*\\
-\text{[identifierlist]}    &\to \textit{ [ } \text{[identifier]}^* \textit{ ] }\\
-\text{[arguments]}         &\to \text{[identifier]} \mid \text{[identifierlist]}\\
+\text{[identifier]}         &\to \text{[letter\_]}\text{[alphanumeric\_]}^*\\
+\text{[identifierlist]}     &\to \textit{ [ } \text{[identifier]}^* \textit{ ] }\\
+\text{[arguments]}          &\to \text{[identifier]} \mid \text{[identifierlist]}\\
 \end{align}
 ```
 
@@ -144,13 +149,13 @@
 
 ```math
 \begin{align}
-\text{[digit]}             &\to \text{0}\mid ... \mid \text{9}\\
-\text{[letter\_]}          &\to \text{\_} \mid \text{a} \mid ... \mid \text{z} \mid \text{A} \mid ...\mid \text{Z}\\
-\text{[alphanumeric\_]}    &\to \text{[digit]} \mid \text{[letter\_]}\\
-\text{[.]}                 &\to \text{.}\\
-\text{[']}                 &\to \text{'}\\
-\text{["]}                 &\to \text{"}\\
-\text{[+-]}                &\to \text{+} \mid \text{-}\\
-\text{[ascii]}             &\to ... todo\\
+\text{[digit]}              &\to \text{0}\mid ... \mid \text{9}\\
+\text{[letter\_]}           &\to \text{\_} \mid \text{a} \mid...\mid \text{z} \mid \text{A} \mid...\mid \text{Z}\\
+\text{[alphanumeric\_]}     &\to \text{[digit]} \mid \text{[letter\_]}\\
+\text{[.]}                  &\to \text{.}\\
+\text{[']}                  &\to \text{'}\\
+\text{["]}                  &\to \text{"}\\
+\text{[+-]}                 &\to \text{+} \mid \text{-}\\
+\text{[ascii]}              &\to ... todo\\
 \end{align}
 ```
