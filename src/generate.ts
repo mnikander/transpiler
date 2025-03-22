@@ -1,11 +1,11 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
-import { generate_atom } from "./lexeme/atom";
+import { Atom, generate_atom, make_atom } from "./lexeme/atom";
 import { generate_function_application } from "./lexeme/application";
 import { is_add, generate_add } from "./lexeme/add";
 import { is_define, generate_define } from "./lexeme/define";
-import { is_display, generate_display } from "./lexeme/display";
+import { Display, is_display, generate_display, make_display } from "./lexeme/display";
 import { is_divide, generate_divide } from "./lexeme/divide";
 import { is_error, generate_error } from "./lexeme/error";
 import { is_multiply, generate_multiply } from "./lexeme/multiply";
@@ -14,11 +14,14 @@ import { is_equal, generate_equal } from "./lexeme/equal";
 import { is_lambda, generate_lambda } from "./lexeme/lambda";
 import { is_if, generate_if } from "./lexeme/if";
 
+export type Expression = Atom | Display;
+
 // TODO: set reasonable type information for the 'ast' parameter
 export function generate(ast: any): string {
     if (ast instanceof Array) {
         if (is_display(ast)) {
-            return generate_display(ast);
+            let node: Display = make_display(ast);
+            return generate_display(node);
         }
         else if (is_error(ast)) {
             return generate_error(ast);
@@ -52,7 +55,8 @@ export function generate(ast: any): string {
         }
     }
     else if (typeof ast !== 'undefined') {
-        return generate_atom(ast);
+        let node: Atom = make_atom(ast);
+        return generate_atom(node);
     }
     else {
         assert(false, "undefined node");

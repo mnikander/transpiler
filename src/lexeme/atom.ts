@@ -3,23 +3,35 @@
 import assert from "assert";
 import { generate } from "../generate";
 
-export function generate_atom(ast: any): string {
+export interface Atom {
+    type: string;
+    value: string;
+}
+
+export function make_atom(ast: any): Atom {
     if (typeof ast === 'string') {
-        if (ast == "True") {
-            return "true";
+        if (ast === "True") {
+            return {type: 'Boolean', value: 'true'} as Atom;
         }
         else if (ast === "False") {
-            return "false";
+            return {type: 'Boolean', value: 'false'} as Atom;
         }
         else {
-            return ast;
+            return {type: 'Other', value: ast} as Atom;
         }
     }
     else if (ast !== Object(ast)) { // primitive data-type (not an object)
-        return ast.toString();
+        if (typeof ast === 'number') {
+            return {type: 'Number', value: ast.toString()} as Atom;
+        }
+        else {
+            return {type: 'OtherPrimitive', value: ast.toString()} as Atom;
+        }
     }
-    else {
-        assert(false, `invalid symbol <${ast.toString()}> of type <${typeof ast}>`);
-        return "/* ERROR: INVALID SYMBOL */";
-    }
+    assert(false, `invalid symbol <${ast.toString()}> of type <${typeof ast}>`);
+    return {type: 'Undefined', value: "/* ERROR: INVALID SYMBOL */"} as Atom;
+}
+
+export function generate_atom(node: Atom): string {
+    return node.value;
 }
