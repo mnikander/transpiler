@@ -45,9 +45,20 @@
 >TODO: add these productions to the grammar above
 ```math
 \begin{align}
-\text{[do]}                &\to ( \textit{do } \text{[expression]}^+ )\\
-\text{[inversecompose]}    &\to ( \text{|> } \text{[expression]}^+ )\\
-\text{[monadicbind]}       &\to ( \text{>>= } \text{[expression]}^+ )\\
+\text{[do]}                &\to
+    \begin{cases}
+    ( \textit{do } \text{[expression]}^+ )\\
+    ( \textit{do } \text{[list]})
+    \end{cases}\\
+\text{[inversecompose]}    &\to
+    \begin{cases}
+    ( \text{|> } \text{[expression]}^+ )\\
+    ( \text{|> } \text{[list]})
+    \end{cases}\\
+\text{[monadicbind]}       &\to
+    \begin{cases}( \text{>>= } \text{[expression]}^+ )\\
+    ( \text{>>= } \text{[list]})
+    \end{cases}\\
 \end{align}
 ```
 
