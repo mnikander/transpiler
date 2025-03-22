@@ -2,6 +2,7 @@
 
 ```math
 \begin{align}
+\text{[entry]}             &\to \text{[expression]}\\
 \text{[nonliteral]}        &\to
 \begin{cases}
                             \text{[identifier]}\\
