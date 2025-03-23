@@ -2,10 +2,12 @@
 
 ```math
 \begin{align}
-\text{expression}   &\to \text{atom} \mid \text{call} \mid \text{list} \\
+ % \mid "\t" \mid "\r" \mid "\f" \mid "\b" )
+\text{expression}   &\to (\text{atom} \mid \text{call} \mid \text{list}) \space \text{comment}^? \\
 \text{atom}         &\to \text{identifier} \mid \text{number\_literal} \mid \text{string\_literal} \\
 \text{call}         &\to \texttt{`(`} \space \text{expression}^+ \space \texttt{`)`} \\
 \text{list}         &\to \texttt{`[`} \space \text{expression}^* \space \texttt{`]`} \\
+\text{comment}      &\to \texttt{`\#`} \space (\text{char} \mid \texttt{`'`} \mid \texttt{`"`})^* \space \text{linebreak} \\
 \end{align}
 ```
 
@@ -30,8 +32,9 @@
                             \texttt{`\_`} \mid \texttt{`}\wedge\texttt{`} \mid \texttt{`}\sim\texttt{`}
                             %\texttt{```} \mid \texttt{`'`} \mid \texttt{`"`} \mid \\\texttt{` `} \mid
 \end{cases}\\
-\text{space}                &\to \texttt{` `} \\
 \text{sign}                 &\to \texttt{`+`} \mid \texttt{`-`} \\
+\text{space}                &\to \texttt{` `} \mid \texttt{`}\backslash\texttt{t`}\\
+\text{linebreak}            &\to \texttt{`}\backslash\texttt{n`} \mid \texttt{`}\backslash\texttt{n}\backslash\texttt{r`} \\
 \end{align}
 ```
 
