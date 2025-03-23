@@ -7,13 +7,13 @@
 \text{atom}         &\to \text{identifier} \mid \text{number\_literal} \mid \text{string\_literal} \\
 \text{call}         &\to \texttt{`(`} \space \text{expression}^+ \space \texttt{`)`} \\
 \text{list}         &\to \texttt{`[`} \space \text{expression}^* \space \texttt{`]`} \\
-\text{comment}     &\to \text{whitespace}^* \space ( \space \texttt{`\#`} \space (\text{char} \mid \texttt{`'`} \mid \texttt{`"`})^* \space \text{linebreak} \space \text{whitespace}^*)^? \\
 \end{align}
 ```
 
-## Identifiers and Literals
+## Comments, Identifiers, and Literals
 ```math
 \begin{align}
+\text{comment}     &\to \text{whitespace}^* \space ( \space \texttt{`\#`} \space (\text{char} \mid \texttt{`'`} \mid \texttt{`"`})^* \space \text{linebreak} \space \text{whitespace}^*)^? \\
 \text{identifier}           &\to (\text{letter} \space (\text{letter} \mid \text{digit})^*) \mid \text{special}^+ \\
 \text{number\_literal}      &\to \text{sign}^? \space \text{digit}^+ \space (\texttt{`.`} \space \text{digit}^+)^? \\
 \text{string\_literal}      &\to \texttt{`'`} \space (\text{char} \mid \texttt{`"`})^* \space \texttt{`'`} \mid
