@@ -2,9 +2,10 @@
 
 ```math
 \begin{align}
-\text{expression}   &\to \text{atom} \mid \text{list} \\
+\text{expression}   &\to \text{atom} \mid \text{call} \mid \text{list} \\
 \text{atom}         &\to \text{identifier} \mid \text{number\_literal} \mid \text{string\_literal} \\
-\text{list}         &\to \texttt{`(`} \space \text{expression}^+ \space \texttt{`)`} \\
+\text{call}         &\to \texttt{`(`} \space \text{expression}^+ \space \texttt{`)`} \\
+\text{list}         &\to \texttt{`[`} \space \text{expression}^* \space \texttt{`]`} \\
 \end{align}
 ```
 
