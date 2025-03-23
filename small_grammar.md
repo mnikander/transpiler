@@ -7,7 +7,7 @@
 \text{atom}         &\to \text{identifier} \mid \text{number\_literal} \mid \text{string\_literal} \\
 \text{call}         &\to \texttt{`(`} \space \text{expression}^+ \space \texttt{`)`} \\
 \text{list}         &\to \texttt{`[`} \space \text{expression}^* \space \texttt{`]`} \\
-\text{comment}      &\to \texttt{`\#`} \space (\text{char} \mid \texttt{`'`} \mid \texttt{`"`})^* \space \text{linebreak} \\
+\text{comment}     &\to \text{whitespace}^* \space ( \space \texttt{`\#`} \space (\text{char} \mid \texttt{`'`} \mid \texttt{`"`})^* \space \text{linebreak} \space \text{whitespace}^*)^? \\
 \end{align}
 ```
 
@@ -33,7 +33,8 @@
                             %\texttt{```} \mid \texttt{`'`} \mid \texttt{`"`} \mid \\\texttt{` `} \mid
 \end{cases}\\
 \text{sign}                 &\to \texttt{`+`} \mid \texttt{`-`} \\
-\text{space}                &\to \texttt{` `} \mid \texttt{`}\backslash\texttt{t`}\\
+\text{whitespace}           &\to \text{space} \mid \text{linebreak} \\
+\text{space}                &\to \texttt{` `} \mid \texttt{`}\backslash\texttt{t`} \\
 \text{linebreak}            &\to \texttt{`}\backslash\texttt{n`} \mid \texttt{`}\backslash\texttt{n}\backslash\texttt{r`} \\
 \end{align}
 ```
