@@ -2,7 +2,6 @@
 
 ```math
 \begin{align}
- % \mid "\t" \mid "\r" \mid "\f" \mid "\b" )
 \text{ expression}   &\to (\text{ atom} \mid \text{call} \mid \text{list }) \text{ comment}^? \\
 \text{ atom}         &\to \text{ identifier} \mid \text{number\_literal} \mid \text{string\_literal} \mid \text{type\_literal} \\
 \text{ call}         &\to \texttt{`(`} \text{ expression}^+ \texttt{`)`} \\
