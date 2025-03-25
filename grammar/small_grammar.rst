@@ -18,7 +18,7 @@ Comments, Identifiers, and Literals
 .. code-block:: abnf
 
    comment         =  "#" *(character / q / qq)
-   identifier      =  [special] / (letter *(letter / digit))
+   identifier      =  (special *special) / (letter *(letter / digit))
    number-literal  =  [sign] digit *digit ["." digit *digit]
    string-literal  =  (q *(character / qq) q) / (qq *(character / q) qq)
    type-literal    =  "Type" / "Empty" / "Boolean" / "Byte" / "Ascii" /
