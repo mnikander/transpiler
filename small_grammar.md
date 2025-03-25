@@ -4,7 +4,7 @@
 \begin{align}
  % \mid "\t" \mid "\r" \mid "\f" \mid "\b" )
 \text{ expression}   &\to (\text{ atom} \mid \text{call} \mid \text{list }) \text{ comment}^? \\
-\text{ atom}         &\to \text{ identifier} \mid \text{number\_literal} \mid \text{string\_literal} \\
+\text{ atom}         &\to \text{ identifier} \mid \text{number\_literal} \mid \text{string\_literal} \mid \text{type\_literal} \\
 \text{ call}         &\to \texttt{`(`} \text{ expression}^+ \texttt{`)`} \\
 \text{ list}         &\to \texttt{`[`} \text{ expression}^* \texttt{`]`} \\
 \end{align}
@@ -18,6 +18,7 @@
 \text{ number\_literal}     &\to \text{ sign}^? \text{ digit}^+ (\texttt{`.`} \text{ digit}^+)^? \\
 \text{ string\_literal}     &\to \texttt{`'`} (\text{ char} \mid \texttt{`"`})^* \texttt{`'`} \mid
                                     \texttt{`"`} (\text{ char} \mid \texttt{`'`})^* \texttt{`"`} \\
+\text{type\_literal}        &\to \texttt{'Type'} \mid \texttt{'Empty'} \mid \texttt{'Boolean'} \mid \texttt{'Byte'} \mid \texttt{'Ascii'} \mid \texttt{'I8'} \mid \texttt{'I16'} \mid \texttt{'I32'} \mid \texttt{'I64'} \mid \texttt{'F32'} \mid \texttt{'F64'} \\
 \text{ char}                &\to \text{ letter} \mid \text{digit} \mid \text{parenthesis} \mid \text{special} \mid \text{space} \\
 \text{ letter}              &\to \texttt{`a`} \mid ... \mid \texttt{`z`} \mid \texttt{`A`} \mid ... \mid \texttt{`Z`} \\
 \text{ digit}               &\to \texttt{`0`} \mid ... \mid \texttt{`9`} \\
