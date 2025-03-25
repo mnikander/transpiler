@@ -7,7 +7,7 @@ This grammar is written in Augmented Backus-Naur Form (ABNF).
 .. code-block:: abnf
 
    expression      =  (atom / call / list) [comment]
-   atom            =  identifier / number_literal / string_literal / type_literal
+   atom            =  identifier / number-literal / string-literal / type-literal
    call            =  "(" expression *expression ")"
    list            =  "[" *expression "]"
 
