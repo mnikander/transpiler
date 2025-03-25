@@ -12,7 +12,8 @@
     (display "hello world")
 
     (define first (lambda [a b] a))
-    (define second (: (-> [i32 i32] i32)    # a type-valued function is used to annotate a function
+    (define second (: ([i32 i32] i32)   # function type which takes 2 integers and returns an integer
                       (-> [a b] b)))
     (declare a (linear i32))
+    42                      # the last expression in the 'do' block is the return value
 )
