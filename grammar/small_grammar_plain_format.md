@@ -10,7 +10,7 @@ This version has plain formatting, to avoid formatting issues with Latex on GitH
 
 ## Comments, Identifiers, and Literals
 ```d
- (5) comment         =  whitespace* ( "#" (character | `'` | `"`)* linebreak whitespace*)?
+ (5) comment         =  linebreak* ( "#" (character | `'` | `"`)* linebreak linebreak*)?
  (6) identifier      =  special+ | (letter (letter | digit)*)
  (7) number_literal  =  sign? digit+ ("." digit+)?
  (8) string_literal  =  (`'` (character | `"`)* `'`) | (`"` (character | `'`)* `"`)
@@ -27,9 +27,8 @@ This version has plain formatting, to avoid formatting issues with Latex on GitH
 (14) special         =  "." | "," | ":" | ";" | "!" | "?" | "<" | ">" | "@" | "#" | "$" | `\` |
                         "+" | "-" | "*" | "/" | "%" | "=" | "|" | "&" | "_" | "^" | "~"
 (15) sign            =  "+" | "-"
-(16) whitespace      =  space | linebreak
-(17) space           =   " " | "\t"
-(18) linebreak       =  "\n" | "\n\r"
+(16) space           =   " " | "\t"
+(17) linebreak       =  "\n" | "\n\r"
 ```
 
 ## Sources

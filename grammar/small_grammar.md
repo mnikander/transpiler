@@ -12,7 +12,7 @@
 ## Comments, Identifiers, and Literals
 ```math
 \begin{align}
-\text{ comment}             &\to \text{ whitespace}^* ( \texttt{`\#`} (\text{ char} \mid \texttt{`'`} \mid \texttt{`"`})^* \text{ linebreak} \text{ whitespace}^*)^? \\
+\text{ comment}             &\to \text{ linebreak}^* ( \texttt{`\#`} (\text{ char} \mid \texttt{`'`} \mid \texttt{`"`})^* \text{ linebreak} \text{ linebreak}^*)^? \\
 \text{ identifier}          &\to (\text{ letter } (\text{ letter} \mid \text{digit })^*) \mid \text{special}^+ \\
 \text{ number\_literal}     &\to \text{ sign}^? \text{ digit}^+ (\texttt{`.`} \text{ digit}^+)^? \\
 \text{ string\_literal}     &\to \texttt{`'`} (\text{ char} \mid \texttt{`"`})^* \texttt{`'`} \mid
@@ -38,7 +38,6 @@
                             \texttt{`\_`} \mid \texttt{`}\wedge\texttt{`} \mid \texttt{`}\sim\texttt{`}
 \end{cases}\\
 \text{ sign}                &\to \texttt{`+`} \mid \texttt{`-`} \\
-\text{ whitespace}          &\to \text{ space} \mid \text{linebreak} \\
 \text{ space}               &\to \texttt{` `} \mid \texttt{`}\backslash\texttt{t`} \\
 \text{ linebreak}           &\to \texttt{`}\backslash\texttt{n`} \mid \texttt{`}\backslash\texttt{n}\backslash\texttt{r`} \\
 \end{align}

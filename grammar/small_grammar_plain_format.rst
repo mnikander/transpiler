@@ -17,7 +17,7 @@ Comments, Identifiers, and Literals
 
 .. code-block:: abnf
 
-   comment         =  *whitespace ["#" *(character / q / qq) linebreak *whitespace]
+   comment         =  *linebreak ["#" *(character / q / qq) linebreak *linebreak]
    identifier      =  [special] / (letter *(letter / digit))
    number-literal  =  [sign] digit *digit ["." digit *digit]
    string-literal  =  (q *(character / qq) q) / (qq *(character / q) qq)
@@ -36,7 +36,6 @@ Characters and Digits
    parenthesis     =  "(" / ")" / "[" / "]" / "{" / "}"
    special         =  "." / "," / ":" / ";" / "!" / "?" / "<" / ">" / "@" / "#" / "$" / "\" /
                       "+" / "-" / "*" / "/" / "%" / "=" / "/" / "&" / "_" / "^" / "~"
-   whitespace      =  space / linebreak
    space           =   " " / "\t"
    linebreak       =  "\n" / "\n\r"
    q               =  `'`
