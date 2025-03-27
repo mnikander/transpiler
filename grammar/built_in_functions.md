@@ -94,3 +94,84 @@
 |    in | (Monad T0) <br/> T0 → T1 <br/> ... <br/> Tm → Tn
 |   out | (Monad Tn)
 | about | monadic bind, takes a monadic value and a series of non-monadic functions, passes the monadic value through those functions, and returns the monadic result
+
+## Names
+- `declare`
+- `define`
+- `overload`
+- `:`
+
+## Types
+In addition to primitive types and functions, the following data-types are provided out-of-the-box:
+- `Variant`
+- `Tuple`
+- `List`
+- `StaticArray`
+
+### Type Operations
+- `typeof`
+- `sizeof`
+- casts, to string, to int etc
+
+### Variant Operations
+- `Variant`
+- check and access operations
+
+### Tuple Operations
+- `Tuple`
+- `get`
+- let-binding (?)
+
+### List Operations
+- `List`
+- `head`
+- `tail`
+- let-binding (?)
+- it might make sense to have a setter here which allows some acyclic operations, but requires a destructive move
+
+
+### Static Array Operations
+- `Array`
+- `get`
+- `at` with bounds-checking
+- let-binding (?)
+
+### Other Datatypes
+Note that many more datatypes can be implemented in terms of the already listed datatypes.
+Several notable datatypes which are NOT included in this grammar, for the time being, are:
+- Dynamic Array
+- Set
+- Dictionary
+
+### Enumerations
+
+Type-safe enums can be created by defining a variant of empty types, as follows:
+```lisp
+(do
+    (define Red   Empty)
+    (define Green Empty)
+    (define Blue  Empty)
+    (define Color (Variant Red Green Blue))
+    (define x (: Color (Red [])))
+    (== x Blue))
+```
+The above example returns `false` since x is not `Blue`.
+
+> TODO: Do I have to construct an _instance_ of Red here as opposed to passing the type Red into x?
+As written above, `x` is an empty variable of type `Color` of the `Red` variety.
+This is the intendend behavior.
+It is really easy to accidentally confuse types and values though, by typing `(define x Red)`.
+That would create a variable of type `Type` with the value `Red`.
+Without a type annotation for x, the compiler error may be cryptic since it will fail with an error about `x` being of type `Type` somewhere where `x` is used, or some where something else is used whose type was deduced via `x`.
+
+### Interfaces
+> TODO
+
+### Generics
+> TODO
+
+## Memory Operations
+
+## Input, Output, Unsafe
+- `display`
+- `(unsafe arguments cpp_string)`
