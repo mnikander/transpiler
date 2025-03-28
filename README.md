@@ -4,16 +4,21 @@ This project transpiles symbolic expressions similar to those found in Lisp and 
 The aim is to experiment with a few language features and learn about compilers and transpilers.
 Currently, the focus of the codebase is on the _code generation_ stage of the transpiler.
 
+
 ## Getting Started
 
-1. Clone this repo
-2. Ensure you have _nodejs_, _npm_, and _g++_ installed
-3. `npm run main` to build and run the example
-4. `npm test` to build and run the unit tests
+```bash
+sudo apt install nodejs npm g++ cmake
+git clone git@github.com:mnikander/transpiler.git
+cd transpiler/
+npm run clean  # the 'clean' target ensures the 'out/' and 'out/artifacts/' directories are created
+npm run main   # build and run the example
+npm test       # build and run the unit tests
+```
 
 Both the main function and the unit tests will automatically transpile their abstract syntax trees to C++ and then compile and execute the resulting programs. 
-If you wish to build the main program without immediately executing it, you can use `npm run build` and then manually execute it with `./out/artifacts/main`.
-You can find all generated source files, executables, and result text files, in the directory `out/artifacts`.
+You can find all generated source files, executables, and result text files, in the directory `out/artifacts`, and you can run execute the programs manually from there.
+**If** you wish to build the main program without immediately executing it, you can: `npm run build` and then and take a look at the generated code first.
 
 
 ## Brief Introduction to Symbolic Expressions
