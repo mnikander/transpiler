@@ -16,7 +16,7 @@ export function is_equal(ast: any): boolean {
     return head == "equal" || head == "==";
 }
 
-export function make_equal(ast: any): Equal {
+export function parse_equal(ast: any): Equal {
     let [head, ...tail] = ast;
     assert(tail.length == 2, `'equal' requires 2 arguments, ${tail.length} provided: <${tail.toString()}>`);
     return {type: 'Equal', left: parse(tail[0]), right: parse(tail[1])} as Equal;

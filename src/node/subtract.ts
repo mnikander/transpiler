@@ -16,7 +16,7 @@ export function is_subtract(ast: any): boolean {
     return head == "subtract" || head == "-";
 }
 
-export function make_subtract(ast: any): Subtract {
+export function parse_subtract(ast: any): Subtract {
     let [head, ...tail] = ast;
     assert(tail.length == 2, `'subtract' requires 2 arguments, ${tail.length} provided: <${tail.toString()}>`);
     return {type: 'Subtract', left: parse(tail[0]), right: parse(tail[1])} as Subtract;

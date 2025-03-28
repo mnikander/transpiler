@@ -17,7 +17,7 @@ export function is_define(ast: any): boolean {
     return head == "define";
 }
 
-export function make_define(ast: any): Define {
+export function parse_define(ast: any): Define {
     let [head, ...tail] = ast;
     assert(tail.length == 2, `'define' requires 2 arguments, ${tail.length} provided <${tail.toString}>`);
     return {type: 'Define', identifier: parse(tail[0]), value: parse(tail[1])} as Define;

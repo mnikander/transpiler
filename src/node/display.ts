@@ -15,7 +15,7 @@ export function is_display(ast: any): boolean {
     return head == "display";
 }
 
-export function make_display(ast: any): Display {
+export function parse_display(ast: any): Display {
     let [head, ...tail] = ast;
     assert(tail.length == 1, `'display' requires 1 argument, ${tail.length} provided: <${tail.toString()}>`);
     return {type:'Display', arg: parse(tail[0])} as Display;

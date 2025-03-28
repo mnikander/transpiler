@@ -16,7 +16,7 @@ export function is_add(ast: any): boolean {
     return head == "add" || head == "+";
 }
 
-export function make_add(ast: any): Add {
+export function parse_add(ast: any): Add {
     let [head, ...tail] = ast;
     assert(tail.length == 2, `'add' requires 2 arguments, ${tail.length} provided: <${tail.toString()}>`);
     return {type: 'Add', left: parse(tail[0]), right: parse(tail[1])} as Add;

@@ -8,7 +8,7 @@ export interface Atom extends Node {
     value: string;
 }
 
-export function make_atom(ast: any): Atom {
+export function parse_atom(ast: any): Atom {
     if (typeof ast === 'string') {
         if (ast === "True") {
             return {type: 'Atom', value: 'true'} as Atom;

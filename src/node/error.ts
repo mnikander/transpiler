@@ -15,7 +15,7 @@ export function is_error(ast: any): boolean {
     return head == "error";
 }
 
-export function make_error(ast: any): Error {
+export function parse_error(ast: any): Error {
     let [head, ...tail] = ast;
     assert(tail.length == 1, `'error' requires 1 argument, ${tail.length} provided: <${tail.toString()}>`);
     return {type: 'Error', arg: parse(tail[0])} as Error;

@@ -17,7 +17,7 @@ export function is_if(ast: any): boolean {
     return head == "if"; // || head == "?";
 }
 
-export function make_if(ast: any): If {
+export function parse_if(ast: any): If {
     let [head, ...tail] = ast;
     assert(tail.length == 3, `'if' requires 3 arguments, ${tail.length} provided: <${tail.toString()}>`);
     return {type: 'If', condition: parse(tail[0]), trueExpr: parse(tail[1]), falseExpr: parse(tail[2])} as If;

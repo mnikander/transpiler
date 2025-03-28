@@ -17,7 +17,7 @@ export function is_lambda(ast: any): boolean {
     return head == "lambda" || head == "->";
 }
 
-export function make_lambda(ast: string[] | string[][]): Lambda {
+export function parse_lambda(ast: string[] | string[][]): Lambda {
     let [head, ...tail] = ast;
     assert(tail.length == 2, `'lambda' requires 2 arguments, ${tail.length} provided <${tail.toString}>`);
     let param: Expression[] = [];

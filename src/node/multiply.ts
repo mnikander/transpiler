@@ -16,7 +16,7 @@ export function is_multiply(ast: any): boolean {
     return head == "multiply" || head == "*";
 }
 
-export function make_multiply(ast: any): Multiply {
+export function parse_multiply(ast: any): Multiply {
     let [head, ...tail] = ast;
     assert(tail.length == 2, `'multiply' requires 2 arguments, ${tail.length} provided: <${tail.toString()}>`);
     return {type: 'Multiply', left: parse(tail[0]), right: parse(tail[1])} as Multiply;

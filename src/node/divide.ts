@@ -16,7 +16,7 @@ export function is_divide(ast: any): boolean {
     return head == "divide" || head == "/";
 }
 
-export function make_divide(ast: any): Divide {
+export function parse_divide(ast: any): Divide {
     let [head, ...tail] = ast;
     assert(tail.length == 2, `'divide' requires 2 arguments, ${tail.length} provided: <${tail.toString()}>`);
     return {type: 'Divide', left: parse(tail[0]), right: parse(tail[1])} as Divide;

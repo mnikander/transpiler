@@ -10,7 +10,7 @@ export interface Call extends Node {
     args: Expression[];
 }
 
-export function make_call(ast: any[]): Call {
+export function parse_call(ast: any[]): Call {
     let [head, ...tail] = ast;
     let f: Expression = parse(head);
     let a : Expression[] = [];
