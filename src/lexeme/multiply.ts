@@ -1,12 +1,12 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
-import { Expression, generate } from "../generate";
+import { Expression, Node, generate, parse } from "../generate";
 
-export interface Multiply {
+export interface Multiply extends Node {
     type: 'Multiply';
-    left: string; // TODO: change to Expression once everything is refactored
-    right: string;
+    left: Expression;
+    right: Expression;
 }
 
 export function is_multiply(ast: any): boolean {
@@ -17,9 +17,9 @@ export function is_multiply(ast: any): boolean {
 export function make_multiply(ast: any): Multiply {
     let [head, ...tail] = ast;
     assert(tail.length == 2, `'multiply' requires 2 arguments, ${tail.length} provided: <${tail.toString()}>`);
-    return {type: 'Multiply', left: generate(tail[0]), right: generate(tail[1])} as Multiply;
+    return {type: 'Multiply', left: parse(tail[0]), right: parse(tail[1])} as Multiply;
 }
 
-export function generate_multiply(ast: any): string {
-    return `std::multiplies<>{}(${ast.left}, ${ast.right})`;
+export function generate_multiply(ast: Multiply): string {
+    return `std::multiplies<>{}(${generate(ast.left)}, ${generate(ast.right)})`;
 }

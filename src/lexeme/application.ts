@@ -1,30 +1,30 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
-import { Expression, generate } from "../generate";
+import { Expression, Node, generate, parse } from "../generate";
 
-export interface Application {
+export interface Application extends Node {
     type: 'Application';
-    func: string; // TODO: change to Expression once everything is refactored
-    args: string[];
+    func: Expression;
+    args: Expression[];
 }
 
 export function make_application(ast: any[]): Application {
     let [head, ...tail] = ast;
-    let f: string = generate(head);
-    let a : string[] = [];
+    let f: Expression = parse(head);
+    let a : Expression[] = [];
     for (let i = 0; i < tail.length; i++) {
-        a.push(generate(tail[i]));
+        a.push(parse(tail[i]));
     }
     return {type: 'Application', func: f, args: a} as Application;
 }
 
 export function generate_function_application(ast: Application): string {
     let result = "";
-    result += ast.func;
+    result += generate(ast.func);
     result += "(";
     for (let i = 0; i < ast.args.length; i++) {
-        result += `${ast.args[i]}`
+        result += `${generate(ast.args[i])}`
         if ((i + 1) < ast.args.length) {
             result += ', ';
         }

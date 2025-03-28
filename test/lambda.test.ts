@@ -2,19 +2,19 @@
 
 import { describe, it, expect } from 'vitest';
 import { cpp_toolchain } from '../src/cpp_toolchain'
-import { generate } from '../src/generate';
+import { generate, parse } from "../src/generate";
 
 describe('lambda', () => {
     let simple = ["lambda", ["a", "b"], "a"]; // (lambda (a b) a)
     it('direct', () => {
-        let code: string = generate(simple);
+        let code: string = generate(parse(simple));
         expect(code).toBe("[](auto const& a, auto const& b){ return a; }");
     });
     
     it('(display ((lambda (a b) a) 1 2))', () => {
         let ast = ["display", [["lambda", ["a", "b"], "a"], 1, 2]];
         let filename: string = "test_lambda_immediate";
-        let content: string = generate(ast);
+        let content: string = generate(parse(ast));
         const result: string = cpp_toolchain(filename, content);
         expect(result).toBe("1\n");
     });
@@ -22,7 +22,7 @@ describe('lambda', () => {
     it('(display ((-> (a b) a) 1 2))', () => {
         let ast = ["display", [["->", ["a", "b"], "a"], 1, 2]];
         let filename: string = "test_lambda_arrow_immediate";
-        let content: string = generate(ast);
+        let content: string = generate(parse(ast));
         const result: string = cpp_toolchain(filename, content);
         expect(result).toBe("1\n");
     });
@@ -31,7 +31,7 @@ describe('lambda', () => {
         let abstraction = ["define", "first", ["lambda", ["a", "b"], "a"]];
         let application = ["display", ["first", 1, 2]];
         let filename: string = "test_lambda_named";
-        let content: string = generate(abstraction) + generate(application);
+        let content: string = generate(parse(abstraction)) + generate(parse(application));
         const result: string = cpp_toolchain(filename, content);
         expect(result).toBe("1\n");
     });
@@ -41,7 +41,7 @@ describe('lambda', () => {
         let second = ["define", "second", ["lambda", ["a", "b"], "b"]];
         let application = ["display", [["first", "first", "second"], 1, 2]];
         let filename: string = "test_lambda_2nd_order";
-        let content: string = generate(first) + generate(second) + generate(application);
+        let content: string = generate(parse(first)) + generate(parse(second)) + generate(parse(application));
         const result: string = cpp_toolchain(filename, content);
         expect(result).toBe("1\n");
     });

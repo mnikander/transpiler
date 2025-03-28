@@ -14,59 +14,105 @@ import { Equal, is_equal, generate_equal, make_equal } from "./lexeme/equal";
 import { Lambda, is_lambda, generate_lambda, make_lambda } from "./lexeme/lambda";
 import { If, is_if, generate_if, make_if } from "./lexeme/if";
 
+export interface Node {
+    type: string;
+}
+
 export type Expression = Add | Application | Atom | Define | Display | Divide | Equal | Error | If | Lambda | Multiply | Subtract;
 
 // TODO: set reasonable type information for the 'ast' parameter
-export function generate(ast: any): string {
+export function parse(ast: any): Expression {
     if (ast instanceof Array) {
         if (is_display(ast)) {
             let node: Display = make_display(ast);
-            return generate_display(node);
+            return node;
         }
         else if (is_error(ast)) {
             let node: Error = make_error(ast);
-            return generate_error(node);
+            return node;
         }
         else if (is_add(ast)) {
             let node: Add = make_add(ast);
-            return generate_add(node);
+            return node;
         }
         else if (is_subtract(ast)) {
             let node: Subtract = make_subtract(ast);
-            return generate_subtract(node);
+            return node;
         }
         else if (is_multiply(ast)) {
             let node: Multiply = make_multiply(ast);
-            return generate_multiply(node);
+            return node;
         }
         else if (is_divide(ast)) {
             let node: Divide = make_divide(ast);
-            return generate_divide(node);
+            return node;
         }
         else if (is_equal(ast)) {
             let node: Equal = make_equal(ast);
-            return generate_equal(node);
+            return node;
         }
         else if (is_define(ast)) {
             let node: Define = make_define(ast);
-            return generate_define(node);
+            return node;
         }
         else if (is_lambda(ast)) {
             let node: Lambda = make_lambda(ast);
-            return generate_lambda(node);
+            return node;
         }
         else if (is_if(ast)) {
             let node: If = make_if(ast);
-            return generate_if(node);
+            return node;
         }
         else {
             let node: Application = make_application(ast);
-            return generate_function_application(node);
+            return node;
         }
     }
     else if (typeof ast !== 'undefined') {
         let node: Atom = make_atom(ast);
-        return generate_atom(node);
+        return node;
+    }
+    else {
+        assert(false, "undefined node");
+    }
+}
+
+export function generate<T extends Expression>(node: T): string {
+    if (node.type == 'Display') {
+        return generate_display(node as Display);
+    }
+    else if (node.type == 'Error') {
+        return generate_error(node as Error);
+    }
+    else if (node.type == 'Add') {
+        return generate_add(node as Add);
+    }
+    else if (node.type == 'Subtract') {
+        return generate_subtract(node as Subtract);
+    }
+    else if (node.type == 'Multiply') {
+        return generate_multiply(node as Multiply);
+    }
+    else if (node.type == 'Divide') {
+        return generate_divide(node as Divide);
+    }
+    else if (node.type == 'Equal') {
+        return generate_equal(node as Equal);
+    }
+    else if (node.type == 'Define') {
+        return generate_define(node as Define);
+    }
+    else if (node.type == 'Lambda') {
+        return generate_lambda(node as Lambda);
+    }
+    else if (node.type == 'If') {
+        return generate_if(node as If);
+    }
+    else if (node.type == 'Application') {
+        return generate_function_application(node as Application);
+    }
+    else if (node.type == 'Atom') {
+        return generate_atom(node as Atom);
     }
     else {
         assert(false, "undefined node");

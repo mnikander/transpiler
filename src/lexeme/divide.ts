@@ -1,12 +1,12 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
-import { Expression, generate } from "../generate";
+import { Expression, Node, generate, parse } from "../generate";
 
-export interface Divide {
+export interface Divide extends Node {
     type: 'Divide';
-    left: string; // TODO: change to Expression once everything is refactored
-    right: string;
+    left: Expression;
+    right: Expression;
 }
 
 export function is_divide(ast: any): boolean {
@@ -17,9 +17,9 @@ export function is_divide(ast: any): boolean {
 export function make_divide(ast: any): Divide {
     let [head, ...tail] = ast;
     assert(tail.length == 2, `'divide' requires 2 arguments, ${tail.length} provided: <${tail.toString()}>`);
-    return {type: 'Divide', left: generate(tail[0]), right: generate(tail[1])} as Divide;
+    return {type: 'Divide', left: parse(tail[0]), right: parse(tail[1])} as Divide;
 }
 
 export function generate_divide(ast: Divide): string {
-    return `std::divides<>{}(${ast.left}, ${ast.right})`;
+    return `std::divides<>{}(${generate(ast.left)}, ${generate(ast.right)})`;
 }

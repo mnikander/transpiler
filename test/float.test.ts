@@ -2,7 +2,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { cpp_toolchain } from '../src/cpp_toolchain'
-import { generate } from '../src/generate';
+import { Expression, generate, parse } from '../src/generate';
 
 // (display 0.1)
 let ast = ["display", 0.1];
@@ -10,13 +10,14 @@ let ast = ["display", 0.1];
 describe('Float', () => {
 
     it('direct', () => {
-        let code = generate(ast[1]);
+        let node: Expression = parse(ast[1]);
+        let code = generate(node);
         expect(code).toBe("0.1");
     });
 
     it('(display 0.1)', () => {
         let filename: string = "test_float";
-        let content: string = generate(ast);
+        let content: string = generate(parse(ast));
         const result: string = cpp_toolchain(filename, content);
         expect(result).toBe("0.1\n");
     });

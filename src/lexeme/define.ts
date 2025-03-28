@@ -1,12 +1,13 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
-import { Expression, generate } from "../generate";
+import { Expression, Node, generate, parse } from "../generate";
+import { Atom } from "./atom";
 
-export interface Define {
+export interface Define extends Node {
     type: 'Define';
-    identifier: string; // TODO: change to Expression once everything is refactored
-    value: string;
+    identifier: Atom;
+    value: Expression;
 }
 
 export function is_define(ast: any): boolean {
@@ -17,9 +18,9 @@ export function is_define(ast: any): boolean {
 export function make_define(ast: any): Define {
     let [head, ...tail] = ast;
     assert(tail.length == 2, `'define' requires 2 arguments, ${tail.length} provided <${tail.toString}>`);
-    return {type: 'Define', identifier: generate(tail[0]), value: generate(tail[1])} as Define;
+    return {type: 'Define', identifier: parse(tail[0]), value: parse(tail[1])} as Define;
 }
 
 export function generate_define(ast: Define): string {
-    return `auto const ${ast.identifier} = ${ast.value};\n`;
+    return `auto const ${generate(ast.identifier)} = ${generate(ast.value)};\n`;
 }

@@ -1,13 +1,13 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
-import { Expression, generate } from "../generate";
+import { Expression, Node, generate, parse } from "../generate";
 
-export interface If {
+export interface If extends Node {
     type: 'If';
-    condition: string; // TODO: change to Expression once everything is refactored
-    trueExpr: string;
-    falseExpr: string;
+    condition: Expression;
+    trueExpr: Expression;
+    falseExpr: Expression;
 }
 
 export function is_if(ast: any): boolean {
@@ -18,9 +18,9 @@ export function is_if(ast: any): boolean {
 export function make_if(ast: any): If {
     let [head, ...tail] = ast;
     assert(tail.length == 3, `'if' requires 3 arguments, ${tail.length} provided: <${tail.toString()}>`);
-    return {type: 'If', condition: generate(tail[0]), trueExpr: generate(tail[1]), falseExpr: generate(tail[2])} as If;
+    return {type: 'If', condition: parse(tail[0]), trueExpr: parse(tail[1]), falseExpr: parse(tail[2])} as If;
 }
 
 export function generate_if(ast: If): string {
-    return `((${ast.condition}) ? (${ast.trueExpr}) : (${ast.falseExpr}))`;
+    return `((${generate(ast.condition)}) ? (${generate(ast.trueExpr)}) : (${generate(ast.falseExpr)}))`;
 }

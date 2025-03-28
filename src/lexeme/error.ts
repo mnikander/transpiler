@@ -1,11 +1,11 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
-import { Expression, generate } from "../generate";
+import { Expression, Node, generate, parse } from "../generate";
 
-export interface Error {
+export interface Error extends Node {
     type: 'Error';
-    arg: string; // TODO: change to Expression once everything is refactored
+    arg: Expression;
 }
 
 export function is_error(ast: any): boolean {
@@ -16,9 +16,9 @@ export function is_error(ast: any): boolean {
 export function make_error(ast: any): Error {
     let [head, ...tail] = ast;
     assert(tail.length == 1, `'error' requires 1 argument, ${tail.length} provided: <${tail.toString()}>`);
-    return {type: 'Error', arg: generate(tail[0]).toString()} as Error;
+    return {type: 'Error', arg: parse(tail[0])} as Error;
 }
 
 export function generate_error(ast: Error): string {
-    return `std::cerr << "Error: " << ${ast.arg} << std::endl;\nstd::abort();\n`;
+    return `std::cerr << "Error: " << ${generate(ast.arg)} << std::endl;\nstd::abort();\n`;
 }

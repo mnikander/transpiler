@@ -1,12 +1,12 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
-import { Expression, generate } from "../generate";
+import { Expression, Node, generate, parse } from "../generate";
 
 export interface Subtract {
     type: 'Subtract';
-    left: string; // TODO: change to Expression once everything is refactored
-    right: string;
+    left: Expression;
+    right: Expression;
 }
 
 export function is_subtract(ast: any): boolean {
@@ -17,9 +17,9 @@ export function is_subtract(ast: any): boolean {
 export function make_subtract(ast: any): Subtract {
     let [head, ...tail] = ast;
     assert(tail.length == 2, `'subtract' requires 2 arguments, ${tail.length} provided: <${tail.toString()}>`);
-    return {type: 'Subtract', left: generate(tail[0]), right: generate(tail[1])} as Subtract;
+    return {type: 'Subtract', left: parse(tail[0]), right: parse(tail[1])} as Subtract;
 }
 
 export function generate_subtract(ast: Subtract): string {
-    return `std::minus<>{}(${ast.left}, ${ast.right})`;
+    return `std::minus<>{}(${generate(ast.left)}, ${generate(ast.right)})`;
 }
