@@ -1,4 +1,4 @@
-# Lisp Grammar
+# A Minimal Grammar for Lisp
 
 This grammar is written in Augmented Backus-Naur Form (ABNF).
 
