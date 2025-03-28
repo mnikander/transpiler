@@ -1,3 +1,5 @@
+# Type Signatures of the Built-In Functions
+
 ## Equality
 
 |    op | `==` `!=`
@@ -98,8 +100,11 @@
 ## Names
 - `declare`
 - `define`
-- `overload`
-- `:`
+- `overload` (?)
+- `:` annotate
+- `import`
+- `export`
+- `module`
 
 ## Types
 In addition to primitive types and functions, the following data-types are provided out-of-the-box:
@@ -136,6 +141,13 @@ In addition to primitive types and functions, the following data-types are provi
 - `at` with bounds-checking
 - let-binding (?)
 
+```lisp
+(do
+    (define data (Array [0 10 20 30]))
+    (define elem (get data 2))
+    (display (== elem 20)))     # true
+```
+
 ### Other Datatypes
 Note that many more datatypes can be implemented in terms of the already listed datatypes.
 Several notable datatypes which are NOT included in this grammar, for the time being, are:
@@ -171,6 +183,8 @@ Without a type annotation for x, the compiler error may be cryptic since it will
 > TODO
 
 ## Memory Operations
+- copy, move, borrow
+- box
 
 ## Input, Output, Unsafe
 - `display`
