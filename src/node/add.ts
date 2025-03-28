@@ -1,7 +1,9 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
-import { Expression, generate, parse } from "../generate";
+import { Expression } from "../common";
+import { generate } from "../generate";
+import { parse } from "../parse";
 
 export interface Add {
     type: 'Add';

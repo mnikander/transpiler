@@ -2,7 +2,9 @@
 
 import { describe, it, expect } from 'vitest';
 import { cpp_toolchain } from '../src/cpp_toolchain'
-import { Expression, generate, parse } from '../src/generate';
+import { Expression } from "../src/common";
+import { generate } from "../src/generate";
+import { parse } from "../src/parse";
 
 // (display 0.1)
 let ast = ["display", 0.1];

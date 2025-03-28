@@ -1,7 +1,8 @@
 // Copyright (c) 2025 Marco Nikander
 
 import { cpp_toolchain } from "./cpp_toolchain";
-import { Expression, generate, parse } from './generate';
+import { generate } from "./generate";
+import { parse } from "./parse";
 
 // (display "Hello, world.")
 let text = ["display", "\"Hello, world.\""];

@@ -1,8 +1,10 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
-import { Expression, Node, generate, parse } from "../generate";
 import { Atom } from "./atom";
+import { Expression, Node } from "../common";
+import { generate } from "../generate";
+import { parse } from "../parse";
 
 export interface Define extends Node {
     type: 'Define';

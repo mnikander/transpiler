@@ -1,7 +1,7 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
-import { Node, generate } from "../generate";
+import { Node } from "../common";
 
 export interface Atom extends Node {
     type: 'Atom';

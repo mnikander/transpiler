@@ -2,7 +2,8 @@
 
 import { describe, it, expect } from 'vitest';
 import { cpp_toolchain } from "../src/cpp_toolchain";
-import { generate, parse } from "../src/generate";
+import { generate } from "../src/generate";
+import { parse } from "../src/parse";
 
 describe('Logical', () => {
 
