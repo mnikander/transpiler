@@ -8,7 +8,7 @@
     "main": "npm run build && node out/main.js",
     "clean": "rm -rf out && mkdir out/ && mkdir out/artifacts && cd out && cmake ../cpp_library && cd ..",
     "cpp": "cmake --build out/ && ./out/unit_tests",
-    "test": "npm run cpp && vitest",
+    "test": "npm run build && npm run cpp && vitest",
     "test:watch": "vitest --watch"
   },
   "repository": {
