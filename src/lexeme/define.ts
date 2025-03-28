@@ -1,7 +1,7 @@
 // Copyright (c) 2025 Marco Nikander
 
 import assert from "assert";
-import { generate } from "../generate";
+import { Expression, generate } from "../generate";
 
 export interface Define {
     type: 'Define';
@@ -14,12 +14,12 @@ export function is_define(ast: any): boolean {
     return head == "define";
 }
 
-export function generate_define(ast: any): string {
+export function make_define(ast: any): Define {
     let [head, ...tail] = ast;
-    if (tail.length == 2) {
-        return `auto const ${generate(tail[0])} = ${generate(tail[1])};\n`;
-    } else {
-        assert(false, `'define' requires 2 arguments, ${tail.length} provided <${tail.toString}>`);
-        return " /* ERROR: INCORRECT NUMBER OF ARGUMENTS */ ";
-    }
+    assert(tail.length == 2, `'define' requires 2 arguments, ${tail.length} provided <${tail.toString}>`);
+    return {type: 'Define', identifier: generate(tail[0]), value: generate(tail[1])} as Define;
+}
+
+export function generate_define(ast: Define): string {
+    return `auto const ${ast.identifier} = ${ast.value};\n`;
 }

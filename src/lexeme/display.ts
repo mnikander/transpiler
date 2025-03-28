@@ -5,7 +5,7 @@ import { Expression, generate } from "../generate";
 
 export interface Display {
     type: 'Display';
-    arg: string;
+    arg: string; // TODO: change to Expression once everything is refactored
 }
 
 export function is_display(ast: any): boolean {

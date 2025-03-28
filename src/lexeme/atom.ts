@@ -5,7 +5,7 @@ import { generate } from "../generate";
 
 export interface Atom {
     type: string;
-    value: string;
+    value: string; // TODO: change to Expression once everything is refactored
 }
 
 export function make_atom(ast: any): Atom {
