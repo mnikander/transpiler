@@ -1,19 +1,19 @@
-(do                         # 'do' sequentially evaluates its arguments, side-effects are allowed inside the 'do' block
+(do                                     # 'do' sequentially evaluates its arguments, side-effects are allowed inside the 'do' block
     (display (+ 1 2))
     (display (! true))
     (display (if true 42 0))
 
     (declare x I32)
     (define x 5)
-    (define y (: I32 2))    # type annotation I32 on the value '2' means y is I32
+    (define y (: I32 2))                # type annotation I32 on the value '2' means y is I32
     (display (+ x y))
-    (display (: Ascii 'a'))
-    (display [1 2.0 'a'])
+    (display (: Ascii 'a'))             # annotate 'a' as an Ascii, the type-checker verifies that the annotation is possible
+    (display [1 2.0 'a'])               # a list of (Variant Integer Float Ascii)
     (display "hello world")
 
     (define first (lambda [a b] a))
     (define second (: ([I32 I32] I32)   # function type which takes 2 integers and returns an integer
                       (-> [a b] b)))
-    (declare a (linear I32))
-    42                      # the last expression in the 'do' block is the return value
+    (declare a (linear I32))            # declare 'a' as a linear variable
+    42                                  # the last expression in the 'do' block is the return value
 )
