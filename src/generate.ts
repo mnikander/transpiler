@@ -8,11 +8,11 @@ import { Define, is_define, generate_define, make_define } from "./node/define";
 import { Display, is_display, generate_display, make_display } from "./node/display";
 import { Divide, is_divide, generate_divide, make_divide } from "./node/divide";
 import { Error, is_error, generate_error, make_error } from "./node/error";
+import { Equal, is_equal, generate_equal, make_equal } from "./node/equal";
+import { If, is_if, generate_if, make_if } from "./node/if";
+import { Lambda, is_lambda, generate_lambda, make_lambda } from "./node/lambda";
 import { Multiply, is_multiply, generate_multiply, make_multiply } from "./node/multiply";
 import { Subtract, is_subtract, generate_subtract, make_subtract } from "./node/subtract";
-import { Equal, is_equal, generate_equal, make_equal } from "./node/equal";
-import { Lambda, is_lambda, generate_lambda, make_lambda } from "./node/lambda";
-import { If, is_if, generate_if, make_if } from "./node/if";
 
 export interface Node {
     type: string;
