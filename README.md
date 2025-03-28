@@ -36,30 +36,35 @@ If we want to print something to the console, we can write:
 (display 42)
 ```
 
-Here is a slightly more complex example:
+We can use a ternary if-expression to do branching.
+Say we wanted to check a condition, `1 > 0`, and if this condition is true we want to print "All good", and otherwise we want to print "Something is wrong".
+We could implement this as follows:
 ```lisp
 (display
     (if (> 1 0)
         "All good"
         "Something is wrong"))
 ```
-We can make use of a ternary if-expression to check for a condition `1 > 0`, if this is true we return the string "All good" and otherwise we return "Something is wrong".
-Finally, whatever the result of the if-expression is, is printed to the screen.
 
 We can create anonymous functions, lambda functions, as follows:
 ```lisp
 (-> [a b] (+ 1 (+ a b)))
 ```
-The arrow `->` is a function, which creates a new function. 
+The 'lambda' or 'arrow' function `->` is an inbuilt function which _creates a new function_.
 The created function takes a list of arguments `a` and `b`, and returns the value `1 + a + b`.
 The newly created function is anonymous, i.e. it does not have a name.
 This lambda function just takes arguments and returns a value.
-We can either assign it a name, or we can provide argument values and evaluate it immediately.
-Here is an example of an immediately-invoked lambda:
+Given a lambda, we can:
+1. provide it argument values and evaluate it immediately
+2. pass it into a higher-order function such as map
+3. assign it a name and use it later via a `let`-binding
+4. assign it a name using `define`, iff we are inside an imperative context such as a `do` block
+
+Here is an example of creating and immediately invoking a lambda:
 ```lisp
 ((-> [a b] a) 1 2)
 ```
-This creates a very simple function that takes two arguments, `a` and `b`, and returns `a`, i.e. the first of the two arguments.
+This creates a very simple function which takes two arguments, `a` and `b`, and returns `a`, i.e. the first of the two arguments.
 The values `1` and `2` are passed into this lambda function, so this whole expression evaluates to a `1`.
 
 <!-- We can use the keyword `define` to assign names to values, types, and functions, for example to create a variable named `x` with the value `5` we can write:
