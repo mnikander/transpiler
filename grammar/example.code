@@ -3,17 +3,17 @@
     (display (! true))
     (display (if true 42 0))
 
-    (declare x i32)
+    (declare x I32)
     (define x 5)
-    (define y (: i32 2))    # type annotation i32 on the value '2' means y is i32
+    (define y (: I32 2))    # type annotation I32 on the value '2' means y is I32
     (display (+ x y))
-    (display (: char 'a'))
+    (display (: Ascii 'a'))
     (display [1 2.0 'a'])
     (display "hello world")
 
     (define first (lambda [a b] a))
-    (define second (: ([i32 i32] i32)   # function type which takes 2 integers and returns an integer
+    (define second (: ([I32 I32] I32)   # function type which takes 2 integers and returns an integer
                       (-> [a b] b)))
-    (declare a (linear i32))
+    (declare a (linear I32))
     42                      # the last expression in the 'do' block is the return value
 )
