@@ -2,8 +2,8 @@
 
 import assert from "assert";
 import { Atom, generate_atom, make_atom } from "./node/atom";
-import { Application, generate_function_application, make_application } from "./node/application";
 import { Add, is_add, generate_add, make_add } from "./node/add";
+import { Call, generate_call, make_call } from "./node/call";
 import { Define, is_define, generate_define, make_define } from "./node/define";
 import { Display, is_display, generate_display, make_display } from "./node/display";
 import { Divide, is_divide, generate_divide, make_divide } from "./node/divide";
@@ -18,7 +18,7 @@ export interface Node {
     type: string;
 }
 
-export type Expression = Add | Application | Atom | Define | Display | Divide | Equal | Error | If | Lambda | Multiply | Subtract;
+export type Expression = Add | Atom | Call | Define | Display | Divide | Equal | Error | If | Lambda | Multiply | Subtract;
 
 // TODO: set reasonable type information for the 'ast' parameter
 export function parse(ast: any): Expression {
@@ -64,7 +64,7 @@ export function parse(ast: any): Expression {
             return node;
         }
         else {
-            let node: Application = make_application(ast);
+            let node: Call = make_call(ast);
             return node;
         }
     }
@@ -108,8 +108,8 @@ export function generate<T extends Expression>(node: T): string {
     else if (node.type == 'If') {
         return generate_if(node as If);
     }
-    else if (node.type == 'Application') {
-        return generate_function_application(node as Application);
+    else if (node.type == 'Call') {
+        return generate_call(node as Call);
     }
     else if (node.type == 'Atom') {
         return generate_atom(node as Atom);

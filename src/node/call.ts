@@ -3,23 +3,23 @@
 import assert from "assert";
 import { Expression, Node, generate, parse } from "../generate";
 
-export interface Application extends Node {
-    type: 'Application';
+export interface Call extends Node {
+    type: 'Call';
     func: Expression;
     args: Expression[];
 }
 
-export function make_application(ast: any[]): Application {
+export function make_call(ast: any[]): Call {
     let [head, ...tail] = ast;
     let f: Expression = parse(head);
     let a : Expression[] = [];
     for (let i = 0; i < tail.length; i++) {
         a.push(parse(tail[i]));
     }
-    return {type: 'Application', func: f, args: a} as Application;
+    return {type: 'Call', func: f, args: a} as Call;
 }
 
-export function generate_function_application(ast: Application): string {
+export function generate_call(ast: Call): string {
     let result = "";
     result += generate(ast.func);
     result += "(";
