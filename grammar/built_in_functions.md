@@ -42,12 +42,12 @@
 
 ## Lambda Functions
 
-|    op | `lambda`
+|    op | `lambda` or `->`
 | ----: | :---
 |    ex | `(lambda [a b] (+ 1 (+ a b))`
 |    in | (List Identifier), Expression
 |   out | T0, ..., Tn → U
-| about | creates and returns an anonymous function
+| about | creates and returns an anonymous function, note that `lambda` and `->` are identical, it is a matter of preference
 
 ## Branching
 
@@ -63,7 +63,7 @@
 |    ex |  `(conditional [(> 1 0) "comparisons work"] [(<= 1 0) "something is really broken"])`
 |    in | [Boolean, T0] ... [Boolean, Tn]
 |   out | (Variant T0 ... Tn)
-| about | lisp-style conditional expression, can be used to immitate pattern-matching and switch-case statements
+| about | lisp-style conditional expression, can be used to imitate pattern-matching and switch-case statements
 
 ## Iteration
 
@@ -125,13 +125,14 @@ In addition to primitive types and functions, the following data-types are provi
 ### Tuple Operations
 - `Tuple`
 - `get`
-- let-binding (?)
+- pattern match / decomposition / let-binding (?)
 
 ### List Operations
 - `List`
 - `head`
 - `tail`
-- let-binding (?)
+- empty / null
+- pattern match / decomposition / let-binding (?)
 - it might make sense to have a setter here which allows some acyclic operations, but requires a destructive move
 
 
@@ -139,7 +140,7 @@ In addition to primitive types and functions, the following data-types are provi
 - `Array`
 - `get`
 - `at` with bounds-checking
-- let-binding (?)
+- pattern match / decomposition / let-binding (?)
 
 ```lisp
 (do
