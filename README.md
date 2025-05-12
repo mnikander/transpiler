@@ -11,9 +11,11 @@ Currently, the focus of the codebase is on the _code generation_ stage of the tr
 sudo apt install nodejs npm g++ cmake libgtest-dev
 git clone git@github.com:mnikander/transpiler.git
 cd transpiler/
-npm run clean  # the 'clean' target ensures the 'out/' and 'out/artifacts/' directories are created
-npm run main   # build and run the example
-npm test       # build and run the unit tests
+npm run setup    # the 'setup' target ensures the 'out/' and 'out/artifacts/' directories are created
+npm run build    # build the transpiler and its C++ library
+npm run test     # run the transpiler unit tests
+npm run test_cpp # run the tests for the C++ library
+npm run main     # build and run the example
 ```
 
 Both the main function and the unit tests will automatically transpile their abstract syntax trees to C++ and then compile and execute the resulting programs. 
