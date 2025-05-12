@@ -4,11 +4,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "mkdir -p out/artifacts && tsc -b tsconfig.json",
+    "build": "mkdir -p out/artifacts && tsc -b tsconfig.json && cmake --build out/",
     "main": "npm run build && node out/main.js",
-    "clean": "rm -rf out && mkdir out/ && mkdir out/artifacts && cd out && cmake ../cpp_library && cd ..",
-    "cpp": "cmake --build out/ && ./out/unit_tests",
-    "test": "npm run build && npm run cpp && vitest",
+    "setup": "mkdir out && mkdir out/artifacts && cd out && cmake ../cpp_library && cd ..",
+    "clean": "rm -rf out && mkdir out/",
+    "test_cpp": "./out/unit_tests",
+    "test": "vitest",
     "test:watch": "vitest --watch"
   },
   "repository": {

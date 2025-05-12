@@ -8,7 +8,7 @@ Currently, the focus of the codebase is on the _code generation_ stage of the tr
 ## Getting Started
 
 ```bash
-sudo apt install nodejs npm g++ cmake
+sudo apt install nodejs npm g++ cmake libgtest-dev
 git clone git@github.com:mnikander/transpiler.git
 cd transpiler/
 npm run clean  # the 'clean' target ensures the 'out/' and 'out/artifacts/' directories are created
